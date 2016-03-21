@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<model package="videocast" baseClass="xPDOObject" platform="mysql"
+       defaultEngine="MyISAM" phpdoc-package="videocast" version="1.1">
+
+    <object class="vcVideo" table="vc_videos" extends="xPDOSimpleObject">
+
+        <field key="name" phptype="string" comment="Name of video, title"
+               dtype="varchar" precision="255" null="false" default="" />
+
+        <field key="description" phptype="text" comment="Description of video, textual into for video"
+               dtype="text"  null="true" default="" />
+
+        <field key="source" phptype="varchar" comment="Source of video, link to file or code for embed"
+               dtype="varchar" precision="100" null="false" default="" />
+
+        <field key="free" phptype="boolean" comment="Status of video: free of paid"
+               dtype="tinyint" precision="1" attributes="unsigned" null="true" default="1"/>
+
+        <field key="review" phptype="boolean"
+               dtype="tinyint" precision="1" attributes="unsigned" null="true" default="0" />
+
+        <field key="length" phptype="integer" comment="Length of video in seconds"
+               dtype="integer" precision="3" attributes="unsigned" null="false" default="0" />
+
+        <field key="complicity" phptype="string"
+               dtype="varchar" precision="10"  null="false" default="" />
+
+        <field key="language" phptype="string" comment="Main language of this video"
+               dtype="varchar" precision="2"  null="false" default="ru" />
+
+        <field key="published_at" phptype="timestamp"
+               dtype="timestamp" null="false" default="CURRENT_TIMESTAMP"/>
+
+        <field key="collection" phptype="integer"
+               dtype="integer" precision="10" attributes="unsigned" null="true" default="0" />
+
+        <field key="course" phptype="integer"
+               dtype="integer" precision="10" attributes="unsigned" null="true" default="0" />
+
+        <index alias="free" name="free" primary="false" unique="false" type="BTREE">
+            <column key="free" length="" collation="A" null="false" />
+        </index>
+
+        <index alias="review" name="review" primary="false" unique="false" type="BTREE">
+            <column key="review" length="" collation="A" null="false" />
+        </index>
+
+        <index alias="language" name="language" primary="false" unique="false" type="BTREE">
+            <column key="language" length="" collation="A" null="false" />
+        </index>
+
+        <index alias="collection" name="collection" primary="false" unique="false" type="BTREE">
+            <column key="collection" length="" collation="A" null="false" />
+        </index>
+
+        <index alias="course" name="course" primary="false" unique="false" type="BTREE">
+            <column key="course" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Collection" class="modResource" local="collection" foreign="id" cardinality="many" owner="foreign" />
+        <aggregate alias="Course" class="modResource" local="course" foreign="id" cardinality="many" owner="foreign" />
+    </object>
+
+</model>
