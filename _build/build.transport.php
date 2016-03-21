@@ -11,8 +11,8 @@ require_once 'build.config.php';
 //    require_once 'build.model.php';
 //}
 
-//$root = dirname(dirname(__FILE__)) . '/';
-$root = __DIR__;
+$root = dirname(__DIR__) . '/';
+//$root = __DIR__;
 $sources = [
     'build' => $root . '_build/',
     'resolvers' => $root . '_build/resolvers/',
@@ -22,7 +22,6 @@ $sources = [
     'source_assets' => $root . 'assets/components/' . PKG_NAME_LOWER,
     'source_core' => $root . 'core/components/' . PKG_NAME_LOWER,
 ];
-unset($root);
 
 require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
 //require_once $sources['build'] . '/includes/functions.php';
@@ -39,7 +38,7 @@ $builder->createPackage(PKG_NAME_LOWER, PKG_VERSION, PKG_RELEASE);
 $builder->registerNamespace(PKG_NAME_LOWER, false, true, PKG_NAMESPACE_PATH);
 
 // ============= MENU
-$menus = include __DIR__ . 'data/transport.menu.php';
+$menus = include __DIR__ . '/data/transport.menu.php';
 $attributes = [
     xPDOTransport::PRESERVE_KEYS => true,
     //xPDOTransport::UPDATE_OBJECT => BUILD_MENU_UPDATE,

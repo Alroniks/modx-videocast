@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class videocast
+ * Class VideoCast
  *
  * @package videocast
  */

@@ -1,3 +1,7 @@
+Ext.onReady(function() {
+    MODx.load({ xtype: "videocast-page-videos"});
+});
+
 VideoCast.page.Videos = function (config) {
     config = config || {};
 

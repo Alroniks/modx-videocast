@@ -8,8 +8,8 @@ Ext.reg('videocast', VideoCast);
 
 VideoCast = new VideoCast();
 
-// videocast.PanelSpacer = {
-//     html: "<br />",
-//     border: false,
-//     cls: 'videocast-panel-spacer'
-// };
+VideoCast.PanelSpacer = {
+    html: "<br />",
+    border: false,
+    cls: 'videocast-panel-spacer'
+};

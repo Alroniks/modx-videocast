@@ -5,7 +5,7 @@ VideoCast.panel.Videos = function (config) {
         border: false,
         deferredRender: true,
         baseCls: 'modx-formpanel',
-        item: [{
+        items: [{
             html: '<h2> :: fffffff</h2>',
             border: false,
             cls: 'modx-page-header container'

@@ -4,7 +4,8 @@ $menus = [];
 
 $list = [
     'videocast' => [
-        'description' => 'ms2_menu_desc',
+        'text' => 'videocast_menu',
+        'description' => 'videocast_menu_desc',
         'parent' => 'components',
         'icon' => '<i class="icon-shopping-cart icon icon-large"></i>',
         'action' => 'videos'

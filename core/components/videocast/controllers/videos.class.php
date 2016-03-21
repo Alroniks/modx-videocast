@@ -1,8 +1,8 @@
 <?php
 
-include_once dirname(__DIR__) . '/model/videocast/videocast.class.php';
+include_once __DIR__ . '/../model/videocast/videocast.class.php';
 
-class videocastVideosManagerController extends modExtraManagerController
+class VideoCastVideosManagerController extends modExtraManagerController
 {
     /** @var VideoCast */
     protected $videocast;
@@ -22,45 +22,52 @@ class videocastVideosManagerController extends modExtraManagerController
         parent::initialize();
     }
 
+    /**
+     * @return null|string
+     */
     public function getPageTitle()
     {
         return $this->modx->lexicon('videocast_title');
     }
-    
+
+    /**
+     * @return array
+     */
     public function getLanguageTopics()
     {
         return ['videocast:default'];
     }
 
+    /**
+     * @return bool
+     */
     public function checkPermissions()
     {
         return true;
     }
 
-    public function loadCustomCssJs()
-    {
-        parent::loadCustomCssJs();
-
-        //$this->addJavascript($this->videocast->config['js_url'] . 'mgr/videos.grid.js');
-        $this->addJavascript($this->videocast->config['js_url'] . 'mgr/videos.panel.js');
-        $this->addJavascript($this->videocast->config['js_url'] . 'mgr/videos.page.js');
-
-        $this->addHtml('<script type="text/javascript">
-			Ext.onReady(function() {
-				MODx.load({ xtype: "videocast-page-videos" });
-				//MODx.add("videocast-page-videos");
-				
-				console.log("time for load");
-				
-				
-			});
-		</script>');
-
-        $this->modx->invokeEvent('vcOnManagerCustomCssJs', ['controller' => &$this, 'page' => 'videos']);
-    }
-
+    /**
+     * @return string
+     */
     public function getTemplateFile()
     {
         return $this->videocast->config['templates_path'] . 'mgr/videos.tpl';
     }
+
+    /**
+     * Loads custom styles and scripts
+     */
+    public function loadCustomCssJs()
+    {
+        parent::loadCustomCssJs();
+
+        $this->addJavascript($this->videocast->config['js_url'] . 'mgr/videos.grid.js');
+        $this->addJavascript($this->videocast->config['js_url'] . 'mgr/videos.panel.js');
+        $this->addJavascript($this->videocast->config['js_url'] . 'mgr/videos.page.js');
+
+        $this->modx->invokeEvent('vcOnManagerCustomCssJs', ['controller' => &$this, 'page' => 'videos']);
+    }
+
 }
+
+return "VideoCastVideosManagerController";
