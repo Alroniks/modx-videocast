@@ -2,13 +2,17 @@ VideoCast.panel.Videos = function (config) {
     config = config || {};
 
     Ext.apply(config, {
-        border: false,
-        deferredRender: true,
-        baseCls: 'modx-formpanel',
+        cls: 'container',
         items: [{
-            html: '<h2> :: fffffff</h2>',
-            border: false,
-            cls: 'modx-page-header container'
+            xtype: 'modx-tabs',
+            items: [{
+                //title: _('videos'),
+                title: 'Видеогалерея',
+                layout: 'anchor',
+                items: [{
+                    html: 'asdfsdfsd'
+                }]
+            }]
         }]
     });
 
