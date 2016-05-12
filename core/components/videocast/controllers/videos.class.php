@@ -27,7 +27,7 @@ class VideoCastVideosManagerController extends modExtraManagerController
      */
     public function getPageTitle()
     {
-        return $this->modx->lexicon('videocast_title');
+        return $this->modx->lexicon('vc_title');
     }
 
     /**
@@ -47,14 +47,6 @@ class VideoCastVideosManagerController extends modExtraManagerController
     }
 
     /**
-     * @return string
-     */
-    public function getTemplateFile()
-    {
-        return $this->videocast->config['templates_path'] . 'mgr/videos.tpl';
-    }
-
-    /**
      * Loads custom styles and scripts
      */
     public function loadCustomCssJs()
@@ -70,4 +62,3 @@ class VideoCastVideosManagerController extends modExtraManagerController
 
 }
 
-return "VideoCastVideosManagerController";

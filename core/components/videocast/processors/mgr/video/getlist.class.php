@@ -27,4 +27,4 @@ class VideoCastVideoGetListProcessor extends modObjectGetListProcessor
 
 }
 
-return "VideoCastVideoGetListProcessor";
+return VideoCastVideoGetListProcessor::class;
