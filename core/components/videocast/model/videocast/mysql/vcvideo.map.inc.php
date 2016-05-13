@@ -211,13 +211,5 @@ $xpdo_meta_map['vcVideo']= array (
       'cardinality' => 'many',
       'owner' => 'foreign',
     ),
-    'Course' => 
-    array (
-      'class' => 'modResource',
-      'local' => 'course',
-      'foreign' => 'id',
-      'cardinality' => 'many',
-      'owner' => 'foreign',
-    ),
   ),
 );

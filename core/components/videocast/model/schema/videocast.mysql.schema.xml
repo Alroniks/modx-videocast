@@ -59,7 +59,7 @@
         </index>
 
         <aggregate alias="Collection" class="modResource" local="collection" foreign="id" cardinality="many" owner="foreign" />
-        <aggregate alias="Course" class="modResource" local="course" foreign="id" cardinality="many" owner="foreign" />
+
     </object>
 
 </model>
