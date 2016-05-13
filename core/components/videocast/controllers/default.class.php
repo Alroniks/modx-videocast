@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/../model/videocast/videocast.class.php';
 
-class VideoCastVideosManagerController extends modExtraManagerController
+class VideoCastDefaultManagerController extends modExtraManagerController
 {
     /** @var VideoCast */
     protected $videocast;

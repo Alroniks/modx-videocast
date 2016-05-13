@@ -12,7 +12,7 @@ $modx->setLogTarget();
 $modx->runProcessor('workspace/packages/scanLocal');
 
 $answer = $modx->runProcessor('workspace/packages/install',
-    ['signature' => join('-', [PKG_NAME_LOWER, PKG_VERSION, PKG_RELEASE])]
+    ['signature' => join('-', [PKG_NAME, PKG_VERSION, PKG_RELEASE])]
 );
 
 if ($answer) {
