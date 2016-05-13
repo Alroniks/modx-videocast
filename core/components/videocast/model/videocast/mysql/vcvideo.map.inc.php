@@ -36,6 +36,7 @@ $xpdo_meta_map['vcVideo']= array (
       'precision' => '255',
       'null' => false,
       'default' => '',
+      'index' => 'index',
     ),
     'description' => 
     array (
@@ -82,6 +83,7 @@ $xpdo_meta_map['vcVideo']= array (
       'attributes' => 'unsigned',
       'null' => true,
       'default' => '0',
+      'index' => 'index',
     ),
     'hidden' => 
     array (
@@ -92,6 +94,7 @@ $xpdo_meta_map['vcVideo']= array (
       'attributes' => 'unsigned',
       'null' => true,
       'default' => '0',
+      'index' => 'index',
     ),
     'publishedon' => 
     array (
@@ -100,6 +103,7 @@ $xpdo_meta_map['vcVideo']= array (
       'dtype' => 'timestamp',
       'null' => false,
       'default' => 'CURRENT_TIMESTAMP',
+      'index' => 'index',
     ),
     'collection' => 
     array (
@@ -110,6 +114,7 @@ $xpdo_meta_map['vcVideo']= array (
       'attributes' => 'unsigned',
       'null' => true,
       'default' => '',
+      'index' => 'index',
     ),
   ),
   'indexes' => 

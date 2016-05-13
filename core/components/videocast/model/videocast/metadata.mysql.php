@@ -7,4 +7,9 @@ $xpdo_meta_map = array (
     1 => 'vcCourse',
     2 => 'vcVideo',
   ),
+  'xPDOObject' => 
+  array (
+    0 => 'vcCourseCollection',
+    1 => 'vcCourseVideo',
+  ),
 );

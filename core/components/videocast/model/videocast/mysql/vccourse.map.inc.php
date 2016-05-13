@@ -30,6 +30,7 @@ $xpdo_meta_map['vcCourse']= array (
       'precision' => '255',
       'null' => false,
       'default' => '',
+      'index' => 'index',
     ),
     'description' => 
     array (
@@ -46,6 +47,7 @@ $xpdo_meta_map['vcCourse']= array (
       'dtype' => 'text',
       'null' => true,
       'default' => '',
+      'index' => 'index',
     ),
   ),
   'indexes' => 
@@ -81,6 +83,25 @@ $xpdo_meta_map['vcCourse']= array (
           'null' => false,
         ),
       ),
+    ),
+  ),
+  'composites' => 
+  array (
+    'Collections' => 
+    array (
+      'class' => 'vcCourseCollection',
+      'local' => 'id',
+      'foreign' => 'course',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Videos' => 
+    array (
+      'class' => 'vcCourseVideo',
+      'local' => 'id',
+      'foreign' => 'course',
+      'cardinality' => 'many',
+      'owner' => 'local',
     ),
   ),
 );

@@ -29,6 +29,7 @@ $xpdo_meta_map['vcCollection']= array (
       'precision' => '255',
       'null' => false,
       'default' => '',
+      'index' => 'index',
     ),
     'description' => 
     array (

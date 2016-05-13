@@ -9,7 +9,7 @@
                dtype="varchar" precision="255" null="false" default="" />
 
         <field key="alias" phptype="string" comment="Slugged title for link of collection"
-               dtype="varchar" precision="255" null="false" default="" />
+               dtype="varchar" precision="255" null="false" default="" index="index" />
 
         <field key="description" phptype="string" comment="Description or introduction of collection"
                dtype="text"  null="true" default="" />
@@ -28,13 +28,13 @@
                dtype="varchar" precision="255" null="false" default="" />
 
         <field key="alias" phptype="string" comment="Slugged title for link of course"
-               dtype="varchar" precision="255" null="false" default="" />
+               dtype="varchar" precision="255" null="false" default="" index="index" />
 
         <field key="description" phptype="string" comment="Description or introduction of course"
                dtype="text"  null="true" default="" />
 
         <field key="complexity" phptype="string" comment="Complexity of course (youngling | padawan | knight | master)"
-               dtype="text"  null="true" default="" />
+               dtype="text"  null="true" default="" index="index" />
 
         <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
             <column key="alias" length="" collation="A" null="false" />
@@ -44,9 +44,60 @@
             <column key="complexity" length="" collation="A" null="false" />
         </index>
 
+        <composite alias="Collections" class="vcCourseCollection" local="id" foreign="course" cardinality="many" owner="local" />
+        <composite alias="Videos" class="vcCourseVideo" local="id" foreign="course" cardinality="many" owner="local" />
+
     </object>
 
+    <object class="vcCourseCollection" table="vc_courses_collections" extends="xPDOObject">
 
+        <field  key="course" phptype="integer" comment="Link to course"
+                dtype="int" precision="10" attributes="unsigned" null="false" default="0" index="pk"/>
+
+        <field  key="collection" phptype="integer" comment="Link to collection"
+                dtype="int" precision="10" attributes="unsigned" null="false" default="0" index="pk"/>
+
+        <field key="rank" phptype="integer" comment="Order of elements in lists"
+               dtype="int" precision="10" null="false" default="0" index="index"/>
+
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="course" length="" collation="A" null="false" />
+            <column key="collection" length="" collation="A" null="false" />
+        </index>
+
+        <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
+            <column key="rank" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Course" class="vcCourse" local="course" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Collection" class="vcCollection" local="collection" foreign="id" cardinality="one" owner="foreign" />
+
+    </object>
+
+    <object class="vcCourseVideo" table="vc_courses_videos" extends="xPDOObject">
+
+        <field  key="course" phptype="integer" comment="Link to course"
+                dtype="int" precision="10" attributes="unsigned" null="false" default="0" index="pk"/>
+
+        <field  key="video" phptype="integer" comment="Link to video"
+                dtype="int" precision="10" attributes="unsigned" null="false" default="0" index="pk"/>
+
+        <field key="rank" phptype="integer" comment="Order of elements in lists"
+               dtype="int" precision="10" null="false" default="0" index="index"/>
+
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="course" length="" collation="A" null="false" />
+            <column key="video" length="" collation="A" null="false" />
+        </index>
+
+        <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
+            <column key="rank" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Course" class="vcCourse" local="course" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Video" class="vcVideo" local="video" foreign="id" cardinality="one" owner="foreign" />
+
+    </object>
 
     <object class="vcVideo" table="vc_videos" extends="xPDOSimpleObject">
 
@@ -54,7 +105,7 @@
                dtype="varchar" precision="255" null="false" default="" />
 
         <field key="alias" phptype="string" comment="Slugged title for link of video"
-               dtype="varchar" precision="255" null="false" default="" />
+               dtype="varchar" precision="255" null="false" default="" index="index" />
 
         <field key="description" phptype="string" comment="Description or introduction of video"
                dtype="text"  null="true" default="" />
@@ -69,16 +120,16 @@
                dtype="integer" precision="3" attributes="unsigned" null="false" default="0" />
 
         <field key="free" phptype="boolean" comment="Status of video: free of paid"
-               dtype="tinyint" precision="1" attributes="unsigned" null="true" default="0"/>
+               dtype="tinyint" precision="1" attributes="unsigned" null="true" default="0" index="index" />
 
         <field key="hidden" phptype="boolean" comment="Video, that exists but hidden from lists and search"
-               dtype="tinyint" precision="1" attributes="unsigned" null="true" default="0"/>
+               dtype="tinyint" precision="1" attributes="unsigned" null="true" default="0" index="index" />
 
         <field key="publishedon" phptype="timestamp" comment="Date of publishing video"
-               dtype="timestamp" null="false" default="CURRENT_TIMESTAMP"/>
+               dtype="timestamp" null="false" default="CURRENT_TIMESTAMP" index="index"/>
 
         <field key="collection" phptype="integer" comment="Link to collection"
-               dtype="integer" precision="10" attributes="unsigned" null="true" default="" />
+               dtype="integer" precision="10" attributes="unsigned" null="true" default="" index="index" />
 
         <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
             <column key="alias" length="" collation="A" null="false" />
