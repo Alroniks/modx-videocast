@@ -1,64 +1,102 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <model package="videocast" baseClass="xPDOObject" platform="mysql"
-       defaultEngine="MyISAM" phpdoc-package="videocast" version="1.1">
+       defaultEngine="InnoDB" phpdoc-package="videocast" version="1.1">
+
+    <object class="vcCollection" table="vc_collections" extends="xPDOSimpleObject">
+
+        <field key="title" phptype="string" comment="Short name of collection"
+               dtype="varchar" precision="255" null="false" default="" />
+
+        <field key="alias" phptype="string" comment="Slugged title for link of collection"
+               dtype="varchar" precision="255" null="false" default="" />
+
+        <field key="description" phptype="string" comment="Description or introduction of collection"
+               dtype="text"  null="true" default="" />
+
+        <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
+            <column key="alias" length="" collation="A" null="false" />
+        </index>
+
+        <composite alias="Videos" class="vcVideo" local="id" foreign="collection" cardinality="many" owner="local" />
+
+    </object>
+
+    <object class="vcCourse" table="vc_courses" extends="xPDOSimpleObject">
+
+        <field key="title" phptype="string" comment="Short name of course"
+               dtype="varchar" precision="255" null="false" default="" />
+
+        <field key="alias" phptype="string" comment="Slugged title for link of course"
+               dtype="varchar" precision="255" null="false" default="" />
+
+        <field key="description" phptype="string" comment="Description or introduction of course"
+               dtype="text"  null="true" default="" />
+
+        <field key="complexity" phptype="string" comment="Complexity of course (youngling | padawan | knight | master)"
+               dtype="text"  null="true" default="" />
+
+        <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
+            <column key="alias" length="" collation="A" null="false" />
+        </index>
+
+        <index alias="complexity" name="complexity" primary="false" unique="false" type="BTREE">
+            <column key="complexity" length="" collation="A" null="false" />
+        </index>
+
+    </object>
+
+
 
     <object class="vcVideo" table="vc_videos" extends="xPDOSimpleObject">
 
-        <field key="name" phptype="string" comment="Name of video, title"
+        <field key="title" phptype="string" comment="Short name of video"
                dtype="varchar" precision="255" null="false" default="" />
 
-        <field key="description" phptype="text" comment="Description of video, textual into for video"
+        <field key="alias" phptype="string" comment="Slugged title for link of video"
+               dtype="varchar" precision="255" null="false" default="" />
+
+        <field key="description" phptype="string" comment="Description or introduction of video"
                dtype="text"  null="true" default="" />
 
-        <field key="source" phptype="varchar" comment="Source of video, link to file or code for embed"
-               dtype="varchar" precision="100" null="false" default="" />
+        <field key="cover" phptype="string" comment="Path to image, that will be used as cover"
+               dtype="varchar" precision="255" null="false" default="" />
 
-        <field key="free" phptype="boolean" comment="Status of video: free of paid"
-               dtype="tinyint" precision="1" attributes="unsigned" null="true" default="1"/>
+        <field key="source" phptype="string" comment="Link to video file or embedded code for video player"
+               dtype="varchar" precision="555" null="false" default="" />
 
-        <field key="review" phptype="boolean"
-               dtype="tinyint" precision="1" attributes="unsigned" null="true" default="0" />
-
-        <field key="length" phptype="integer" comment="Length of video in seconds"
+        <field key="duration" phptype="integer" comment="Duration of video (in seconds)"
                dtype="integer" precision="3" attributes="unsigned" null="false" default="0" />
 
-        <field key="complicity" phptype="string"
-               dtype="varchar" precision="10"  null="false" default="" />
+        <field key="free" phptype="boolean" comment="Status of video: free of paid"
+               dtype="tinyint" precision="1" attributes="unsigned" null="true" default="0"/>
 
-        <field key="language" phptype="string" comment="Main language of this video"
-               dtype="varchar" precision="2"  null="false" default="ru" />
+        <field key="hidden" phptype="boolean" comment="Video, that exists but hidden from lists and search"
+               dtype="tinyint" precision="1" attributes="unsigned" null="true" default="0"/>
 
-        <field key="published_at" phptype="timestamp"
+        <field key="publishedon" phptype="timestamp" comment="Date of publishing video"
                dtype="timestamp" null="false" default="CURRENT_TIMESTAMP"/>
 
-        <field key="collection" phptype="integer"
-               dtype="integer" precision="10" attributes="unsigned" null="true" default="0" />
+        <field key="collection" phptype="integer" comment="Link to collection"
+               dtype="integer" precision="10" attributes="unsigned" null="true" default="" />
 
-        <field key="course" phptype="integer"
-               dtype="integer" precision="10" attributes="unsigned" null="true" default="0" />
+        <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
+            <column key="alias" length="" collation="A" null="false" />
+        </index>
+
+        <index alias="hidden" name="hidden" primary="false" unique="false" type="BTREE">
+            <column key="hidden" length="" collation="A" null="false" />
+        </index>
 
         <index alias="free" name="free" primary="false" unique="false" type="BTREE">
             <column key="free" length="" collation="A" null="false" />
-        </index>
-
-        <index alias="review" name="review" primary="false" unique="false" type="BTREE">
-            <column key="review" length="" collation="A" null="false" />
-        </index>
-
-        <index alias="language" name="language" primary="false" unique="false" type="BTREE">
-            <column key="language" length="" collation="A" null="false" />
         </index>
 
         <index alias="collection" name="collection" primary="false" unique="false" type="BTREE">
             <column key="collection" length="" collation="A" null="false" />
         </index>
 
-        <index alias="course" name="course" primary="false" unique="false" type="BTREE">
-            <column key="course" length="" collation="A" null="false" />
-        </index>
-
-        <aggregate alias="Collection" class="modResource" local="collection" foreign="id" cardinality="many" owner="foreign" />
+        <aggregate alias="Collection" class="vcCollection" local="collection" foreign="id" cardinality="one" owner="foreign" />
 
     </object>
 

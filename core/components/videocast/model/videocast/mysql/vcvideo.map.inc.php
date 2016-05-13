@@ -6,24 +6,32 @@ $xpdo_meta_map['vcVideo']= array (
   'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
-    'name' => '',
+    'title' => '',
+    'alias' => '',
     'description' => '',
+    'cover' => '',
     'source' => '',
-    'free' => '1',
-    'review' => '0',
-    'length' => '0',
-    'complicity' => '',
-    'language' => 'ru',
-    'published_at' => 'CURRENT_TIMESTAMP',
-    'collection' => '0',
-    'course' => '0',
+    'duration' => '0',
+    'free' => '0',
+    'hidden' => '0',
+    'publishedon' => 'CURRENT_TIMESTAMP',
+    'collection' => '',
   ),
   'fieldMeta' => 
   array (
-    'name' => 
+    'title' => 
     array (
       'phptype' => 'string',
-      'comment' => 'Name of video, title',
+      'comment' => 'Short name of video',
+      'dtype' => 'varchar',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'alias' => 
+    array (
+      'phptype' => 'string',
+      'comment' => 'Slugged title for link of video',
       'dtype' => 'varchar',
       'precision' => '255',
       'null' => false,
@@ -31,20 +39,39 @@ $xpdo_meta_map['vcVideo']= array (
     ),
     'description' => 
     array (
-      'phptype' => 'text',
-      'comment' => 'Description of video, textual into for video',
+      'phptype' => 'string',
+      'comment' => 'Description or introduction of video',
       'dtype' => 'text',
       'null' => true,
       'default' => '',
     ),
-    'source' => 
+    'cover' => 
     array (
-      'phptype' => 'varchar',
-      'comment' => 'Source of video, link to file or code for embed',
+      'phptype' => 'string',
+      'comment' => 'Path to image, that will be used as cover',
       'dtype' => 'varchar',
-      'precision' => '100',
+      'precision' => '255',
       'null' => false,
       'default' => '',
+    ),
+    'source' => 
+    array (
+      'phptype' => 'string',
+      'comment' => 'Link to video file or embedded code for video player',
+      'dtype' => 'varchar',
+      'precision' => '555',
+      'null' => false,
+      'default' => '',
+    ),
+    'duration' => 
+    array (
+      'phptype' => 'integer',
+      'comment' => 'Duration of video (in seconds)',
+      'dtype' => 'integer',
+      'precision' => '3',
+      'attributes' => 'unsigned',
+      'null' => false,
+      'default' => '0',
     ),
     'free' => 
     array (
@@ -54,47 +81,22 @@ $xpdo_meta_map['vcVideo']= array (
       'precision' => '1',
       'attributes' => 'unsigned',
       'null' => true,
-      'default' => '1',
+      'default' => '0',
     ),
-    'review' => 
+    'hidden' => 
     array (
       'phptype' => 'boolean',
+      'comment' => 'Video, that exists but hidden from lists and search',
       'dtype' => 'tinyint',
       'precision' => '1',
       'attributes' => 'unsigned',
       'null' => true,
       'default' => '0',
     ),
-    'length' => 
-    array (
-      'phptype' => 'integer',
-      'comment' => 'Length of video in seconds',
-      'dtype' => 'integer',
-      'precision' => '3',
-      'attributes' => 'unsigned',
-      'null' => false,
-      'default' => '0',
-    ),
-    'complicity' => 
-    array (
-      'phptype' => 'string',
-      'dtype' => 'varchar',
-      'precision' => '10',
-      'null' => false,
-      'default' => '',
-    ),
-    'language' => 
-    array (
-      'phptype' => 'string',
-      'comment' => 'Main language of this video',
-      'dtype' => 'varchar',
-      'precision' => '2',
-      'null' => false,
-      'default' => 'ru',
-    ),
-    'published_at' => 
+    'publishedon' => 
     array (
       'phptype' => 'timestamp',
+      'comment' => 'Date of publishing video',
       'dtype' => 'timestamp',
       'null' => false,
       'default' => 'CURRENT_TIMESTAMP',
@@ -102,24 +104,48 @@ $xpdo_meta_map['vcVideo']= array (
     'collection' => 
     array (
       'phptype' => 'integer',
+      'comment' => 'Link to collection',
       'dtype' => 'integer',
       'precision' => '10',
       'attributes' => 'unsigned',
       'null' => true,
-      'default' => '0',
-    ),
-    'course' => 
-    array (
-      'phptype' => 'integer',
-      'dtype' => 'integer',
-      'precision' => '10',
-      'attributes' => 'unsigned',
-      'null' => true,
-      'default' => '0',
+      'default' => '',
     ),
   ),
   'indexes' => 
   array (
+    'alias' => 
+    array (
+      'alias' => 'alias',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'alias' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'hidden' => 
+    array (
+      'alias' => 'hidden',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'hidden' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
     'free' => 
     array (
       'alias' => 'free',
@@ -129,38 +155,6 @@ $xpdo_meta_map['vcVideo']= array (
       'columns' => 
       array (
         'free' => 
-        array (
-          'length' => '',
-          'collation' => 'A',
-          'null' => false,
-        ),
-      ),
-    ),
-    'review' => 
-    array (
-      'alias' => 'review',
-      'primary' => false,
-      'unique' => false,
-      'type' => 'BTREE',
-      'columns' => 
-      array (
-        'review' => 
-        array (
-          'length' => '',
-          'collation' => 'A',
-          'null' => false,
-        ),
-      ),
-    ),
-    'language' => 
-    array (
-      'alias' => 'language',
-      'primary' => false,
-      'unique' => false,
-      'type' => 'BTREE',
-      'columns' => 
-      array (
-        'language' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -184,31 +178,15 @@ $xpdo_meta_map['vcVideo']= array (
         ),
       ),
     ),
-    'course' => 
-    array (
-      'alias' => 'course',
-      'primary' => false,
-      'unique' => false,
-      'type' => 'BTREE',
-      'columns' => 
-      array (
-        'course' => 
-        array (
-          'length' => '',
-          'collation' => 'A',
-          'null' => false,
-        ),
-      ),
-    ),
   ),
   'aggregates' => 
   array (
     'Collection' => 
     array (
-      'class' => 'modResource',
+      'class' => 'vcCollection',
       'local' => 'collection',
       'foreign' => 'id',
-      'cardinality' => 'many',
+      'cardinality' => 'one',
       'owner' => 'foreign',
     ),
   ),
