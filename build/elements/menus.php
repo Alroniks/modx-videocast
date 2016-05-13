@@ -8,11 +8,12 @@
 
 $list = [
     'videocast' => [
-        'text' => 'videocast_menu',
-        'description' => 'videocast_menu_desc',
+        'text' => 'vc_menu',
+        'description' => 'vc_menu_desc',
         'parent' => 'topnav',
-        'icon' => '<i class="icon-shopping-cart icon icon-large"></i>',
-        'action' => 'default'
+        'menuindex' => -10,
+        'icon' => '<i class="icon-television icon icon-large"></i>',
+        'action' => 'library'
     ]
 ];
 
@@ -21,7 +22,6 @@ foreach ($list as $name => $data) {
     /* @var modMenu $menu */
     $menu = $modx->newObject('modMenu');
     $menu->fromArray(array_merge([
-        'text' => $name,
         'parent' => 'components',
         'namespace' => PKG_NAME,
         'menuindex' => 0

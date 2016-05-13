@@ -1,4 +1,4 @@
-VideoCast.panel.Videos = function (config) {
+VideoCast.panel.Library = function (config) {
     config = config || {};
 
     Ext.apply(config, {
@@ -6,17 +6,23 @@ VideoCast.panel.Videos = function (config) {
         items: [{
             xtype: 'modx-tabs',
             items: [{
-                //title: _('videos'),
-                title: 'Видеогалерея',
+                title: _('vc_videos_tab_title'),
                 layout: 'anchor',
                 items: [{
-                    html: 'asdfsdfsd'
+                    xtype: 'vc-grid-videos',
+                    id: 'vc-grid-videos'
                 }]
+            }, {
+                title: _('vc_collections_tab_title'),
+                layout: 'anchor'
+            }, {
+                title: _('vc_courses_tab_title'),
+                layout: 'anchor'
             }]
         }]
     });
 
-    VideoCast.panel.Videos.superclass.constructor.call(this, config);
+    VideoCast.panel.Library.superclass.constructor.call(this, config);
 };
-Ext.extend(VideoCast.panel.Videos, MODx.Panel);
-Ext.reg('videocast-panel-videos', VideoCast.panel.Videos);
+Ext.extend(VideoCast.panel.Library, MODx.Panel);
+Ext.reg('vc-panel-library', VideoCast.panel.Library);

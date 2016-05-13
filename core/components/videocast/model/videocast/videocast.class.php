@@ -2,18 +2,12 @@
 
 /**
  * Class VideoCast
- *
- * @package videocast
  */
 class VideoCast
 {
     /** @var modX */
     public $modx;
 
-    /** @var VideoCast */
-    public $videocast;
-
-    /** @var array */
     public $config = [];
 
     /**
@@ -25,26 +19,27 @@ class VideoCast
     {
         $this->modx =& $modx;
 
-        $corePath = $this->modx->getOption('videocast.core_path', $config, $this->modx->getOption('core_path') . 'components/videocast/');
-        $assetsPath = $this->modx->getOption('videocast.assets_path', $config, $this->modx->getOption('assets_path') . 'components/videocast/');
+        $corePath = $this->modx->getOption('videocast.core_path', $config,
+            $this->modx->getOption('core_path') . 'components/videocast/');
+        $assetsPath = $this->modx->getOption('videocast.assets_path', $config,
+            $this->modx->getOption('assets_path') . 'components/videocast/');
+        $assetsUrl = $this->modx->getOption('videocast.assets_url', $config,
+            $this->modx->getOption('assets_url') . 'components/videocast/');
 
-        $assetsUrl = $this->modx->getOption('videocast.assets_url', $config, $this->modx->getOption('assets_url') . 'components/videocast/');
+        $connectorUrl = $assetsUrl . 'connector.php';
 
         $this->config = array_merge([
-            'assets_path' => $assetsPath,
-            'js_path' => $assetsPath . 'js/',
-            'core_path' => $corePath,
-            'model_path' => $corePath . 'model/',
-
-            'assets_url' => $assetsUrl,
-            'css_url' => $assetsUrl . 'css/',
-            'js_url' => $assetsUrl . 'js/',
-            'templates_path' => $corePath . 'elements/templates/'
-
+            'path.core' => $corePath,
+            'path.core.model' => $corePath . 'model/',
+            'path.assets' => $assetsPath,
+            'path.assets.js' => $assetsPath . 'js/',
+            'url.assets' => $assetsUrl,
+            'url.assets.css' => $assetsUrl . 'css/',
+            'url.assets.js' => $assetsUrl . 'js/',
+            'url.assets.connector' => $connectorUrl
         ], $config);
 
-        $this->modx->addPackage('videocast', $this->config['model_path']);
+        $this->modx->addPackage('videocast', $this->config['path.core.model']);
         $this->modx->lexicon->load('videocast:default');
     }
-
 }
