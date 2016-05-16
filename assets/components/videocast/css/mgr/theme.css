@@ -1,0 +1,51 @@
+/*
+Collections tab styles
+*/
+/* collections.grid */
+.collection {
+    padding-left: 5px;
+    white-space: normal;
+}
+.collection.cover img {
+    width: 150px;
+    height: 150px;
+}
+.collection.description h2 {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1;
+    margin: 0 0 5px;
+}
+.collection.description h2 span {
+    font-size: 12px;
+    line-height: 24px;
+    border: 1px solid;
+    border-radius: 5px;
+    font-weight: normal;
+    padding: 0 5px;
+    white-space: nowrap;
+    vertical-align: top;
+}
+.collection.description h2 span.active {
+    color: #7DC855;
+    border-color: #7DC855;
+}
+.collection.description h2 span.hidden {
+    color: #B5C2CD;
+    border-color: #B5C2CD;
+}
+.collection.description h3 {
+    font-size: 14px;
+    font-weight: normal;
+}
+.collection.parameters .count strong {
+    font-size: 30px;
+    color: #43484D;
+}
+.collection.parameters .time strong {
+    font-size: 24px;
+    color: #86939E;
+}
+.collection.parameters .publishedon {
+    margin-top: 20px;
+}
