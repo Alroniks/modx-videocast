@@ -7,14 +7,18 @@ VideoCast.panel.Library = function (config) {
             xtype: 'modx-tabs',
             items: [{
                 title: _('vc_videos_tab_title'),
-                layout: 'anchor',
-                items: [{
-                    xtype: 'vc-grid-videos',
-                    id: 'vc-grid-videos'
-                }]
+                layout: 'anchor'
+                // items: [{
+                //     xtype: 'vc-grid-videos',
+                //     id: 'vc-grid-videos'
+                // }]
             }, {
                 title: _('vc_collections_tab_title'),
-                layout: 'anchor'
+                layout: 'anchor',
+                items: [{
+                    xtype: 'vc-grid-collections',
+                    id: 'vc-grid-collections'
+                }]
             }, {
                 title: _('vc_courses_tab_title'),
                 layout: 'anchor'

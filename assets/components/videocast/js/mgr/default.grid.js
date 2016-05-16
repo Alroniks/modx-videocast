@@ -20,9 +20,6 @@ VideoCast.grid.Default = function (config) {
             scrollOffset: -10,
             getRowClass: function (rec) {
                 var cls = [];
-
-                // classes depend on rec data
-
                 return cls.join(' ');
             }
         }
@@ -166,3 +163,22 @@ Ext.extend(VideoCast.grid.Default, MODx.grid.Grid, {
 
 });
 Ext.reg('vc-grid-default', VideoCast.grid.Default);
+
+VideoCast.grid.RowExpander = Ext.extend(Ext.grid.RowExpander, {
+
+    getBodyContent: function(record, index) {
+
+        if (!this.enableCaching) {
+            return this.tpl.apply(record.json);
+        }
+        var content = this.bodyContent[record.id];
+
+        if (!content) {
+            content = this.tpl.apply(record.json);
+            this.bodyContent[record.id] = content;
+        }
+
+        return content;
+    }
+
+});
