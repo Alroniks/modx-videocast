@@ -6,9 +6,9 @@ $xpdo_meta_map['vcCourseVideo']= array (
   'extends' => 'xPDOObject',
   'fields' => 
   array (
-    'course' => '0',
-    'video' => '0',
-    'rank' => '0',
+    'course' => 0,
+    'video' => 0,
+    'rank' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -16,32 +16,32 @@ $xpdo_meta_map['vcCourseVideo']= array (
     array (
       'phptype' => 'integer',
       'comment' => 'Link to course',
-      'dtype' => 'int',
+      'dbtype' => 'integer',
       'precision' => '10',
       'attributes' => 'unsigned',
       'null' => false,
-      'default' => '0',
+      'default' => 0,
       'index' => 'pk',
     ),
     'video' => 
     array (
       'phptype' => 'integer',
       'comment' => 'Link to video',
-      'dtype' => 'int',
+      'dbtype' => 'integer',
       'precision' => '10',
       'attributes' => 'unsigned',
       'null' => false,
-      'default' => '0',
+      'default' => 0,
       'index' => 'pk',
     ),
     'rank' => 
     array (
       'phptype' => 'integer',
       'comment' => 'Order of elements in lists',
-      'dtype' => 'int',
+      'dbtype' => 'integer',
       'precision' => '10',
       'null' => false,
-      'default' => '0',
+      'default' => 0,
       'index' => 'index',
     ),
   ),

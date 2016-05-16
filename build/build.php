@@ -6,9 +6,8 @@ require_once 'config.php';
 
 $root = dirname(__DIR__) . '/';
 $sources = [
-    'build' => $root . '_build/',
-    'resolvers' => $root . '_build/resolvers/',
-    'validators' => $root . '_build/validators/',
+    'resolvers' => $root . 'build/resolvers/',
+    'validators' => $root . 'build/validators/',
     'source_assets' => $root . 'assets/components/' . PKG_NAME,
     'source_core' => $root . 'core/components/' . PKG_NAME
 ];
@@ -77,6 +76,8 @@ $vehicle->resolve('file', [
     'source' => $sources['source_core'],
     'target' => "return MODX_CORE_PATH . 'components/';"
 ]);
+
+$vehicle->resolve('php', ['source' => $sources['resolvers'] . 'tables.php']);
 
 flush();
 

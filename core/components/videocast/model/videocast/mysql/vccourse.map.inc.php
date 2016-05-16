@@ -17,7 +17,7 @@ $xpdo_meta_map['vcCourse']= array (
     array (
       'phptype' => 'string',
       'comment' => 'Short name of course',
-      'dtype' => 'varchar',
+      'dbtype' => 'varchar',
       'precision' => '255',
       'null' => false,
       'default' => '',
@@ -26,7 +26,7 @@ $xpdo_meta_map['vcCourse']= array (
     array (
       'phptype' => 'string',
       'comment' => 'Slugged title for link of course',
-      'dtype' => 'varchar',
+      'dbtype' => 'varchar',
       'precision' => '255',
       'null' => false,
       'default' => '',
@@ -36,7 +36,7 @@ $xpdo_meta_map['vcCourse']= array (
     array (
       'phptype' => 'string',
       'comment' => 'Description or introduction of course',
-      'dtype' => 'text',
+      'dbtype' => 'text',
       'null' => true,
       'default' => '',
     ),
@@ -44,7 +44,8 @@ $xpdo_meta_map['vcCourse']= array (
     array (
       'phptype' => 'string',
       'comment' => 'Complexity of course (youngling | padawan | knight | master)',
-      'dtype' => 'text',
+      'dbtype' => 'varchar',
+      'precision' => '50',
       'null' => true,
       'default' => '',
       'index' => 'index',

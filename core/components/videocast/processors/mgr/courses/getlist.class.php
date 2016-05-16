@@ -1,22 +1,22 @@
 <?php
 
-class VideoCastVideoGetListProcessor extends modObjectGetListProcessor
+class VideoCastCoursesGetListProcessor extends modObjectGetListProcessor
 {
-    public $classKey = 'vcVideo';
-    public $languageTopics = ['default', 'videocast:manager'];
+    public $classKey = 'vcCourse';
+    public $languageTopics = ['default', 'videocast:default'];
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
     //public $permission = 'vcvideo_list';
 
     /** @var VideoCast */
-    protected $videocast;
+    protected $vc;
 
     /**
      * @return bool
      */
     public function initialize()
     {
-        $this->videocast = $this->modx->getService('VideoCast');
+        $this->vc = $this->modx->getService('VideoCast');
 
 //        if (!$this->modx->hasPermission($this->permission)) {
 //            return $this->modx->lexicon('access_denied');
@@ -27,4 +27,4 @@ class VideoCastVideoGetListProcessor extends modObjectGetListProcessor
 
 }
 
-return VideoCastVideoGetListProcessor::class;
+return VideoCastCoursesGetListProcessor::class;

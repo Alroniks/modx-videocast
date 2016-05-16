@@ -35,6 +35,7 @@ class VideoCastLibraryManagerController extends modExtraManagerController
 
     /**
      * @return bool
+     * @todo: implements permissions rules
      */
     public function checkPermissions()
     {
@@ -51,8 +52,8 @@ class VideoCastLibraryManagerController extends modExtraManagerController
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/videocast.js');
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/default.grid.js');
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/videos.grid.js');
-//        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/collections.grid.js');
-//        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/courses.grid.js');
+        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/collections.grid.js');
+        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/courses.grid.js');
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/library.panel.js');
 
         $this->addHtml(str_replace('		', '','

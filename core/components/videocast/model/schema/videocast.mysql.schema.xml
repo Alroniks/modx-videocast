@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <model package="videocast" baseClass="xPDOObject" platform="mysql"
-       defaultEngine="InnoDB" phpdoc-package="videocast" version="1.1">
+       defaultEngine="MyISAM" phpdoc-package="videocast" version="1.1">
 
     <object class="vcCollection" table="vc_collections" extends="xPDOSimpleObject">
 
         <field key="title" phptype="string" comment="Short name of collection"
-               dtype="varchar" precision="255" null="false" default="" />
+               dbtype="varchar" precision="255" null="false" default="" />
 
         <field key="alias" phptype="string" comment="Slugged title for link of collection"
-               dtype="varchar" precision="255" null="false" default="" index="index" />
+               dbtype="varchar" precision="255" null="false" default="" index="index" />
 
         <field key="description" phptype="string" comment="Description or introduction of collection"
-               dtype="text"  null="true" default="" />
+               dbtype="text"  null="true" default="" />
 
         <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
             <column key="alias" length="" collation="A" null="false" />
@@ -25,16 +25,16 @@
     <object class="vcCourse" table="vc_courses" extends="xPDOSimpleObject">
 
         <field key="title" phptype="string" comment="Short name of course"
-               dtype="varchar" precision="255" null="false" default="" />
+               dbtype="varchar" precision="255" null="false" default="" />
 
         <field key="alias" phptype="string" comment="Slugged title for link of course"
-               dtype="varchar" precision="255" null="false" default="" index="index" />
+               dbtype="varchar" precision="255" null="false" default="" index="index" />
 
         <field key="description" phptype="string" comment="Description or introduction of course"
-               dtype="text"  null="true" default="" />
+               dbtype="text"  null="true" default="" />
 
         <field key="complexity" phptype="string" comment="Complexity of course (youngling | padawan | knight | master)"
-               dtype="text"  null="true" default="" index="index" />
+               dbtype="varchar" precision="50" null="true" default="" index="index" />
 
         <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
             <column key="alias" length="" collation="A" null="false" />
@@ -52,13 +52,13 @@
     <object class="vcCourseCollection" table="vc_courses_collections" extends="xPDOObject">
 
         <field  key="course" phptype="integer" comment="Link to course"
-                dtype="int" precision="10" attributes="unsigned" null="false" default="0" index="pk"/>
+                dbtype="integer" precision="10" attributes="unsigned" null="false" default="0" index="pk"/>
 
         <field  key="collection" phptype="integer" comment="Link to collection"
-                dtype="int" precision="10" attributes="unsigned" null="false" default="0" index="pk"/>
+                dbtype="int" precision="10" attributes="unsigned" null="false" default="0" index="pk"/>
 
         <field key="rank" phptype="integer" comment="Order of elements in lists"
-               dtype="int" precision="10" null="false" default="0" index="index"/>
+               dbtype="integer" precision="10" null="false" default="0" index="index"/>
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="course" length="" collation="A" null="false" />
@@ -77,13 +77,13 @@
     <object class="vcCourseVideo" table="vc_courses_videos" extends="xPDOObject">
 
         <field  key="course" phptype="integer" comment="Link to course"
-                dtype="int" precision="10" attributes="unsigned" null="false" default="0" index="pk"/>
+                dbtype="integer" precision="10" attributes="unsigned" null="false" default="0" index="pk"/>
 
         <field  key="video" phptype="integer" comment="Link to video"
-                dtype="int" precision="10" attributes="unsigned" null="false" default="0" index="pk"/>
+                dbtype="integer" precision="10" attributes="unsigned" null="false" default="0" index="pk"/>
 
         <field key="rank" phptype="integer" comment="Order of elements in lists"
-               dtype="int" precision="10" null="false" default="0" index="index"/>
+               dbtype="integer" precision="10" null="false" default="0" index="index"/>
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="course" length="" collation="A" null="false" />
@@ -102,34 +102,34 @@
     <object class="vcVideo" table="vc_videos" extends="xPDOSimpleObject">
 
         <field key="title" phptype="string" comment="Short name of video"
-               dtype="varchar" precision="255" null="false" default="" />
+               dbtype="varchar" precision="255" null="false" default="" />
 
         <field key="alias" phptype="string" comment="Slugged title for link of video"
-               dtype="varchar" precision="255" null="false" default="" index="index" />
+               dbtype="varchar" precision="255" null="false" default="" index="index" />
 
         <field key="description" phptype="string" comment="Description or introduction of video"
-               dtype="text"  null="true" default="" />
+               dbtype="text"  null="true" default="" />
 
         <field key="cover" phptype="string" comment="Path to image, that will be used as cover"
-               dtype="varchar" precision="255" null="false" default="" />
+               dbtype="varchar" precision="255" null="false" default="" />
 
         <field key="source" phptype="string" comment="Link to video file or embedded code for video player"
-               dtype="varchar" precision="555" null="false" default="" />
+               dbtype="varchar" precision="555" null="false" default="" />
 
         <field key="duration" phptype="integer" comment="Duration of video (in seconds)"
-               dtype="integer" precision="3" attributes="unsigned" null="false" default="0" />
+               dbtype="integer" precision="3" attributes="unsigned" null="false" default="0" />
 
         <field key="free" phptype="boolean" comment="Status of video: free of paid"
-               dtype="tinyint" precision="1" attributes="unsigned" null="true" default="0" index="index" />
+               dbtype="tinyint" precision="1" attributes="unsigned" null="true" default="0" index="index" />
 
         <field key="hidden" phptype="boolean" comment="Video, that exists but hidden from lists and search"
-               dtype="tinyint" precision="1" attributes="unsigned" null="true" default="0" index="index" />
+               dbtype="tinyint" precision="1" attributes="unsigned" null="true" default="0" index="index" />
 
         <field key="publishedon" phptype="timestamp" comment="Date of publishing video"
-               dtype="timestamp" null="false" default="CURRENT_TIMESTAMP" index="index"/>
+               dbtype="timestamp" null="false" default="CURRENT_TIMESTAMP" index="index"/>
 
         <field key="collection" phptype="integer" comment="Link to collection"
-               dtype="integer" precision="10" attributes="unsigned" null="true" default="" index="index" />
+               dbtype="integer" precision="10" attributes="unsigned" null="true" default="" index="index" />
 
         <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
             <column key="alias" length="" collation="A" null="false" />

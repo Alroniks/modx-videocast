@@ -1,16 +1,15 @@
-VideoCast.grid.Videos = function (config) {
+VideoCast.grid.Collections = function (config) {
     config = config || {};
 
     Ext.applyIf(config, {
-        id: 'videocast-grid-videos'
+        id: 'vc-grid-collections'
     });
 
-    VideoCast.grid.Videos.superclass.constructor.call(this, config);
+    VideoCast.grid.Collections.superclass.constructor.call(this, config);
 };
 
-Ext.extend(VideoCast.grid.Videos, MODx.grid.Grid, {
+Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
     windows: {}
-
-
+    
 });
-Ext.reg('videocast-grid-videos', VideoCast.grid.Videos);
+Ext.reg('vc-grid-collections', VideoCast.grid.Collections);

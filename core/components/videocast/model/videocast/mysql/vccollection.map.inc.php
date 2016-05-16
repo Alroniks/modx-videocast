@@ -16,7 +16,7 @@ $xpdo_meta_map['vcCollection']= array (
     array (
       'phptype' => 'string',
       'comment' => 'Short name of collection',
-      'dtype' => 'varchar',
+      'dbtype' => 'varchar',
       'precision' => '255',
       'null' => false,
       'default' => '',
@@ -25,7 +25,7 @@ $xpdo_meta_map['vcCollection']= array (
     array (
       'phptype' => 'string',
       'comment' => 'Slugged title for link of collection',
-      'dtype' => 'varchar',
+      'dbtype' => 'varchar',
       'precision' => '255',
       'null' => false,
       'default' => '',
@@ -35,7 +35,7 @@ $xpdo_meta_map['vcCollection']= array (
     array (
       'phptype' => 'string',
       'comment' => 'Description or introduction of collection',
-      'dtype' => 'text',
+      'dbtype' => 'text',
       'null' => true,
       'default' => '',
     ),
