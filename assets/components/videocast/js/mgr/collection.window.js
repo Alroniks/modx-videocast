@@ -2,8 +2,8 @@ VideoCast.window.Collection = function (config) {
     config = config || {};
 
     Ext.applyIf(config, {
-        title: 'title',
-        width: 600,
+        title: 'Новая коллекция',
+        width: 700,
         baseParams: {
             action: config.action || 'mgr/fgd'
         },
@@ -31,58 +31,74 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                 border: false
             },
             items: [{
-                columnWidth: .5,
+                columnWidth: .7,
                 layout: 'form',
                 items: [{
                     xtype: 'textfield',
                     name: 'user_id',
                     fieldLabel: 'Название коллекции',
-                    anchor: '95%'
+                    anchor: '100%'
                 },{
                     xtype: 'textfield',
                     name: 'user_id',
                     fieldLabel: 'Ссылка на коллекцию',
-                    anchor: '95%'
+                    anchor: '100%'
                 }, {
                     layout: 'column',
-                    defaults: {},
+                    style: 'margin-top: 15px',
+                    defaults: {
+                        msgTarget: 'under',
+                        border: false
+                    },
                     items: [{
-                        columnWidth: .5,
+                        columnWidth: .3,
                         layout: 'form',
                         items: [{
                             xtype: 'textfield',
                             name: 'user_id',
                             fieldLabel: 'Позиция',
-                            anchor: '95%'
+                            anchor: '100%'
                         }]
                     }, {
-                        columnWidth: .5,
+                        columnWidth: .3,
                         layout: 'form',
                         items: [{
-                            xtype: 'textfield',
+                            xtype: 'datefield',
                             name: 'user_id',
                             fieldLabel: 'Дата публикации',
-                            anchor: '95%'
+                            anchor: '100%'
+                        }]
+                    }, {
+                        columnWidth: .3,
+                        layout: 'form',
+                        items: [{
+                            xtype: 'checkbox',
+                            name: 'user_id',
+                            label: 'sdfsdf',
+                            fieldLabel: 'Не показывать',
+                            anchor: '100%'
                         }]
                     }]
                 }]
             }, {
-                columnWidth: .5,
+                columnWidth: .3,
                 layout: 'form',
                 items: [{
                     xtype: 'textfield',
                     name: 'image',
                     fieldLabel: 'Обложка',
-                    anchor: '95%'
+                    anchor: '100%'
                 }]
                 // todo: добавить блок для вывода превью обложки + плагин для ресайзинга картинки с кропом
             }]
         }, {
             layout: 'form',
+            style: 'margin-top: 15px',
             items: [{
                 xtype: 'textarea',
                 name: 'desc',
-                id: 'vc-desc-col'
+                fieldLabel: 'Описание',
+                anchor: '100%'
             }]
         }];
     }
