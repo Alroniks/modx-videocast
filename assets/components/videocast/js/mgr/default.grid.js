@@ -27,6 +27,7 @@ VideoCast.grid.Default = function (config) {
 
     VideoCast.grid.Default.superclass.constructor.call(this, config);
 };
+
 Ext.extend(VideoCast.grid.Default, MODx.grid.Grid, {
 
     /**
@@ -55,7 +56,8 @@ Ext.extend(VideoCast.grid.Default, MODx.grid.Grid, {
      * @returns {*[]}
      */
     getTopBar: function getTopBar() {
-        // return ['->', this.getSearchField()];
+        return [];
+        //}, '->', this.getSearchField()];
     },
 
     /**
@@ -162,6 +164,7 @@ Ext.extend(VideoCast.grid.Default, MODx.grid.Grid, {
     }
 
 });
+
 Ext.reg('vc-grid-default', VideoCast.grid.Default);
 
 VideoCast.grid.RowExpander = Ext.extend(Ext.grid.RowExpander, {

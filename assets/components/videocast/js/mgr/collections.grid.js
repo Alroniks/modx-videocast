@@ -29,7 +29,7 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
 
     getFields: function getFields() {
         return [
-            'id', 'title', 'alias', 'description'
+            'id', 'title', 'alias', 'description', 'cover'
         ]
     },
 
@@ -37,18 +37,39 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
         return [this.exp, {
             header: _('id'),
             dataIndex: 'id',
-            width: 20,
-            sortable: true
+            sortable: true,
+            hidden: true
         }, {
-            header: _('vc_collections_columns_title'),
+            header: _('vc_collections_columns_cover') + 'Обложка',
+            dataIndex: 'cover',
+            width: 30
+        }, {
+            header: _('vc_collections_columns_title') + 'основные с-ва',
             dataIndex: 'title',
             width: 100
         }, {
-            header: _('vc_collections_columns_alias'),
+            header: _('vc_collections_columns_alias') + 'дополнительные с-ва и статистика',
             dataIndex: 'alias',
             width: 50
         }];
+    },
+
+    getTopBar: function getTopBar() {
+        return [{
+            text: 'new collection',
+            handler: this.addNewCollection,
+            scope: this
+        }, '->'];
+    },
+
+    addNewCollection: function addNewCollection() {
+        // ???
+        var w = MODx.load({
+            xtype: 'vc-window-collection'
+        });
+
+        w.show();
     }
-    
+
 });
 Ext.reg('vc-grid-collections', VideoCast.grid.Collections);

@@ -50,10 +50,16 @@ class VideoCastLibraryManagerController extends modExtraManagerController
         $this->addCss($this->vc->config['url.assets.css'] . 'mgr/theme.css');
 
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/videocast.js');
+
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/default.grid.js');
+        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/default.window.js');
+
+        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/collection.window.js');
+
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/videos.grid.js');
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/collections.grid.js');
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/courses.grid.js');
+
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/library.panel.js');
 
         $this->addHtml(str_replace('		', '','
