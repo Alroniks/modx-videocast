@@ -18,7 +18,8 @@ VideoCast.grid.Collections = function (config) {
         baseParams: {
             action: 'mgr/collections/getlist'
         },
-        cm: this.cm
+        cm: this.cm,
+        stripeRows: false
     });
 
     VideoCast.grid.Collections.superclass.constructor.call(this, config);
@@ -33,28 +34,24 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
     },
 
     getColumns: function getColumns() {
-        return [
-        //     {
-        //     header: _('id'),
-        //     dataIndex: 'id',
-        //     sortable: true,
-        //     hidden: true
-        // },
-            {
+        return [{
+            id: 'cover',
             header: _('vc_collections_columns_cover'),
             dataIndex: 'cover',
             renderer: this.coverRenderer.createDelegate(this, [this], true),
-            width: 60
+            fixed: true,
+            resizable: false,
+            width: 170
         }, {
+            id: 'description',
             header: _('vc_collections_columns_description'),
             dataIndex: 'title',
-            renderer: this.descriptionRenderer.createDelegate(this, [this], true),
-            width: 150
+            renderer: this.descriptionRenderer.createDelegate(this, [this], true)
         }, {
+            id: 'parameters',
             header: _('vc_collections_columns_parameters'),
             dataIndex: 'alias',
-            renderer: this.parametersRenderer.createDelegate(this, [this], true),
-            width: 100
+            renderer: this.parametersRenderer.createDelegate(this, [this], true)
         }];
     },
 
@@ -70,7 +67,7 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
     descriptionRenderer: function titleRender(value, metaData, record) {
         var tpl =
             '<div class="collection description">' +
-                '<h2>{title} <span class="active">показывается</span>' +
+                '<h2>{rank}. {title} <span class="active">показывается</span>' +
                 '<span class="hidden">скрыто</span>' +
                 '</h2>' +
                 '<h3>.../{alias}</h3>' +
@@ -99,10 +96,25 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
             handler: this.addNewCollection,
             scope: this
         }, '->'];
+        // просто поиск + предвыбранные фильтры
+        // показывать активные
+        // показывать скрытые
+        // сначала активные
+        // сначала скрытые
+        // сбросить фильтр
+        // мало видео
+        // много видео
+
+        // меню
+        // - показать / скрыть
+        // - редактировать
+        // - переместить вверх
+        // - переместить вниз
+        // - обновить статистику (если делать денормализацию, но проще через кеш)
     },
 
     addNewCollection: function addNewCollection() {
-        // ???
+
         var w = MODx.load({
             xtype: 'vc-window-collection'
         });

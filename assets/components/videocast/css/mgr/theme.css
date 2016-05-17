@@ -3,9 +3,10 @@ Collections tab styles
 */
 /* collections.grid */
 .collection {
-    padding-left: 5px;
+    margin-left: 5px;
     white-space: normal;
 }
+.collection.cover,
 .collection.cover img {
     width: 150px;
     height: 150px;
