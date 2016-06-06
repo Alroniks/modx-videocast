@@ -1,36 +1,6 @@
 <?php
 
-// load menus
-//$menus = include_once __DIR__ . '/elements/menus.php';
-//if (!is_array($menus)) {
-//    $modx->log(modX::LOG_LEVEL_ERROR, 'Cannot build menus');
-//} else {
-//    foreach ($menus as $menu) {
-//        $builder->putVehicle($builder->createVehicle($menu, [
-//            xPDOTransport::PRESERVE_KEYS => true,
-//            xPDOTransport::UPDATE_OBJECT => true,
-//            xPDOTransport::UNIQUE_KEY => 'text',
-//            xPDOTransport::RELATED_OBJECTS => true,
-//            xPDOTransport::RELATED_OBJECT_ATTRIBUTES => [
-//                'Action' => [
-//                    xPDOTransport::PRESERVE_KEYS => false,
-//                    xPDOTransport::UPDATE_OBJECT => true,
-//                    xPDOTransport::UNIQUE_KEY => ['namespace', 'controller']
-//                ]
-//            ]
-//        ]));
-//        $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($menus) . ' menus.');
-//    }
-//}
-
-//$vehicle->resolve('php', ['source' => $sources['resolvers'] . 'tables.php']);
-
-
-//    'requires', [
-//        'php' => '>=5.6',
-//        'modx' => '>=2.4',
-//        'pdoTools' => '~2.3'
-//    ]
+use videocast\builder\Utils;
 
 set_time_limit(0);
 
@@ -136,10 +106,10 @@ class Builder
         $category = $this->modx->newObject('modCategory');
         $category->set('category', self::PKG_NAME);
 
-        $this->packCategoryElements($category, 'templates');
-        $this->packCategoryElements($category, 'chunks');
-        $this->packCategoryElements($category, 'snippets');
-        $this->packCategoryElements($category, 'plugins');
+//        $this->packCategoryElements($category, 'templates');
+//        $this->packCategoryElements($category, 'chunks');
+//        $this->packCategoryElements($category, 'snippets');
+//        $this->packCategoryElements($category, 'plugins');
 
         $this->builder->putVehicle($this->builder->createVehicle($category, [
             xPDOTransport::UNIQUE_KEY => 'category',
@@ -147,31 +117,31 @@ class Builder
             xPDOTransport::UPDATE_OBJECT => true,
             xPDOTransport::RELATED_OBJECTS => true,
             xPDOTransport::RELATED_OBJECT_ATTRIBUTES => [
-                'Templates' => [
-                    xPDOTransport::PRESERVE_KEYS => true,
-                    xPDOTransport::UPDATE_OBJECT => true,
-                    xPDOTransport::UNIQUE_KEY => 'id'
-                ],
-                'Chunks' => [
-                    xPDOTransport::PRESERVE_KEYS => false,
-                    xPDOTransport::UPDATE_OBJECT => true,
-                    xPDOTransport::UNIQUE_KEY => 'name'
-                ],
-                'Snippets' => [
-                    xPDOTransport::PRESERVE_KEYS => false,
-                    xPDOTransport::UPDATE_OBJECT => true,
-                    xPDOTransport::UNIQUE_KEY => 'name'
-                ],
-                'Plugins' => [
-                    xPDOTransport::PRESERVE_KEYS => true,
-                    xPDOTransport::UPDATE_OBJECT => true,
-                    xPDOTransport::UNIQUE_KEY => 'name'
-                ],
-                'PluginEvents' => [
-                    xPDOTransport::PRESERVE_KEYS => true,
-                    xPDOTransport::UPDATE_OBJECT => true,
-                    xPDOTransport::UNIQUE_KEY => ['pluginid','event'],
-                ]
+//                'Templates' => [
+//                    xPDOTransport::PRESERVE_KEYS => true,
+//                    xPDOTransport::UPDATE_OBJECT => true,
+//                    xPDOTransport::UNIQUE_KEY => 'id'
+//                ],
+//                'Chunks' => [
+//                    xPDOTransport::PRESERVE_KEYS => false,
+//                    xPDOTransport::UPDATE_OBJECT => true,
+//                    xPDOTransport::UNIQUE_KEY => 'name'
+//                ],
+//                'Snippets' => [
+//                    xPDOTransport::PRESERVE_KEYS => false,
+//                    xPDOTransport::UPDATE_OBJECT => true,
+//                    xPDOTransport::UNIQUE_KEY => 'name'
+//                ],
+//                'Plugins' => [
+//                    xPDOTransport::PRESERVE_KEYS => true,
+//                    xPDOTransport::UPDATE_OBJECT => true,
+//                    xPDOTransport::UNIQUE_KEY => 'name'
+//                ],
+//                'PluginEvents' => [
+//                    xPDOTransport::PRESERVE_KEYS => true,
+//                    xPDOTransport::UPDATE_OBJECT => true,
+//                    xPDOTransport::UNIQUE_KEY => ['pluginid','event'],
+//                ]
             ]
         ]));
     }
@@ -235,21 +205,82 @@ class Builder
     }
 
     /**
+     * Packs top menus for package
+     */
+    private function packMenus()
+    {
+        $menus = include_once __DIR__ . '/elements/menus.php';
+        if (!is_array($menus)) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Cannot build menus');
+        } else {
+            foreach ($menus as $menu) {
+                $this->builder->putVehicle($this->builder->createVehicle($menu, [
+                    xPDOTransport::PRESERVE_KEYS => true,
+                    xPDOTransport::UPDATE_OBJECT => true,
+                    xPDOTransport::UNIQUE_KEY => 'text',
+                    xPDOTransport::RELATED_OBJECTS => true,
+                    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => [
+                        'Action' => [
+                            xPDOTransport::PRESERVE_KEYS => false,
+                            xPDOTransport::UPDATE_OBJECT => true,
+                            xPDOTransport::UNIQUE_KEY => ['namespace', 'controller']
+                        ]
+                    ]
+                ]));
+                $this->modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($menus) . ' menus.');
+            }
+        }
+    }
+
+    /**
+     * Packs internal models from schema file
+     */
+    private function packModels()
+    {
+        /** @var xPDOManager $manager */
+        $manager = $this->modx->getManager();
+        /** @var xPDOGenerator $generator */
+        $generator = $manager->getGenerator();
+
+        Utils::removeDirectory(__DIR__ . '/../core/components/videocast/model/videocast/mysql');
+
+        $generator->parseSchema(
+            __DIR__ . '/../core/components/videocast/model/schema/videocast.mysql.schema.xml',
+            __DIR__ . '/../core/components/videocast/model/'
+        );
+
+        $this->modx->log(modX::LOG_LEVEL_INFO, 'Models generated');
+    }
+
+    /**
      * Packs files into package
      */
     private function packFiles()
     {
-        $vehicle = $this->builder->createVehicle('xPDOFileVehicle', [
-            'vehicle_class' => 'xPDOFileVehicle'
-        ]);
+        // load core
+        $this->builder->putVehicle($this->builder->createVehicle('xPDOFileVehicle', [
+            'vehicle_class' => 'xPDOFileVehicle',
+            'object' => [
+                'source' => __DIR__ . '/../core/components/' . self::PKG_NAME,
+                'target' => "return MODX_CORE_PATH . 'components/';"
+            ]
+        ]));
 
-        $vehicle->resolve('file', [
-            'source' => __DIR__ . '/../core/components/' . self::PKG_NAME,
-            'target' => "return MODX_CORE_PATH . 'components/';"
-        ]);
-        $vehicle->resolve('file', [
-            'source' => __DIR__ . '/../themes/' . self::PKG_NAME,
-            'target' => "return MODX_ASSETS_PATH . 'themes/';"
+        // load assets
+        $this->builder->putVehicle($this->builder->createVehicle('xPDOFileVehicle', [
+            'vehicle_class' => 'xPDOFileVehicle',
+            'object' => [
+                'source' => __DIR__ . '/../assets/components/' . self::PKG_NAME,
+                'target' => "return MODX_ASSETS_PATH . 'themes/';"
+            ]
+        ]));
+    }
+
+    private function packResolvers()
+    {
+        $vehicle = $this->builder->createVehicle('xPDOScriptVehicle', [
+            'vehicle_class' => 'xPDOScriptVehicle',
+            'object' => ['source' => __DIR__ . '/resolvers/tables.php']
         ]);
 
         $this->builder->putVehicle($vehicle);
@@ -284,9 +315,12 @@ class Builder
 
         $this->packNamespace();
         $this->packCategory();
-        $this->packResources();
-        $this->packSettings();
+        //$this->packResources();
+        //$this->packSettings();
+        $this->packMenus();
+        $this->packModels();
         $this->packFiles();
+        $this->packResolvers();
         $this->packMeta();
 
         $this->builder->pack();

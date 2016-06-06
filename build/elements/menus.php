@@ -20,10 +20,10 @@ $list = [
 $menus = [];
 foreach ($list as $name => $data) {
     /* @var modMenu $menu */
-    $menu = $modx->newObject('modMenu');
+    $menu = $this->modx->newObject('modMenu');
     $menu->fromArray(array_merge([
         'parent' => 'components',
-        'namespace' => PKG_NAME,
+        'namespace' => Builder::PKG_NAME,
         'menuindex' => 0
     ], $data), '', true, true);
 
