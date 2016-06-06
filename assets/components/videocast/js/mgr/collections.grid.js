@@ -67,7 +67,7 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
     descriptionRenderer: function titleRender(value, metaData, record) {
         var tpl =
             '<div class="collection description">' +
-                '<h2>{rank}. {title} <span class="active">показывается</span>' +
+                '<h2>{title} <span class="active">показывается</span>' +
                 '<span class="hidden">скрыто</span>' +
                 '</h2>' +
                 '<h3>.../{alias}</h3>' +
