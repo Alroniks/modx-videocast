@@ -14,8 +14,21 @@
         <field key="description" phptype="string" comment="Description or introduction of collection"
                dbtype="text"  null="true" default="" />
 
+        <field key="cover" phptype="string" comment="Path to image, that will be used as cover"
+               dbtype="varchar" precision="255" null="false" default="" />
+
+        <field key="rank" phptype="integer" comment="Order of categories in lists"
+               dbtype="integer" precision="10" null="false" default="0" index="index"/>
+
+        <field key="publishedon" phptype="timestamp" comment="Date of publishing video"
+               dbtype="timestamp" null="false" default="CURRENT_TIMESTAMP" index="index"/>
+
         <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
             <column key="alias" length="" collation="A" null="false" />
+        </index>
+
+        <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
+            <column key="rank" length="" collation="A" null="false" />
         </index>
 
         <composite alias="Videos" class="vcVideo" local="id" foreign="collection" cardinality="many" owner="local" />
@@ -32,6 +45,9 @@
 
         <field key="description" phptype="string" comment="Description or introduction of course"
                dbtype="text"  null="true" default="" />
+
+        <field key="cover" phptype="string" comment="Path to image, that will be used as cover"
+               dbtype="varchar" precision="255" null="false" default="" />
 
         <field key="complexity" phptype="string" comment="Complexity of course (youngling | padawan | knight | master)"
                dbtype="varchar" precision="50" null="true" default="" index="index" />

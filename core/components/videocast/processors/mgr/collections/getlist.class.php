@@ -6,7 +6,6 @@ class VideoCastCollectionsGetListProcessor extends modObjectGetListProcessor
     public $languageTopics = ['default', 'videocast:default'];
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
-    //public $permission = 'vcvideo_list';
 
     /** @var VideoCast */
     protected $vc;
@@ -17,10 +16,6 @@ class VideoCastCollectionsGetListProcessor extends modObjectGetListProcessor
     public function initialize()
     {
         $this->vc = $this->modx->getService('VideoCast');
-
-//        if (!$this->modx->hasPermission($this->permission)) {
-//            return $this->modx->lexicon('access_denied');
-//        }
 
         return parent::initialize();
     }

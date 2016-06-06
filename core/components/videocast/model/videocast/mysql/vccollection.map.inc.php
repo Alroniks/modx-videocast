@@ -9,6 +9,9 @@ $xpdo_meta_map['vcCollection']= array (
     'title' => '',
     'alias' => '',
     'description' => '',
+    'cover' => '',
+    'rank' => 0,
+    'publishedon' => 'CURRENT_TIMESTAMP',
   ),
   'fieldMeta' => 
   array (
@@ -39,6 +42,34 @@ $xpdo_meta_map['vcCollection']= array (
       'null' => true,
       'default' => '',
     ),
+    'cover' => 
+    array (
+      'phptype' => 'string',
+      'comment' => 'Path to image, that will be used as cover',
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'rank' => 
+    array (
+      'phptype' => 'integer',
+      'comment' => 'Order of categories in lists',
+      'dbtype' => 'integer',
+      'precision' => '10',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'publishedon' => 
+    array (
+      'phptype' => 'timestamp',
+      'comment' => 'Date of publishing video',
+      'dbtype' => 'timestamp',
+      'null' => false,
+      'default' => 'CURRENT_TIMESTAMP',
+      'index' => 'index',
+    ),
   ),
   'indexes' => 
   array (
@@ -51,6 +82,22 @@ $xpdo_meta_map['vcCollection']= array (
       'columns' => 
       array (
         'alias' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'rank' => 
+    array (
+      'alias' => 'rank',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'rank' => 
         array (
           'length' => '',
           'collation' => 'A',

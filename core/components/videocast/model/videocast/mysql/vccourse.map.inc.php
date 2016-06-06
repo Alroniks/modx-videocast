@@ -9,6 +9,7 @@ $xpdo_meta_map['vcCourse']= array (
     'title' => '',
     'alias' => '',
     'description' => '',
+    'cover' => '',
     'complexity' => '',
   ),
   'fieldMeta' => 
@@ -38,6 +39,15 @@ $xpdo_meta_map['vcCourse']= array (
       'comment' => 'Description or introduction of course',
       'dbtype' => 'text',
       'null' => true,
+      'default' => '',
+    ),
+    'cover' => 
+    array (
+      'phptype' => 'string',
+      'comment' => 'Path to image, that will be used as cover',
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'null' => false,
       'default' => '',
     ),
     'complexity' => 
