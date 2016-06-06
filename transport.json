@@ -1,17 +1,10 @@
 {
   "name": "videocast",
-  "description": "Packed tfdsgdfgdfgdfgheme files for website modcasts.video",
-
-  "screenshot": "https://raw.githubusercontent.com/Alroniks/mdv-theme/master/meta/cover.png?token=AAShitzFDJy9m7k_FGOPiiv4BQ1hT4tCks5XRap-wA%3D%3D",
-  "thumbnail": "https://raw.githubusercontent.com/Alroniks/mdv-theme/master/meta/thumb.png?token=AAShih08h6sDUufxACjVh8BiSFYpLKA9ks5XRaqVwA%3D%3D",
-
+  "description": "Video gallery (library) extra for MODX Revolution",
   "author": "Ivan Klimchuk",
   "license": "MIT",
-
   "support": {
-    "db": [
-      "mysql"
-    ],
+    "db": ["mysql"],
     "modx": ">=2.5.0",
     "php": ">=7.0"
   }
