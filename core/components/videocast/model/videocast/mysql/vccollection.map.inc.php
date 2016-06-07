@@ -11,6 +11,7 @@ $xpdo_meta_map['vcCollection']= array (
     'description' => '',
     'cover' => '',
     'rank' => 0,
+    'hidden' => 0,
     'publishedon' => 'CURRENT_TIMESTAMP',
   ),
   'fieldMeta' => 
@@ -61,6 +62,17 @@ $xpdo_meta_map['vcCollection']= array (
       'default' => 0,
       'index' => 'index',
     ),
+    'hidden' => 
+    array (
+      'phptype' => 'boolean',
+      'comment' => 'Collection, that exists but hidden from lists and search',
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'null' => true,
+      'default' => 0,
+      'index' => 'index',
+    ),
     'publishedon' => 
     array (
       'phptype' => 'timestamp',
@@ -98,6 +110,22 @@ $xpdo_meta_map['vcCollection']= array (
       'columns' => 
       array (
         'rank' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'hidden' => 
+    array (
+      'alias' => 'hidden',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'hidden' => 
         array (
           'length' => '',
           'collation' => 'A',

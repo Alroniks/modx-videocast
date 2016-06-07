@@ -29,7 +29,8 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
 
     getFields: function getFields() {
         return [
-            'id', 'title', 'alias', 'description', 'cover'
+            'id', 'title', 'alias', 'description', 'cover', 'rank', 'hidden', 'publishedon',
+            'videos', 'duration'
         ]
     },
 
@@ -65,11 +66,14 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
     },
 
     descriptionRenderer: function titleRender(value, metaData, record) {
+
+        record.data.status = record.data.hidden
+            ? '<span class="hidden">' + _('vc_collections_status_hidden') + '</span>'
+            : '<span class="active">' + _('vc_collections_status_active') + '</span>';
+
         var tpl =
             '<div class="collection description">' +
-                '<h2>{title} <span class="active">показывается</span>' +
-                '<span class="hidden">скрыто</span>' +
-                '</h2>' +
+                '<h2>{title} {status}</h2>' +
                 '<h3>.../{alias}</h3>' +
                 '<p>{description}</p>' +
             '</div>';
@@ -78,13 +82,24 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
     },
 
     parametersRenderer: function parametersRenderer(value, metaData, record) {
+
+        var publishedon = new Date(record.data.publishedon),
+            pubdate = {
+                rtime: publishedon.toISOString(),
+                htime: publishedon.format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)
+            };
+
+        var h = Math.floor(record.data.duration / 3600), 
+            m = Math.floor(record.data.duration / 60) % 60, 
+            s = record.data.duration % 60;
+
         var tpl =
             '<div class="collection parameters">' +
-                '<p class="count"><strong>12 <small>видео</small></strong></p>' +
-                '<p class="time"><strong>7 200 <small>секунд</small></strong>' +
-                '<br><span>2ч 23м 34c</span>' +
+                '<p class="count"><strong>{videos} <small>' + _('vc_collections_videos') + '</small></strong></p>' +
+                '<p class="time"><strong>{duration} <small>' + _('vc_collections_seconds') + '</small></strong>' +
+                    '<br><span>' + _('vc_collections_duration', [h, m, s]) + '</span>' +
                 '</p>' +
-                '<p class="publishedon"><b>Опубликована:</b><br><time>17.05.2016</time></p>' +
+                '<p class="publishedon">' + _('vc_collections_publishedon', pubdate) + '</p>' +
             '</div>';
 
         return new Ext.XTemplate(tpl).applyTemplate(record.data);

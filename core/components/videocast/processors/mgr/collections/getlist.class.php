@@ -20,6 +20,16 @@ class VideoCastCollectionsGetListProcessor extends modObjectGetListProcessor
         return parent::initialize();
     }
 
+    public function prepareRow(xPDOObject $object)
+    {
+        $array = parent::prepareRow($object);
+
+        $array['videos'] = rand(5, 20); // items
+        $array['duration'] = rand(999, 10000); // seconds
+
+        return $array;
+    }
+
 }
 
 return VideoCastCollectionsGetListProcessor::class;
