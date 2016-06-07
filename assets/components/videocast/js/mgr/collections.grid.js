@@ -57,9 +57,12 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
     },
 
     coverRenderer: function coverRenderer(value, metaData, record) {
+
+        record.data.cover = value ? MODx.config.base_url + value : 'http://dummyimage.com/300x300/eeeeee/ffffff&text=cl';
+
         var tpl =
             '<div class="collection cover">' +
-                '<img src="http://modcasts.video.loc/assets/themes/modcastsvideo/img/cls/1.jpeg">' +
+                '<img src="{cover}">' +
             '</div>';
 
         return new Ext.XTemplate(tpl).applyTemplate(record.data);
@@ -131,7 +134,8 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
     addNewCollection: function addNewCollection() {
 
         var w = MODx.load({
-            xtype: 'vc-window-collection'
+            xtype: 'vc-window-collection',
+            action: 'mgr/collections/create'
         });
 
         w.show();

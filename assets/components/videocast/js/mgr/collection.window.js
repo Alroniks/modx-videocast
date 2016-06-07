@@ -2,20 +2,15 @@ VideoCast.window.Collection = function (config) {
     config = config || {};
 
     Ext.applyIf(config, {
-        title: 'Новая коллекция',
+        title: 'Новая коллекция', // TODO: lex
         width: 700,
         baseParams: {
-            action: config.action || 'mgr/fgd'
+            action: config.action || 'mgr/collections/create'
         },
         modal: false
     });
 
     VideoCast.window.Collection.superclass.constructor.call(this, config);
-
-    // this.on('afterrender', function() {
-    //     MODx.loadRTE
-    //     MODx.loadRTE('vc-desc-col');
-    // }, this);
 };
 
 Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
@@ -35,12 +30,12 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                 layout: 'form',
                 items: [{
                     xtype: 'textfield',
-                    name: 'user_id',
+                    name: 'title',
                     fieldLabel: 'Название коллекции',
                     anchor: '100%'
                 },{
                     xtype: 'textfield',
-                    name: 'user_id',
+                    name: 'alias',
                     fieldLabel: 'Ссылка на коллекцию',
                     anchor: '100%'
                 }, {
@@ -54,8 +49,8 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                         columnWidth: .3,
                         layout: 'form',
                         items: [{
-                            xtype: 'textfield',
-                            name: 'user_id',
+                            xtype: 'numberfield',
+                            name: 'rank',
                             fieldLabel: 'Позиция',
                             anchor: '100%'
                         }]
@@ -64,7 +59,7 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                         layout: 'form',
                         items: [{
                             xtype: 'datefield',
-                            name: 'user_id',
+                            name: 'publishedon',
                             fieldLabel: 'Дата публикации',
                             anchor: '100%'
                         }]
@@ -73,8 +68,8 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                         layout: 'form',
                         items: [{
                             xtype: 'checkbox',
-                            name: 'user_id',
-                            label: 'sdfsdf',
+                            name: 'hidden',
+                            label: 'Не показывать',
                             fieldLabel: 'Не показывать',
                             anchor: '100%'
                         }]
@@ -84,8 +79,8 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                 columnWidth: .3,
                 layout: 'form',
                 items: [{
-                    xtype: 'textfield',
-                    name: 'image',
+                    xtype: 'modx-combo-browser',
+                    name: 'cover',
                     fieldLabel: 'Обложка',
                     anchor: '100%'
                 }]
@@ -96,7 +91,7 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
             style: 'margin-top: 15px',
             items: [{
                 xtype: 'textarea',
-                name: 'desc',
+                name: 'description',
                 fieldLabel: 'Описание',
                 anchor: '100%'
             }]
@@ -106,6 +101,3 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
 });
 
 Ext.reg('vc-window-collection', VideoCast.window.Collection);
-
-
-// нужно написать роад мап с версиями и выпустить первую базову версию сначала
