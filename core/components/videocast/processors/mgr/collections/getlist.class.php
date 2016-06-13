@@ -4,7 +4,7 @@ class VideoCastCollectionsGetListProcessor extends modObjectGetListProcessor
 {
     public $classKey = 'vcCollection';
     public $languageTopics = ['default', 'videocast:default'];
-    public $defaultSortField = 'id';
+    public $defaultSortField = 'rank';
     public $defaultSortDirection = 'ASC';
 
     /** @var VideoCast */

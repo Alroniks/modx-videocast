@@ -2,6 +2,7 @@ VideoCast.grid.Default = function (config) {
     config = config || {};
 
     Ext.applyIf(config, {
+        sm: new Ext.grid.RowSelectionModel({ singleSelect: true }),
         url: VideoCast.config['url.assets.connector'],
         baseParams: {},
         cls: config['cls'] || 'main-wrapper',
@@ -221,22 +222,3 @@ Ext.extend(VideoCast.grid.Default, MODx.grid.Grid, {
 });
 
 Ext.reg('vc-grid-default', VideoCast.grid.Default);
-
-VideoCast.grid.RowExpander = Ext.extend(Ext.grid.RowExpander, {
-
-    getBodyContent: function(record, index) {
-
-        if (!this.enableCaching) {
-            return this.tpl.apply(record.json);
-        }
-        var content = this.bodyContent[record.id];
-
-        if (!content) {
-            content = this.tpl.apply(record.json);
-            this.bodyContent[record.id] = content;
-        }
-
-        return content;
-    }
-
-});

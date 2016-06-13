@@ -11,6 +11,8 @@ VideoCast.window.Collection = function (config) {
     });
 
     VideoCast.window.Collection.superclass.constructor.call(this, config);
+
+
 };
 
 Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
@@ -61,6 +63,7 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                             xtype: 'datefield',
                             name: 'publishedon',
                             fieldLabel: 'Дата публикации',
+                            format: MODx.config['manager_date_format'] || 'Y-m-d',
                             anchor: '100%'
                         }]
                     }, {

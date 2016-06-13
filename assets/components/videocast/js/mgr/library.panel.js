@@ -5,14 +5,15 @@ VideoCast.panel.Library = function (config) {
         cls: 'container',
         items: [{
             xtype: 'modx-tabs',
-            items: [{
+            items: [
+                /*{
                 title: _('vc_videos_tab_title'),
                 layout: 'anchor'
                 // items: [{
                 //     xtype: 'vc-grid-videos',
                 //     id: 'vc-grid-videos'
                 // }]
-            }, {
+            }, */{
                 title: _('vc_collections_tab_title'),
                 layout: 'anchor',
                 items: [{

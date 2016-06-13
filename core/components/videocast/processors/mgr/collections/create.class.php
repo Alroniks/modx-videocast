@@ -5,14 +5,12 @@ class VideoCastCollectionsCreateProcessor extends modObjectCreateProcessor
     public $classKey = 'vcCollection';
     public $languageTopics = ['videocast:default'];
 
-    /**
-     * @return bool
-     */
-    public function initialize()
+    public function __construct(modX $modx, array $properties)
     {
-        return parent::initialize();
-    }
+        parent::__construct($modx, $properties);
 
+        $this->setCheckbox('hidden');
+    }
 }
 
 return VideoCastCollectionsCreateProcessor::class;

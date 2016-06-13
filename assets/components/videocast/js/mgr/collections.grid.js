@@ -5,11 +5,6 @@ VideoCast.grid.Collections = function (config) {
         config.id = 'vc-grid-collections';
     }
 
-    // this.exp = new VideoCast.grid.RowExpander({
-    //     expandOnDblClick: false,
-    //     tpl: new Ext.XTemplate('{description}')
-    // });
-
     this.cm = new Ext.grid.ColumnModel({
         columns: this.getColumns()
     });
@@ -19,7 +14,8 @@ VideoCast.grid.Collections = function (config) {
             action: 'mgr/collections/getlist'
         },
         cm: this.cm,
-        stripeRows: false
+        stripeRows: false,
+        pageSize: 3
     });
 
     VideoCast.grid.Collections.superclass.constructor.call(this, config);
@@ -79,6 +75,7 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
                 '<h2>{title} {status}</h2>' +
                 '<h3>.../{alias}</h3>' +
                 '<p>{description}</p>' +
+                '<br><small>Rank: {rank}</small>' +
             '</div>';
 
         return new Ext.XTemplate(tpl).applyTemplate(record.data);
@@ -131,6 +128,15 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
         // - обновить статистику (если делать денормализацию, но проще через кеш)
     },
 
+    getListeners: function getListeners() {
+        return {
+            rowDblClick: function (grid, rowIndex, e) {
+                var row = grid.store.getAt(rowIndex);
+                this.updateCollection(grid, e, row)
+            }
+        };
+    },
+
     addNewCollection: function addNewCollection() {
 
         var w = MODx.load({
@@ -139,6 +145,50 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
         });
 
         w.show();
+    },
+
+    updateCollection: function updateCollection(btn, e, row) {
+        if (typeof(row) != 'undefined') {
+            this.menu.record = row.data;
+        }
+        var id = this.menu.record.id;
+
+        MODx.Ajax.request({
+            url: this.config.url,
+            params: {
+                action: 'mgr/collections/get',
+                id: id
+            },
+            listeners: {
+                success: {
+                    fn: function (r) {
+                        var w = Ext.getCmp('vc-window-collection');
+                        if (w) { w.close(); }
+
+                        w = MODx.load({
+                            xtype: 'vc-window-collection',
+                            action: 'mgr/collections/update',
+                            record: r.object,
+                            listeners: {
+                                success: {
+                                    fn: function () {
+                                        this.refresh();
+                                    }, scope: this
+                                },
+                                hide: {
+                                    fn: function () {
+                                        Ext.getCmp('vc-grid-collections').getStore().reload();
+                                    }, scope: this
+                                }
+                            }
+                        });
+                        w.fp.getForm().reset();
+                        w.fp.getForm().setValues(r.object);
+                        w.show(e.target);
+                    }, scope: this
+                }
+            }
+        });
     }
 
 });
