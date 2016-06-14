@@ -15,7 +15,8 @@ VideoCast.grid.Collections = function (config) {
         },
         cm: this.cm,
         stripeRows: false,
-        pageSize: 3
+        pageSize: 3,
+        cls: 'main-wrapper collection grid'
     });
 
     VideoCast.grid.Collections.superclass.constructor.call(this, config);
@@ -33,7 +34,7 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
     getColumns: function getColumns() {
         return [{
             id: 'cover',
-            header: _('vc_collections_columns_cover'),
+            header: _('vc_collections_column_cover'),
             dataIndex: 'cover',
             renderer: this.coverRenderer.createDelegate(this, [this], true),
             fixed: true,
@@ -41,12 +42,12 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
             width: 170
         }, {
             id: 'description',
-            header: _('vc_collections_columns_description'),
+            header: _('vc_collections_column_description'),
             dataIndex: 'title',
             renderer: this.descriptionRenderer.createDelegate(this, [this], true)
         }, {
             id: 'parameters',
-            header: _('vc_collections_columns_parameters'),
+            header: _('vc_collections_column_parameters'),
             dataIndex: 'alias',
             renderer: this.parametersRenderer.createDelegate(this, [this], true)
         }];
@@ -57,7 +58,7 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
         record.data.cover = value ? MODx.config.base_url + value : 'http://dummyimage.com/300x300/eeeeee/ffffff&text=cl';
 
         var tpl =
-            '<div class="collection cover">' +
+            '<div class="cover">' +
                 '<img src="{cover}">' +
             '</div>';
 
@@ -71,7 +72,7 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
             : '<span class="active">' + _('vc_collections_status_active') + '</span>';
 
         var tpl =
-            '<div class="collection description">' +
+            '<div class="description">' +
                 '<h2>{title} {status}</h2>' +
                 '<h3>.../{alias}</h3>' +
                 '<p>{description}</p>' +
@@ -94,12 +95,12 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
             s = record.data.duration % 60;
 
         var tpl =
-            '<div class="collection parameters">' +
-                '<p class="count"><strong>{videos} <small>' + _('vc_collections_videos') + '</small></strong></p>' +
-                '<p class="time"><strong>{duration} <small>' + _('vc_collections_seconds') + '</small></strong>' +
-                    '<br><span>' + _('vc_collections_duration', [h, m, s]) + '</span>' +
+            '<div class="parameters">' +
+                '<p class="count"><strong>{videos} <small>' + _('vc_collections_grid_videos') + '</small></strong></p>' +
+                '<p class="time"><strong>{duration} <small>' + _('vc_collections_grid_seconds') + '</small></strong>' +
+                    '<br><span>' + _('vc_collections_grid_duration', [h, m, s]) + '</span>' +
                 '</p>' +
-                '<p class="publishedon">' + _('vc_collections_publishedon', pubdate) + '</p>' +
+                '<p class="publishedon">' + _('vc_collections_grid_publishedon', pubdate) + '</p>' +
             '</div>';
 
         return new Ext.XTemplate(tpl).applyTemplate(record.data);
@@ -107,7 +108,7 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
 
     getTopBar: function getTopBar() {
         return [{
-            text: '<i class="icon icon-large icon-folder-o"></i>&nbsp;&nbsp;&nbsp;' + _('vc_collections_btn_new'),
+            text: '<i class="icon icon-large icon-folder-o"></i>&nbsp;&nbsp;&nbsp;' + _('vc_collections_button_new'),
             handler: this.addNewCollection,
             scope: this
         }, '->'];
@@ -151,13 +152,12 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
         if (typeof(row) != 'undefined') {
             this.menu.record = row.data;
         }
-        var id = this.menu.record.id;
 
         MODx.Ajax.request({
             url: this.config.url,
             params: {
                 action: 'mgr/collections/get',
-                id: id
+                id: this.menu.record.id
             },
             listeners: {
                 success: {
@@ -167,6 +167,7 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
 
                         w = MODx.load({
                             xtype: 'vc-window-collection',
+                            title: _('vc_collections_window_title_update', [r.object.title]),
                             action: 'mgr/collections/update',
                             record: r.object,
                             listeners: {

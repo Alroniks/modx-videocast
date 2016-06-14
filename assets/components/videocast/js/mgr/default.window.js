@@ -18,6 +18,11 @@ VideoCast.window.Default = function (config) {
 
     VideoCast.window.Default.superclass.constructor.call(this, config);
 
+    this.on('show', function () {
+        var field = this.fp.getForm().items.itemAt(0);
+        field.focus(false, 200);
+    });
+
     this.on('hide', function () {
         var self = this;
         window.setTimeout(function () {
