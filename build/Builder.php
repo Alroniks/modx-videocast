@@ -271,7 +271,7 @@ class Builder
             'vehicle_class' => 'xPDOFileVehicle',
             'object' => [
                 'source' => __DIR__ . '/../assets/components/' . self::PKG_NAME,
-                'target' => "return MODX_ASSETS_PATH . 'themes/';"
+                'target' => "return MODX_ASSETS_PATH . 'components/';"
             ]
         ]));
     }
