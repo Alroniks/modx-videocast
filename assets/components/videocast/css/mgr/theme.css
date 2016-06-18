@@ -49,4 +49,13 @@
     border-radius: 3px;
     border: 1px solid #E4E4E4; }
 
+/*videos*/
+.video {
+  /* grid styles */
+  /* window styles */ }
+  .video.window .cover-preview {
+    width: 216px;
+    height: 216px;
+    border: 1px solid #E4E4E4; }
+
 /*# sourceMappingURL=theme.css.map */

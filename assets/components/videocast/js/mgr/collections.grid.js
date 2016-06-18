@@ -15,7 +15,6 @@ VideoCast.grid.Collections = function (config) {
         cm: this.cm,
         stripeRows: false,
         pageSize: 3,
-
         cls: 'main-wrapper collection grid'
     });
 

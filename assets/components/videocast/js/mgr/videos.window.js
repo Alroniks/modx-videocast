@@ -1,64 +1,91 @@
-VideoCast.window.Collection = function (config) {
+VideoCast.window.Video = function (config) {
     config = config || {};
 
     Ext.applyIf(config, {
         modal: false,
-        title: _('vc_collections_window_title_new'),
-        width: 700,
+        title: 'create video',
+        width: 800,
         baseParams: {
-            action: config.action || 'mgr/collections/create'
+            action: config.action || 'mgr/videos/create'
         },
-        cls: 'collection window'
+        cls: 'video window'
     });
 
-    VideoCast.window.Collection.superclass.constructor.call(this, config);
+    VideoCast.window.Video.superclass.constructor.call(this, config);
 
+    // todo: move to common - def
     this.on('show', function () {
         this.renderPreview(this.record.cover);
     });
 };
 
-Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
+Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
 
     getLeftColumn: function getLeftColumn() {
         return {
-            columnWidth: .6,
+            columnWidth: .7,
             layout: 'form',
             items: [{
-                xtype: 'textfield',
-                name: 'title',
-                fieldLabel: _('vc_collections_field_title'),
-                anchor: '100%'
-            }, {
-                xtype: 'textfield',
-                name: 'alias',
-                fieldLabel: _('vc_collections_field_alias'),
-                anchor: '100%'
+                layout: 'column',
+                items: [{
+                    columnWidth: .6,
+                    layout: 'form',
+                    items: [{
+                        xtype: 'textfield',
+                        name: 'title',
+                        //fieldLabel: _('vc_videos_field_title'),
+                        fieldLabel: 'Название видео',
+                        anchor: '100%'
+                    }]
+                }, {
+                    columnWidth: .4,
+                    layout: 'form',
+                    items: [{
+                        xtype: 'textfield',
+                        name: 'collection',
+                        fieldLabel: 'Коллекция',
+                        anchor: '100%'
+                    }]
+                }]
             }, {
                 layout: 'column',
                 style: 'margin-top: 15px',
-                defaults: {
-                    msgTarget: 'under',
-                    border: false
-                },
+                items: [{
+                    columnWidth: .6,
+                    layout: 'form',
+                    items: [{
+                        xtype: 'textfield',
+                        name: 'alias',
+                        //fieldLabel: _('vc_videos_field_alias'),
+                        fieldLabel: 'Ссылка',
+                        anchor: '100%'
+                    }]
+                }, {
+                    columnWidth: .4,
+                    layout: 'form',
+                    items: [{
+                        xtype: 'datefield',
+                        name: 'publishedon',
+                        // fieldLabel: _('vc_collections_field_publishedon'),
+                        fieldLabel: _('vc_collections_field_publishedon'),
+                        format: 'd.m.Y',
+                        startDay: 1,
+                        anchor: '100%'
+                    }]
+                }]
+            }, {
+                layout: 'column',
+                style: 'margin-top: 15px',
                 items: [{
                     columnWidth: .3,
                     layout: 'form',
                     items: [{
                         xtype: 'numberfield',
-                        name: 'rank',
-                        fieldLabel: _('vc_collections_field_rank'),
-                        anchor: '100%'
-                    }]
-                }, {
-                    columnWidth: .3,
-                    layout: 'form',
-                    items: [{
-                        xtype: 'datefield',
-                        name: 'publishedon',
-                        fieldLabel: _('vc_collections_field_publishedon'),
-                        format: 'd.m.Y',
-                        startDay: 1,
+                        name: 'duration',
+                        //fieldLabel: _('vc_collections_field_rank'),
+                        fieldLabel: 'Продолжительность',
+                        disabled: true,
+                        value: 345,
                         anchor: '100%'
                     }]
                 }, {
@@ -70,20 +97,28 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                         fieldLabel: _('vc_collections_field_hidden'),
                         anchor: '100%'
                     }]
+                }, {
+                    columnWidth: .3,
+                    layout: 'form',
+                    items: [{
+                        xtype: 'checkbox',
+                        name: 'free',
+                        fieldLabel: 'FREE',
+                        anchor: '100%'
+                    }]
                 }]
             }, {
                 xtype: 'textarea',
-                name: 'description',
-                fieldLabel: _('vc_collections_field_description'),
-                height: 115,
+                name: 'source',
+                fieldLabel: 'Исходник',
                 anchor: '100%'
             }]
-        };
+        }
     },
 
     getRightColumn: function getRightColumn() {
         return {
-            columnWidth: .4,
+            columnWidth: .3,
             layout: 'form',
             items: [{
                 xtype: 'modx-combo-browser',
@@ -110,7 +145,7 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                     id: 'cover-preview'
                 }
             })]
-        };
+        }
     },
 
     getFields: function () {
@@ -125,25 +160,14 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
             layout: 'form',
             style: 'margin-top: 15px',
             items: [{
-                html: 'here will be list of videos',
-                cls: 'disabled'
+                xtype: 'textarea',
+                name: 'description',
+                fieldLabel: _('vc_collections_field_description'),
+                anchor: '100%'
             }]
         }];
-    },
-
-    renderPreview: function renderPreview(cover) {
-        if (!cover) {
-            return;
-        }
-
-        var rule = new RegExp(/^http(s?):\/\/.+/);
-        var preview = rule.test(cover)
-            ? cover
-            : MODx.config.base_url + cover;
-
-        document.getElementById('cover-preview').setAttribute('src', preview);
     }
 
 });
 
-Ext.reg('vc-window-collection', VideoCast.window.Collection);
+Ext.reg('vc-window-video', VideoCast.window.Video);

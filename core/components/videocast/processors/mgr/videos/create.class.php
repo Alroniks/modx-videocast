@@ -1,16 +1,14 @@
 <?php
 
-class VideoCastCollectionsCreateProcessor extends modObjectCreateProcessor
+class VideoCastVideosCreateProcessor extends modObjectCreateProcessor
 {
-    public $classKey = 'vcCollection';
+    public $classKey = 'vcVideo';
     public $languageTopics = ['videocast:default'];
 
-    public function __construct(modX $modx, array $properties)
-    {
-        parent::__construct($modx, $properties);
-
-        $this->setCheckbox('hidden');
-    }
+//    public function __construct(modX $modx, array $properties)
+//    {
+//        parent::__construct($modx, $properties);
+//    }
 }
 
-return VideoCastCollectionsCreateProcessor::class;
+return VideoCastVideosCreateProcessor::class;

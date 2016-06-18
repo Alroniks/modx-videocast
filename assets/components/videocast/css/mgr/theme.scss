@@ -80,3 +80,16 @@
         }
     }
 }
+/*videos*/
+.video {
+    /* grid styles */
+    &.grid {}
+    /* window styles */
+    &.window {
+        .cover-preview {
+            width: 216px;
+            height: 216px;
+            border: 1px solid #E4E4E4;
+        }
+    }
+}
