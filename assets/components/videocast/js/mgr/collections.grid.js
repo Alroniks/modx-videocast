@@ -1,9 +1,6 @@
 VideoCast.grid.Collections = function (config) {
     config = config || {};
-
-    if (!config.id) {
-        config.id = 'vc-grid-collections';
-    }
+    config.id = config.id || 'vc-grid-collections';
 
     this.cm = new Ext.grid.ColumnModel({
         columns: this.getColumns()
@@ -11,11 +8,14 @@ VideoCast.grid.Collections = function (config) {
 
     Ext.applyIf(config, {
         baseParams: {
-            action: 'mgr/collections/getlist'
+            action: 'mgr/collections/getlist',
+            sort: 'rank',
+            dir: 'ASC'
         },
         cm: this.cm,
         stripeRows: false,
         pageSize: 3,
+
         cls: 'main-wrapper collection grid'
     });
 
@@ -53,57 +53,30 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
         }];
     },
 
-    coverRenderer: function coverRenderer(value, metaData, record) {
+    getMenu: function getMenu()
+    {
+        var menu = [];
+        menu.push({
+            text: _('vc_collections_menu_edit'),
+            handler: this.updateCollection
+        }, {
+            text: this.menu.record.hidden
+                ? _('vc_collections_menu_show')
+                : _('vc_collections_menu_hide'),
+            handler: null
+        }, '-', {
+            text: _('vc_collections_menu_move_up'),
+            handler: null
+        }, {
+            text: _('vc_collections_menu_move_down'),
+            handler: null
+        }, '-', {
+            text: _('vc_collections_menu_remove'),
+            cls: 'danger',
+            handler: null
+        });
 
-        record.data.cover = value ? MODx.config.base_url + value : 'http://dummyimage.com/300x300/eeeeee/ffffff&text=cl';
-
-        var tpl =
-            '<div class="cover">' +
-                '<img src="{cover}">' +
-            '</div>';
-
-        return new Ext.XTemplate(tpl).applyTemplate(record.data);
-    },
-
-    descriptionRenderer: function titleRender(value, metaData, record) {
-
-        record.data.status = record.data.hidden
-            ? '<span class="hidden">' + _('vc_collections_status_hidden') + '</span>'
-            : '<span class="active">' + _('vc_collections_status_active') + '</span>';
-
-        var tpl =
-            '<div class="description">' +
-                '<h2>{title} {status}</h2>' +
-                '<h3>.../{alias}</h3>' +
-                '<p>{description}</p>' +
-                '<br><small>Rank: {rank}</small>' +
-            '</div>';
-
-        return new Ext.XTemplate(tpl).applyTemplate(record.data);
-    },
-
-    parametersRenderer: function parametersRenderer(value, metaData, record) {
-
-        var publishedon = new Date(record.data.publishedon),
-            pubdate = {
-                rtime: publishedon.toISOString(),
-                htime: publishedon.format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)
-            };
-
-        var h = Math.floor(record.data.duration / 3600), 
-            m = Math.floor(record.data.duration / 60) % 60, 
-            s = record.data.duration % 60;
-
-        var tpl =
-            '<div class="parameters">' +
-                '<p class="count"><strong>{videos} <small>' + _('vc_collections_grid_videos') + '</small></strong></p>' +
-                '<p class="time"><strong>{duration} <small>' + _('vc_collections_grid_seconds') + '</small></strong>' +
-                    '<br><span>' + _('vc_collections_grid_duration', [h, m, s]) + '</span>' +
-                '</p>' +
-                '<p class="publishedon">' + _('vc_collections_grid_publishedon', pubdate) + '</p>' +
-            '</div>';
-
-        return new Ext.XTemplate(tpl).applyTemplate(record.data);
+        this.addContextMenuItem(menu);
     },
 
     getTopBar: function getTopBar() {
@@ -120,76 +93,90 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
         // сбросить фильтр
         // мало видео
         // много видео
-
-        // меню
-        // - показать / скрыть
-        // - редактировать
-        // - переместить вверх
-        // - переместить вниз
-        // - обновить статистику (если делать денормализацию, но проще через кеш)
-    },
-
-    getListeners: function getListeners() {
-        return {
-            rowDblClick: function (grid, rowIndex, e) {
-                var row = grid.store.getAt(rowIndex);
-                this.updateCollection(grid, e, row)
-            }
-        };
     },
 
     addNewCollection: function addNewCollection() {
-
-        var w = MODx.load({
+        MODx.load({
             xtype: 'vc-window-collection',
             action: 'mgr/collections/create'
-        });
-
-        w.show();
+        }).show();
     },
 
-    updateCollection: function updateCollection(btn, e, row) {
-        if (typeof(row) != 'undefined') {
-            this.menu.record = row.data;
-        }
+    updateCollection: function updateCollection(btn, e) {
 
-        MODx.Ajax.request({
-            url: this.config.url,
-            params: {
-                action: 'mgr/collections/get',
-                id: this.menu.record.id
-            },
+        var record = this.menu.record;
+        record.publishedon = (new Date(record.publishedon)).format(MODx.config.manager_date_format || 'd-m-Y');
+
+        var window = MODx.load({
+            xtype: 'vc-window-collection',
+            title: _('vc_collections_window_title_update', [record.title]),
+            action: 'mgr/collections/update',
+            record: record,
+            grid: this,
             listeners: {
                 success: {
-                    fn: function (r) {
-                        var w = Ext.getCmp('vc-window-collection');
-                        if (w) { w.close(); }
-
-                        w = MODx.load({
-                            xtype: 'vc-window-collection',
-                            title: _('vc_collections_window_title_update', [r.object.title]),
-                            action: 'mgr/collections/update',
-                            record: r.object,
-                            listeners: {
-                                success: {
-                                    fn: function () {
-                                        this.refresh();
-                                    }, scope: this
-                                },
-                                hide: {
-                                    fn: function () {
-                                        Ext.getCmp('vc-grid-collections').getStore().reload();
-                                    }, scope: this
-                                }
-                            }
-                        });
-                        w.fp.getForm().reset();
-                        w.fp.getForm().setValues(r.object);
-                        w.show(e.target);
+                    fn: function () {
+                        this.refresh();
                     }, scope: this
                 }
             }
         });
+
+        window.reset();
+        window.setValues(record);
+        window.show(e.target);
+    },
+
+    // Renders
+    coverRenderer: function coverRenderer(value, metaData, record) {
+        return new Ext
+            .XTemplate('<div class="cover"><img src="{cover}"></div>')
+            .applyTemplate({
+                cover: value
+                    ? MODx.config.base_url + value
+                    : 'http://dummyimage.com/300x300/eeeeee/ffffff&text=cl'
+            });
+    },
+
+    descriptionRenderer: function titleRender(value, metaData, record) {
+
+        record.data.status = record.data.hidden
+            ? '<span class="hidden">' + _('vc_collections_status_hidden') + '</span>'
+            : '<span class="active">' + _('vc_collections_status_active') + '</span>';
+
+        var tpl =
+            '<div class="description">' +
+            '<h2>{title} {status}</h2>' +
+            '<h3>.../{alias}</h3>' +
+            '<p>{description}</p>' +
+            '<br><small>Rank: {rank}</small>' +
+            '</div>';
+
+        return new Ext.XTemplate(tpl).applyTemplate(record.data);
+    },
+
+    parametersRenderer: function parametersRenderer(value, metaData, record) {
+
+        var publishedon = new Date(record.data.publishedon),
+            pubdate = {
+                rtime: publishedon.toISOString(),
+                htime: publishedon.format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)
+            };
+
+        var h = Math.floor(record.data.duration / 3600),
+            m = Math.floor(record.data.duration / 60) % 60,
+            s = record.data.duration % 60;
+
+        var tpl =
+            '<div class="parameters">' +
+            '<p class="count"><strong>{videos} <small>' + _('vc_collections_grid_videos') + '</small></strong></p>' +
+            '<p class="time"><strong>{duration} <small>' + _('vc_collections_grid_seconds') + '</small></strong>' +
+            '<br><span>' + _('vc_collections_grid_duration', [h, m, s]) + '</span>' +
+            '</p>' +
+            '<p class="publishedon">' + _('vc_collections_grid_publishedon', pubdate) + '</p>' +
+            '</div>';
+
+        return new Ext.XTemplate(tpl).applyTemplate(record.data);
     }
 
 });

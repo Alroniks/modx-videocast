@@ -5,6 +5,7 @@ VideoCast.window.Default = function (config) {
         title: '',
         url: VideoCast.config['url.assets.connector'],
         cls: config['cls'] || 'modx-window vc-window ',
+        layout: 'anchor',
         width: 600,
         autoHeight: true,
         allowDrop: false,
@@ -17,11 +18,6 @@ VideoCast.window.Default = function (config) {
     });
 
     VideoCast.window.Default.superclass.constructor.call(this, config);
-
-    this.on('show', function () {
-        var field = this.fp.getForm().items.itemAt(0);
-        field.focus(false, 200);
-    });
 
     this.on('hide', function () {
         var self = this;

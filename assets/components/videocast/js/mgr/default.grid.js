@@ -100,8 +100,6 @@ Ext.extend(VideoCast.grid.Default, MODx.grid.Grid, {
 
     /**
      * Makes context menu for each row in table
-     * @param grid
-     * @param rowIndex
      */
     getMenu: function getMenu(grid, rowIndex) {
         var row = grid.getStore().getAt(rowIndex);

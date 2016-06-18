@@ -2,34 +2,37 @@ VideoCast.window.Collection = function (config) {
     config = config || {};
 
     Ext.applyIf(config, {
+        modal: false,
         title: _('vc_collections_window_title_new'),
         width: 700,
-        fileUpload: true,
         baseParams: {
             action: config.action || 'mgr/collections/create'
         },
-        modal: false,
         cls: 'collection window'
     });
 
     VideoCast.window.Collection.superclass.constructor.call(this, config);
+
+    this.on('show', function () {
+        this.renderPreview(this.record.cover);
+    })
 };
 
 Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
 
     getLeftColumn: function getLeftColumn() {
         return {
-            columnWidth: .7,
+            columnWidth: .6,
             layout: 'form',
             items: [{
                 xtype: 'textfield',
                 name: 'title',
-                fieldLabel: 'Название коллекции',
+                fieldLabel: _('vc_collections_field_title'),
                 anchor: '100%'
             }, {
                 xtype: 'textfield',
                 name: 'alias',
-                fieldLabel: 'Ссылка на коллекцию',
+                fieldLabel: _('vc_collections_field_alias'),
                 anchor: '100%'
             }, {
                 layout: 'column',
@@ -44,7 +47,7 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                     items: [{
                         xtype: 'numberfield',
                         name: 'rank',
-                        fieldLabel: 'Позиция',
+                        fieldLabel: _('vc_collections_field_rank'),
                         anchor: '100%'
                     }]
                 }, {
@@ -53,9 +56,9 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                     items: [{
                         xtype: 'datefield',
                         name: 'publishedon',
-                        fieldLabel: 'Дата публикации',
-                        emptyText: '',
-                        format: MODx.config['manager_date_format'] || 'Y-m-d',
+                        fieldLabel: _('vc_collections_field_publishedon'),
+                        format: 'd.m.Y',
+                        startDay: 1,
                         anchor: '100%'
                     }]
                 }, {
@@ -64,51 +67,49 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                     items: [{
                         xtype: 'checkbox',
                         name: 'hidden',
-                        label: 'Не показывать',
-                        fieldLabel: 'Не показывать',
+                        fieldLabel: _('vc_collections_field_hidden'),
                         anchor: '100%'
                     }]
                 }]
+            }, {
+                xtype: 'textarea',
+                name: 'description',
+                fieldLabel: _('vc_collections_field_description'),
+                height: 115,
+                anchor: '100%'
             }]
         };
     },
 
     getRightColumn: function getRightColumn() {
-
-        var previewTpl = '' +
-            '<div class="x-form-item">' +
-                '<label class="x-form-item-label">{label}</label>' +
-                '<div class="x-form-element">' +
-                    '<div class="x-form-field-wrap x-form-field-trigger-wrap">{image}</div>' +
-                '</div>' +
-                '<div class="x-form-clear-left"></div>' +
-            '</div>';
-
         return {
-            columnWidth: .3,
+            columnWidth: .4,
             layout: 'form',
-            items: [
-                {
-                    xtype: 'modx-combo-browser',
-                    name: 'cover',
-                    fieldLabel: 'Обложка',
-                    anchor: '100%'
-                },
-                new Ext.XTemplate(previewTpl).applyTemplate({
-                    label: 'Cover Preview',
-                    image: 'img'
-                })
-            ]
-
-            // , new Ext.Component(
-            //     {
-            //         autoEl: { tag: 'p', html: 'sadfasdfadf' }
-            //     }
-            // ), new Ext.Component(
-            //     {
-            //         autoEl: { tag: 'img', src: 'http://dummyimage.com/300x300/eeeeee/ffffff&text=cl', id: 'preview', class: 'cover-preview' }
-            //     }
-            // )]
+            items: [{
+                xtype: 'modx-combo-browser',
+                name: 'cover',
+                fieldLabel: _('vc_collections_field_cover'),
+                anchor: '100%',
+                listeners: {
+                    'select': {
+                        fn: function (image) {
+                            this.renderPreview(image.relativeUrl);
+                        }, scope: this
+                    }
+                }
+            }, {
+                html: new Ext.XTemplate('<label class="x-form-item-label">{label}</label>').applyTemplate({
+                    label: _('vc_collections_field_preview')
+                }),
+                cls: 'x-form-item'
+            }, new Ext.Component({
+                autoEl: {
+                    tag: 'img',
+                    src: 'http://dummyimage.com/300x300/eeeeee/ffffff&text=cl',
+                    class: 'cover-preview',
+                    id: 'cover-preview'
+                }
+            })]
         };
     },
 
@@ -124,12 +125,23 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
             layout: 'form',
             style: 'margin-top: 15px',
             items: [{
-                xtype: 'textarea',
-                name: 'description',
-                fieldLabel: 'Описание',
-                anchor: '100%'
+                html: 'here will be list of videos',
+                cls: 'disabled'
             }]
         }];
+    },
+
+    renderPreview: function renderPreview(cover) {
+        if (!cover) {
+            return;
+        }
+
+        var rule = new RegExp(/^http(s?):\/\/.+/);
+        var preview = rule.test(cover)
+            ? cover
+            : MODx.config.base_url + cover;
+
+        document.getElementById('cover-preview').setAttribute('src', preview);
     }
 
 });
