@@ -53,8 +53,7 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
         }];
     },
 
-    getMenu: function getMenu()
-    {
+    getMenu: function getMenu() {
         var menu = [];
         menu.push({
             text: _('vc_collections_menu_edit'),
@@ -63,29 +62,39 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
             text: this.menu.record.hidden
                 ? _('vc_collections_menu_show')
                 : _('vc_collections_menu_hide'),
-            handler: null
+            handler: this.updateVisibility
         }, '-', {
             text: _('vc_collections_menu_move_up'),
-            handler: null
+            handler: this.updatePosition
         }, {
             text: _('vc_collections_menu_move_down'),
-            handler: null
+            handler: this.updatePosition
         }, '-', {
             text: _('vc_collections_menu_remove'),
             cls: 'danger',
-            handler: null
+            handler: this.removeCollection
         });
 
         this.addContextMenuItem(menu);
     },
 
     getTopBar: function getTopBar() {
-        return [{
+        var topBar = VideoCast.grid.Collections.superclass.getTopBar.call(this);
+
+        topBar.unshift({
             text: '<i class="icon icon-large icon-folder-o"></i>&nbsp;&nbsp;&nbsp;' + _('vc_collections_button_new'),
-            handler: this.addNewCollection,
+            handler: this.addCollection,
             scope: this
-        }, '->'];
-        // просто поиск + предвыбранные фильтры
+        });
+
+        topBar.splice(topBar.indexOf('->') + 1, 0, {
+            xtype: 'textfield',
+            name: 'filter',
+            // id: 'vc-search-collection',
+            emptyText: 'filtering'
+        });
+
+        // предвыбранные фильтры
         // показывать активные
         // показывать скрытые
         // сначала активные
@@ -93,9 +102,11 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
         // сбросить фильтр
         // мало видео
         // много видео
+
+        return topBar;
     },
 
-    addNewCollection: function addNewCollection() {
+    addCollection: function addCollection() {
         MODx.load({
             xtype: 'vc-window-collection',
             action: 'mgr/collections/create'
@@ -127,8 +138,20 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
         window.show(e.target);
     },
 
+    removeCollection: function removeCollection(btn, e) {
+        // TBD
+    },
+    
+    updateVisibility: function updateVisibility() {
+        // TBD
+    },
+
+    updatePosition: function updatePosition() {
+        // TBD
+    },
+
     // Renders
-    coverRenderer: function coverRenderer(value, metaData, record) {
+    coverRenderer: function coverRenderer(value) {
         return new Ext
             .XTemplate('<div class="cover"><img src="{cover}"></div>')
             .applyTemplate({
