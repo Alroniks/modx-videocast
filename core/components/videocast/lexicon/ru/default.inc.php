@@ -54,3 +54,7 @@ $_lang['vc_collections_status_active'] = 'показывается';
 
 # courses
 $_lang['vc_courses_tab_title'] = 'Курсы';
+
+
+// system settings
+// videocast_cover_source_default

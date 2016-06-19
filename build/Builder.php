@@ -278,12 +278,15 @@ class Builder
 
     private function packResolvers()
     {
-        $vehicle = $this->builder->createVehicle('xPDOScriptVehicle', [
+        $this->builder->putVehicle($this->builder->createVehicle('xPDOScriptVehicle', [
             'vehicle_class' => 'xPDOScriptVehicle',
             'object' => ['source' => __DIR__ . '/resolvers/tables.php']
-        ]);
+        ]));
 
-        $this->builder->putVehicle($vehicle);
+        $this->builder->putVehicle($this->builder->createVehicle('xPDOScriptVehicle', [
+            'vehicle_class' => 'xPDOScriptVehicle',
+            'object' => ['source' => __DIR__ . '/resolvers/sources.php']
+        ]));
     }
 
     /**
@@ -316,7 +319,7 @@ class Builder
         $this->packNamespace();
         $this->packCategory();
         //$this->packResources();
-        //$this->packSettings();
+        $this->packSettings();
         $this->packMenus();
         $this->packModels();
         $this->packFiles();

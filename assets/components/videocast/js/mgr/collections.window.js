@@ -65,7 +65,7 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                     columnWidth: .3,
                     layout: 'form',
                     items: [{
-                        xtype: 'checkbox',
+                        xtype: 'xcheckbox',
                         name: 'hidden',
                         fieldLabel: _('vc_collections_field_hidden'),
                         anchor: '100%'
@@ -90,6 +90,8 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                 name: 'cover',
                 fieldLabel: _('vc_collections_field_cover'),
                 anchor: '100%',
+                source: MODx.config['videocast_cover_source_default'] || MODx.config.default_media_source,
+                hideSourceCombo: false,
                 listeners: {
                     'select': {
                         fn: function (image) {
