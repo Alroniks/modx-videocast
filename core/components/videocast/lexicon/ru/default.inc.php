@@ -2,14 +2,54 @@
 
 $_lang['vc_title'] = 'Видеогалерея';
 
-# menus
+
+# MENUS
+# =====
 $_lang['vc_menu'] = 'Видеогалерея';
 $_lang['vc_menu_desc'] = 'Управление видео-файлами сайта';
 
-# videos
+
+# VIDEOS
+# ======
 $_lang['vc_videos_tab_title'] = 'Видео';
 
-# collections
+// buttons
+$_lang['vc_videos_button_new'] = 'Добавить видео';
+
+// columns
+$_lang['vc_videos_column_cover'] = 'Обложка';
+$_lang['vc_videos_column_description'] = 'Описание видео';
+$_lang['vc_videos_column_details'] = 'Детали';
+
+// windows
+$_lang['vc_videos_window_title_new'] = 'Новое видео';
+$_lang['vc_videos_window_title_update'] = 'Редактирование видео: [[+0]]';
+
+// form fields
+$_lang['vc_videos_field_title'] = 'Название видео';
+$_lang['vc_videos_field_alias'] = 'Ссылка на видео';
+$_lang['vc_videos_field_duration'] = 'Продолжительность';
+$_lang['vc_videos_field_collection'] = 'Коллекция';
+$_lang['vc_videos_field_publishedon'] = 'Опубликовано';
+$_lang['vc_videos_field_hidden'] = 'Не показывать';
+$_lang['vc_videos_field_free'] = 'Бесплатно';
+$_lang['vc_videos_field_cover'] = 'Обложка';
+$_lang['vc_videos_field_source'] = 'Источник видео';
+$_lang['vc_videos_field_description'] = 'Описание';
+$_lang['vc_videos_field_preview'] = 'Предпросмотр обложки';
+
+// context menu
+$_lang['vc_videos_menu_edit'] = 'Редактировать видео';
+
+// custom strings
+$_lang['vc_videos_visibility_hidden'] = 'скрыто';
+$_lang['vc_videos_visibility_active'] = 'показывается';
+$_lang['vc_videos_availability_free'] = 'бесплатно';
+$_lang['vc_videos_availability_paid'] = 'платно';
+
+
+# COLLECTIONS
+# ===========
 $_lang['vc_collections_tab_title'] = 'Коллекции';
 
 // buttons
@@ -49,12 +89,15 @@ $_lang['vc_collections_menu_move_up'] = 'Передвинуть вверх';
 $_lang['vc_collections_menu_move_down'] = 'Передвинуть вниз';
 
 // custom strings
-$_lang['vc_collections_status_hidden'] = 'скрыто';
-$_lang['vc_collections_status_active'] = 'показывается';
+$_lang['vc_collections_visibility_hidden'] = 'скрыто';
+$_lang['vc_collections_visibility_active'] = 'показывается';
 
-# courses
+
+# COURSES
+# =======
 $_lang['vc_courses_tab_title'] = 'Курсы';
 
 
-// system settings
+# SYSTEM SETTINGS
+# ===============
 // videocast_cover_source_default

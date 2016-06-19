@@ -3,20 +3,14 @@ VideoCast.window.Video = function (config) {
 
     Ext.applyIf(config, {
         modal: false,
-        title: 'create video',
         width: 800,
         baseParams: {
             action: config.action || 'mgr/videos/create'
         },
-        cls: 'video window'
+        cls: 'vc-window video'
     });
 
     VideoCast.window.Video.superclass.constructor.call(this, config);
-
-    // todo: move to common - def
-    this.on('show', function () {
-        this.renderPreview(this.record.cover);
-    });
 };
 
 Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
@@ -33,8 +27,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                     items: [{
                         xtype: 'textfield',
                         name: 'title',
-                        //fieldLabel: _('vc_videos_field_title'),
-                        fieldLabel: 'Название видео',
+                        fieldLabel: _('vc_videos_field_title'),
                         anchor: '100%'
                     }]
                 }, {
@@ -43,7 +36,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                     items: [{
                         xtype: 'textfield',
                         name: 'collection',
-                        fieldLabel: 'Коллекция',
+                        fieldLabel: _('vc_videos_field_collection'),
                         anchor: '100%'
                     }]
                 }]
@@ -56,8 +49,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                     items: [{
                         xtype: 'textfield',
                         name: 'alias',
-                        //fieldLabel: _('vc_videos_field_alias'),
-                        fieldLabel: 'Ссылка',
+                        fieldLabel: _('vc_videos_field_alias'),
                         anchor: '100%'
                     }]
                 }, {
@@ -66,8 +58,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                     items: [{
                         xtype: 'datefield',
                         name: 'publishedon',
-                        // fieldLabel: _('vc_collections_field_publishedon'),
-                        fieldLabel: _('vc_collections_field_publishedon'),
+                        fieldLabel: _('vc_videos_field_publishedon'),
                         format: 'd.m.Y',
                         startDay: 1,
                         anchor: '100%'
@@ -82,35 +73,33 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                     items: [{
                         xtype: 'numberfield',
                         name: 'duration',
-                        //fieldLabel: _('vc_collections_field_rank'),
-                        fieldLabel: 'Продолжительность',
+                        fieldLabel: _('vc_videos_field_duration'),
                         disabled: true,
-                        value: 345,
                         anchor: '100%'
                     }]
                 }, {
                     columnWidth: .3,
                     layout: 'form',
                     items: [{
-                        xtype: 'checkbox',
+                        xtype: 'xcheckbox',
                         name: 'hidden',
-                        fieldLabel: _('vc_collections_field_hidden'),
+                        fieldLabel: _('vc_videos_field_hidden'),
                         anchor: '100%'
                     }]
                 }, {
                     columnWidth: .3,
                     layout: 'form',
                     items: [{
-                        xtype: 'checkbox',
+                        xtype: 'xcheckbox',
                         name: 'free',
-                        fieldLabel: 'FREE',
+                        fieldLabel: _('vc_videos_field_free'),
                         anchor: '100%'
                     }]
                 }]
             }, {
                 xtype: 'textarea',
                 name: 'source',
-                fieldLabel: 'Исходник',
+                fieldLabel: _('vc_videos_field_source'),
                 anchor: '100%'
             }]
         }
@@ -123,7 +112,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
             items: [{
                 xtype: 'modx-combo-browser',
                 name: 'cover',
-                fieldLabel: _('vc_collections_field_cover'),
+                fieldLabel: _('vc_videos_field_cover'),
                 anchor: '100%',
                 listeners: {
                     'select': {
@@ -134,7 +123,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                 }
             }, {
                 html: new Ext.XTemplate('<label class="x-form-item-label">{label}</label>').applyTemplate({
-                    label: _('vc_collections_field_preview')
+                    label: _('vc_videos_field_preview')
                 }),
                 cls: 'x-form-item'
             }, new Ext.Component({
@@ -162,7 +151,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
             items: [{
                 xtype: 'textarea',
                 name: 'description',
-                fieldLabel: _('vc_collections_field_description'),
+                fieldLabel: _('vc_videos_field_description'),
                 anchor: '100%'
             }]
         }];

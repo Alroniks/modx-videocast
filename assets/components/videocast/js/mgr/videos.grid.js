@@ -15,7 +15,7 @@ VideoCast.grid.Videos = function (config) {
         cm: this.cm,
         stripeRows: false,
         pageSize: 3,
-        cls: 'main-wrapper video grid'
+        cls: 'main-wrapper vc-grid video'
     });
 
     VideoCast.grid.Videos.superclass.constructor.call(this, config);
@@ -32,17 +32,41 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
     
     getColumns: function getColumns() {
         return [{
-            id: 'id',
-            header: 'id',
-            dataIndex: 'id'
+            id: 'cover',
+            header: _('vc_videos_column_cover'),
+            dataIndex: 'cover',
+            renderer: this.coverRenderer.createDelegate(this, [this], true),
+            fixed: true,
+            resizable: false,
+            width: 170
+        }, {
+            id: 'description',
+            header: _('vc_videos_column_description'),
+            dataIndex: 'title',
+            renderer: this.descriptionRenderer.createDelegate(this, [this], true)
+        }, {
+            id: 'parameters',
+            header: _('vc_videos_column_details'),
+            dataIndex: 'alias',
+            renderer: this.parametersRenderer.createDelegate(this, [this], true)
         }];
+    },
+
+    getMenu: function getMenu() {
+        var menu = [];
+        menu.push({
+            text: _('vc_videos_menu_edit'),
+            handler: this.updateVideo
+        });
+
+        this.addContextMenuItem(menu);
     },
     
     getTopBar: function getTopBar() {
         var topBar = VideoCast.grid.Videos.superclass.getTopBar.call(this);
         
         topBar.unshift({
-            text: '<i class="icon icon-large icon-vimeo"></i>&nbsp;&nbsp;&nbsp; New video',
+            text: '<i class="icon icon-large icon-vimeo"></i>&nbsp;&nbsp;&nbsp;' + _('vc_videos_button_new'),
             handler: this.addVideo,
             scope: this
         });
@@ -53,8 +77,67 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
     addVideo: function addVideo() {
         MODx.load({
             xtype: 'vc-window-video',
-            action: 'mgr/videos/create'
+            title: _('vc_videos_window_title_new'),
+            action: 'mgr/videos/create',
+            grid: this,
+            listeners: {
+                success: {
+                    fn: function () {
+                        this.refresh();
+                    }, scope: this
+                }
+            }
         }).show();
+    },
+
+    updateVideo: function updateVideo(btn, e) {
+
+        var record = this.menu.record;
+        record.publishedon = (new Date(record.publishedon)).format(MODx.config.manager_date_format || 'd-m-Y');
+
+        var window = MODx.load({
+            xtype: 'vc-window-video',
+            title: _('vc_videos_window_title_update', [record.title]),
+            action: 'mgr/videos/update',
+            record: record,
+            grid: this,
+            listeners: {
+                success: {
+                    fn: function () {
+                        this.refresh();
+                    }, scope: this
+                }
+            }
+        });
+
+        window.reset();
+        window.setValues(record);
+        window.show(e.target);
+    },
+
+    descriptionRenderer: function descriptionRenderer(value, metaData, record) {
+
+        record.data.visibility = record.data.hidden
+            ? '<span class="visibility hidden">' + _('vc_videos_visibility_hidden') + '</span>'
+            : '<span class="visibility active">' + _('vc_videos_visibility_active') + '</span>';
+
+        record.data.availability = record.data.free
+            ? '<span class="availability free">' + _('vc_videos_availability_free') + '</span>'
+            : '<span class="availability paid">' + _('vc_videos_availability_paid') + '</span>';
+
+        var tpl =
+            '<div class="description">' +
+            '<h2>{title}</h2>' +
+            '<p>{visibility} {availability}</p>' +
+            '<h3>.../{alias}</h3>' +
+            '<p>{description}</p>' +
+            '</div>';
+
+        return new Ext.XTemplate(tpl).applyTemplate(record.data);
+    },
+
+    parametersRenderer: function parametersRenderer(value, metaData, record) {
+
     }
 
 });

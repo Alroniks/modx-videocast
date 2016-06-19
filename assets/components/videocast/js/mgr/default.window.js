@@ -19,6 +19,10 @@ VideoCast.window.Default = function (config) {
 
     VideoCast.window.Default.superclass.constructor.call(this, config);
 
+    this.on('show', function () {
+        this.renderPreview(this.record.cover);
+    });
+
     this.on('hide', function () {
         var self = this;
         window.setTimeout(function () {
@@ -62,6 +66,19 @@ Ext.extend(VideoCast.window.Default, MODx.Window, {
 
     getListeners: function () {
         return {};
+    },
+
+    renderPreview: function renderPreview(cover) {
+        if (!cover) {
+            return;
+        }
+
+        var rule = new RegExp(/^http(s?):\/\/.+/);
+        var preview = rule.test(cover)
+            ? cover
+            : MODx.config.base_url + cover;
+
+        document.getElementById('cover-preview').setAttribute('src', preview);
     }
 
 });

@@ -3,19 +3,14 @@ VideoCast.window.Collection = function (config) {
 
     Ext.applyIf(config, {
         modal: false,
-        title: _('vc_collections_window_title_new'),
         width: 700,
         baseParams: {
             action: config.action || 'mgr/collections/create'
         },
-        cls: 'collection window'
+        cls: 'vc-window collection'
     });
 
     VideoCast.window.Collection.superclass.constructor.call(this, config);
-
-    this.on('show', function () {
-        this.renderPreview(this.record.cover);
-    });
 };
 
 Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
@@ -131,19 +126,6 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                 cls: 'disabled'
             }]
         }];
-    },
-
-    renderPreview: function renderPreview(cover) {
-        if (!cover) {
-            return;
-        }
-
-        var rule = new RegExp(/^http(s?):\/\/.+/);
-        var preview = rule.test(cover)
-            ? cover
-            : MODx.config.base_url + cover;
-
-        document.getElementById('cover-preview').setAttribute('src', preview);
     }
 
 });

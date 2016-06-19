@@ -1,6 +1,6 @@
 <?php
 
-class VideoCastVideosCreateProcessor extends modObjectCreateProcessor
+class VideoCastVideosUpdateProcessor extends modObjectUpdateProcessor
 {
     public $classKey = 'vcVideo';
     public $languageTopics = ['videocast:default'];
@@ -14,4 +14,4 @@ class VideoCastVideosCreateProcessor extends modObjectCreateProcessor
     }
 }
 
-return VideoCastVideosCreateProcessor::class;
+return VideoCastVideosUpdateProcessor::class;

@@ -140,6 +140,17 @@ Ext.extend(VideoCast.grid.Default, MODx.grid.Grid, {
     clear: function clear() {
         this.getStore().baseParams.query = '';
         this.getBottomToolbar().changePage(1);
+    },
+
+    // Renders
+    coverRenderer: function coverRenderer(value) {
+        return new Ext
+            .XTemplate('<div class="cover"><img src="{cover}"></div>')
+            .applyTemplate({
+                cover: value
+                    ? MODx.config.base_url + value
+                    : 'http://dummyimage.com/300x300/eeeeee/ffffff&text=cl'
+            });
     }
     
 });

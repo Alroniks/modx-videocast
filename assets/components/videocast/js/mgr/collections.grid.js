@@ -15,7 +15,7 @@ VideoCast.grid.Collections = function (config) {
         cm: this.cm,
         stripeRows: false,
         pageSize: 3,
-        cls: 'main-wrapper collection grid'
+        cls: 'main-wrapper vc-grid collection'
     });
 
     VideoCast.grid.Collections.superclass.constructor.call(this, config);
@@ -108,7 +108,16 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
     addCollection: function addCollection() {
         MODx.load({
             xtype: 'vc-window-collection',
-            action: 'mgr/collections/create'
+            title: _('vc_collections_window_title_new'),
+            action: 'mgr/collections/create',
+            grid: this,
+            listeners: {
+                success: {
+                    fn: function () {
+                        this.refresh();
+                    }, scope: this
+                }
+            }
         }).show();
     },
 
@@ -149,26 +158,15 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
         // TBD
     },
 
-    // Renders
-    coverRenderer: function coverRenderer(value) {
-        return new Ext
-            .XTemplate('<div class="cover"><img src="{cover}"></div>')
-            .applyTemplate({
-                cover: value
-                    ? MODx.config.base_url + value
-                    : 'http://dummyimage.com/300x300/eeeeee/ffffff&text=cl'
-            });
-    },
+    descriptionRenderer: function descriptionRenderer(value, metaData, record) {
 
-    descriptionRenderer: function titleRender(value, metaData, record) {
-
-        record.data.status = record.data.hidden
-            ? '<span class="hidden">' + _('vc_collections_status_hidden') + '</span>'
-            : '<span class="active">' + _('vc_collections_status_active') + '</span>';
+        record.data.visibility = record.data.hidden
+            ? '<span class="hidden">' + _('vc_collections_visibility_hidden') + '</span>'
+            : '<span class="active">' + _('vc_collections_visibility_active') + '</span>';
 
         var tpl =
             '<div class="description">' +
-            '<h2>{title} {status}</h2>' +
+            '<h2>{title} {visibility}</h2>' +
             '<h3>.../{alias}</h3>' +
             '<p>{description}</p>' +
             '<br><small>Rank: {rank}</small>' +
