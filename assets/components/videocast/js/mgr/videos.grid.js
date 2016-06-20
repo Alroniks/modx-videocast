@@ -45,10 +45,10 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
             dataIndex: 'title',
             renderer: this.descriptionRenderer.createDelegate(this, [this], true)
         }, {
-            id: 'parameters',
+            id: 'details',
             header: _('vc_videos_column_details'),
             dataIndex: 'alias',
-            renderer: this.parametersRenderer.createDelegate(this, [this], true)
+            renderer: this.detailsRenderer.createDelegate(this, [this], true)
         }];
     },
 
@@ -136,8 +136,19 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
         return new Ext.XTemplate(tpl).applyTemplate(record.data);
     },
 
-    parametersRenderer: function parametersRenderer(value, metaData, record) {
+    detailsRenderer: function detailsRenderer(value, metaData, record) {
+        var publishedon = new Date(record.data.publishedon),
+            pubdate = {
+                rtime: publishedon.toISOString(),
+                htime: publishedon.format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)
+            };
 
+        var tpl =
+            '<div class="details">' +
+            '<p class="publishedon">' + _('vc_videos_grid_publishedon', pubdate) + '</p>' +
+            '</div>';
+
+        return new Ext.XTemplate(tpl).applyTemplate(record.data);
     }
 
 });

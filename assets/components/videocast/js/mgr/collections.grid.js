@@ -14,7 +14,7 @@ VideoCast.grid.Collections = function (config) {
         },
         cm: this.cm,
         stripeRows: false,
-        pageSize: 3,
+        pageSize: 5,
         cls: 'main-wrapper vc-grid collection'
     });
 
@@ -161,12 +161,13 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
     descriptionRenderer: function descriptionRenderer(value, metaData, record) {
 
         record.data.visibility = record.data.hidden
-            ? '<span class="hidden">' + _('vc_collections_visibility_hidden') + '</span>'
-            : '<span class="active">' + _('vc_collections_visibility_active') + '</span>';
+            ? '<span class="visibility hidden">' + _('vc_collections_visibility_hidden') + '</span>'
+            : '<span class="visibility active">' + _('vc_collections_visibility_active') + '</span>';
 
         var tpl =
             '<div class="description">' +
-            '<h2>{title} {visibility}</h2>' +
+            '<h2>{title}</h2>' +
+            '<p>{visibility}</p>' +
             '<h3>.../{alias}</h3>' +
             '<p>{description}</p>' +
             '<br><small>Rank: {rank}</small>' +
