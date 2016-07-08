@@ -276,6 +276,9 @@ class Builder
         ]));
     }
 
+    /**
+     * Packs custom php scripts that will be run after package installation
+     */
     private function packResolvers()
     {
         $this->builder->putVehicle($this->builder->createVehicle('xPDOScriptVehicle', [
