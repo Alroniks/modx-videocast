@@ -59,8 +59,15 @@
   border: 1px solid #E4E4E4; }
 .vc-window.video .cover-preview {
   width: 204px;
-  height: 204px; }
-.vc-window.video textarea[name="source"] {
-  height: 66px !important; }
+  height: 128px; }
+.vc-window.video .x-form-trigger.fetcher {
+  width: 165px;
+  padding-left: 30px;
+  padding-right: 10px;
+  line-height: 32px; }
+  .vc-window.video .x-form-trigger.fetcher:before {
+    content: '\f021';
+    left: 0;
+    right: inherit; }
 
 /*# sourceMappingURL=theme.css.map */

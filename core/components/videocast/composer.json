@@ -1,0 +1,16 @@
+{
+  "name": "alroniks/videocast",
+  "description": "Extra for manage videos and its collections (video gallery) on the site",
+  "type": "addon",
+  "require": {
+    "vimeo/vimeo-api": "1.2.3"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ivan Klimchuk",
+      "email": "ivan@klimchuk.com"
+    }
+  ],
+  "minimum-stability": "dev"
+}

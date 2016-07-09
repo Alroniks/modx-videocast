@@ -30,11 +30,13 @@ $_lang['vc_videos_field_title'] = 'Название видео';
 $_lang['vc_videos_field_alias'] = 'Ссылка на видео';
 $_lang['vc_videos_field_duration'] = 'Продолжительность';
 $_lang['vc_videos_field_collection'] = 'Коллекция';
+$_lang['vc_videos_field_collection_empty'] = 'Без коллекции';
 $_lang['vc_videos_field_publishedon'] = 'Опубликовано';
 $_lang['vc_videos_field_hidden'] = 'Не показывать';
 $_lang['vc_videos_field_free'] = 'Бесплатно';
 $_lang['vc_videos_field_cover'] = 'Обложка';
-$_lang['vc_videos_field_source'] = 'Источник видео';
+$_lang['vc_videos_field_source'] = 'Источник видео (id видео на vimeo.com)';
+$_lang['vc_videos_field_source_fetch'] = 'Синхронизировать с Vimeo';
 $_lang['vc_videos_field_description'] = 'Описание';
 $_lang['vc_videos_field_preview'] = 'Предпросмотр обложки';
 

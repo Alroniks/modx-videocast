@@ -92,10 +92,18 @@
     &.video {
         .cover-preview {
             width: 204px;
-            height: 204px;
+            height: 128px;
         }
-        textarea[name="source"] {
-            height: 66px !important;
+        .x-form-trigger.fetcher {
+            width: 165px;
+            padding-left: 30px;
+            padding-right: 10px;
+            line-height: 32px;
+            &:before {
+                content: '\f021';
+                left: 0;
+                right: inherit;
+            }
         }
     }
     &.course {}

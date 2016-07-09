@@ -184,6 +184,8 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
                 htime: publishedon.format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)
             };
 
+        record.data.duration = record.data.duration || 0;
+
         var h = Math.floor(record.data.duration / 3600),
             m = Math.floor(record.data.duration / 60) % 60,
             s = record.data.duration % 60;

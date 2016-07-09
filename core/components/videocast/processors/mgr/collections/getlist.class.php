@@ -11,6 +11,27 @@ class VideoCastCollectionsGetListProcessor extends modObjectGetListProcessor
     protected $vc;
 
     /**
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
+    public function prepareQueryBeforeCount(xPDOQuery $c)
+    {
+        if ($this->getProperty('combo')) {
+            $c->select(['id', 'title']);
+        } else {
+            $c->select([
+                'vcCollection.*',
+                'duration' => 'SUM(vcVideo.duration)',
+                'videos' => 'COUNT(vcVideo.id)'
+            ]);
+            $c->leftJoin('vcVideo', 'vcVideo', ['vcVideo.collection = `vcCollection`.`id`']);
+            $c->groupby('vcCollection.id');
+        }
+
+        return $c;
+    }
+
+    /**
      * @return bool
      */
     public function initialize()
@@ -18,16 +39,6 @@ class VideoCastCollectionsGetListProcessor extends modObjectGetListProcessor
         $this->vc = $this->modx->getService('VideoCast');
 
         return parent::initialize();
-    }
-
-    public function prepareRow(xPDOObject $object)
-    {
-        $array = parent::prepareRow($object);
-
-        $array['videos'] = rand(5, 20); // items
-        $array['duration'] = rand(999, 10000); // seconds
-
-        return $array;
     }
 
 }

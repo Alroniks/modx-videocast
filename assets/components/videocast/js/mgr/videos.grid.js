@@ -78,8 +78,8 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
         MODx.load({
             xtype: 'vc-window-video',
             title: _('vc_videos_window_title_new'),
-            action: 'mgr/videos/create',
             grid: this,
+            new: true,
             listeners: {
                 success: {
                     fn: function () {
@@ -98,7 +98,6 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
         var window = MODx.load({
             xtype: 'vc-window-video',
             title: _('vc_videos_window_title_update', [record.title]),
-            action: 'mgr/videos/update',
             record: record,
             grid: this,
             listeners: {
@@ -152,4 +151,5 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
     }
 
 });
+
 Ext.reg('vc-grid-videos', VideoCast.grid.Videos);

@@ -149,7 +149,7 @@ Ext.extend(VideoCast.grid.Default, MODx.grid.Grid, {
             .applyTemplate({
                 cover: value
                     ? MODx.config.base_url + value
-                    : 'http://dummyimage.com/300x300/eeeeee/ffffff&text=cl'
+                    : 'https://dummyimage.com/300x300/eeeeee/ffffff&text=cl'
             });
     }
     
