@@ -20,6 +20,16 @@ class VideoCastVideosGetListProcessor extends modObjectGetListProcessor
         return parent::initialize();
     }
 
+    public function prepareRow(xPDOObject $object)
+    {
+        $row = parent::prepareRow($object);
+
+        // @TODO to system settings root link?
+        $row['preview'] = $this->modx->makeUrl(21) . '/' . $object->get('alias');
+
+        return $row;
+    }
+
 }
 
 return VideoCastVideosGetListProcessor::class;

@@ -1,6 +1,10 @@
 VideoCast.window.Video = function (config) {
     config = config || { new: false };
 
+    if (!config.id) {
+        config.id = 'vc-window-video';
+    }
+
     Ext.applyIf(config, {
         modal: false,
         width: 800,
@@ -15,7 +19,32 @@ VideoCast.window.Video = function (config) {
 
 Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
 
-    getMetaDataFromVimeo: function getMetaDataFromVimeo() {
+    updateFields: function updateFields(data) {
+        var form = this.fp.getForm();
+        var self = this;
+
+        Ext.MessageBox.confirm(
+            _('vc_videos_message_update_title'),
+            _('vc_videos_message_update_msg'),
+            function (value) {
+                if (value == 'yes') {
+                    form.items.each(function(field) {
+                        if (data.hasOwnProperty(field.name)) {
+                            if (!self.config.new && field.name === 'alias') {
+                                return;
+                            }
+                            field.setValue(data[field.name]);
+                        }
+                    });
+                    if (data.hasOwnProperty('cover')) {
+                        this.renderPreview(data.cover);
+                    }
+                }
+            }, self
+        );
+    },
+
+    getMetaDataFromSource: function getMetaDataFromSource(e, target, object) {
 
         var video = this.getValue();
 
@@ -27,8 +56,15 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
             },
             listeners: {
                 success: {
-                    fn: function () {
-                        console.log('dsdsafsdf');
+                    fn: function (response) {
+                        var answer = response.object;
+                        var w = Ext.getCmp('vc-window-video');
+                        w.updateFields(answer);
+                    }, scope: this
+                },
+                failure: {
+                    fn: function (response) {
+                        Ext.MessageBox.alert('', response.message);
                     }, scope: this
                 }
             }
@@ -54,7 +90,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                             html: _('vc_videos_field_source_fetch'),
                             cls: 'x-form-trigger fetcher'
                         },
-                        onTriggerClick: this.getMetaDataFromVimeo
+                        onTriggerClick: this.getMetaDataFromSource
                     }]
                 }]
             }, {
@@ -90,7 +126,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                         xtype: 'textfield',
                         name: 'alias',
                         fieldLabel: _('vc_videos_field_alias'),
-                        disabled: !config.new,
+                        readOnly: !config.new,
                         anchor: '100%'
                     }]
                 }, {
@@ -115,7 +151,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                         xtype: 'numberfield',
                         name: 'duration',
                         fieldLabel: _('vc_videos_field_duration'),
-                        disabled: true,
+                        readOnly: true,
                         anchor: '100%',
                         listeners: {
                             render: function () {

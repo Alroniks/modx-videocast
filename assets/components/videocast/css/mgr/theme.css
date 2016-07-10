@@ -3,10 +3,20 @@
 .vc-grid .parameters {
   margin-left: 5px;
   white-space: normal; }
-.vc-grid .cover,
-.vc-grid .cover img {
-  width: 150px;
-  height: 150px; }
+.vc-grid .cover {
+  text-align: center; }
+  .vc-grid .cover img {
+    width: 150px;
+    height: 150px;
+    border-radius: 3px; }
+  .vc-grid .cover .preview {
+    margin-top: 5px;
+    display: inline-block;
+    border: 1px solid;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 0 5px;
+    white-space: nowrap; }
 .vc-grid .description h2 {
   font-size: 20px;
   font-weight: bold;
@@ -49,6 +59,8 @@
   color: #86939E; }
 .vc-grid .parameters .publishedon {
   margin-top: 20px; }
+.vc-grid.video .cover img {
+  height: 94px; }
 
 /* window styles */
 .vc-window .cover-preview {

@@ -25,6 +25,10 @@ $_lang['vc_videos_column_details'] = 'Детали';
 $_lang['vc_videos_window_title_new'] = 'Новое видео';
 $_lang['vc_videos_window_title_update'] = 'Редактирование видео: [[+0]]';
 
+// messages
+$_lang['vc_videos_message_update_title'] = 'Обновление сведений';
+$_lang['vc_videos_message_update_msg'] = 'Обновленные данные могут удалить или изменить уже сохраненную информацию. Вы уверены?';
+
 // form fields
 $_lang['vc_videos_field_title'] = 'Название видео';
 $_lang['vc_videos_field_alias'] = 'Ссылка на видео';
@@ -48,6 +52,8 @@ $_lang['vc_videos_visibility_hidden'] = 'скрыто';
 $_lang['vc_videos_visibility_active'] = 'показывается';
 $_lang['vc_videos_availability_free'] = 'бесплатно';
 $_lang['vc_videos_availability_paid'] = 'платно';
+
+$_lang['vc_videos_preview'] = 'Открыть на сайте';
 
 
 # COLLECTIONS

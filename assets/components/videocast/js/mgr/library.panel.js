@@ -22,6 +22,9 @@ VideoCast.panel.Library = function (config) {
             }, {
                 title: _('vc_courses_tab_title'),
                 layout: 'anchor'
+            }, {
+                title: 'Настройки',
+                layout: 'anchor'
             }]
         }]
     });

@@ -6,10 +6,22 @@
         white-space: normal;
     }
 
-    .cover,
-    .cover img {
-        width: 150px;
-        height: 150px;
+    .cover {
+        text-align: center;
+        img {
+            width: 150px;
+            height: 150px;
+            border-radius: 3px;
+        }
+        .preview {
+            margin-top: 5px;
+            display: inline-block;
+            border: 1px solid;
+            border-radius: 5px;
+            text-decoration: none;
+            padding: 0 5px;
+            white-space: nowrap;
+        }
     }
 
     .description {
@@ -76,7 +88,13 @@
         }
     }
     &.collection {}
-    &.video {}
+    &.video {
+        .cover {
+            img {
+                height: 94px;
+            }
+        }
+    }
     &.course {}
 }
 /* window styles */

@@ -26,7 +26,7 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
     getFields: function getFields() {
         return [
             'id', 'title', 'alias', 'description', 'cover', 'source', 'duration',
-            'free', 'hidden', 'publishedon', 'collection'
+            'free', 'hidden', 'publishedon', 'collection', 'preview'
         ];
     },
     
