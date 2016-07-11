@@ -15,6 +15,7 @@ $chunks = explode('/', $request);
 
 $collections = $modx->getObject('modResource', ['id' => $this->getOption('videocast_resource_collections'), null, '']);
 $videos = $modx->getObject('modResource', ['id' => $this->getOption('videocast_resource_videos'), null, '']);
+$courses = $modx->getObject('modResource', ['id' => $this->getOption('videocast_resource_courses'), null, '']);
 
 if (!$collections) {
     $modx->log(modX::LOG_LEVEL_ERROR, 'Entry point resource for collections not found. See system settings.');
@@ -24,6 +25,12 @@ if (!$collections) {
 
 if (!$videos) {
     $modx->log(modX::LOG_LEVEL_ERROR, 'Entry point resource for videos not found. See system settings.');
+
+    return false;
+}
+
+if (!$courses) {
+    $modx->log(modX::LOG_LEVEL_ERROR, 'Entry point resource for courses not found. See system settings.');
 
     return false;
 }
@@ -73,6 +80,29 @@ switch ($chunks[0]) {
 
         $modx->setPlaceholders($video, 'video.');
         $modx->sendForward($videosSection);
+
+        break;
+
+    case $courses->get('alias'):
+
+        if (!$coursesSection = $modx->findResource($chunks[0])) {
+            return false;
+        }
+
+        $courseAlias = str_replace('.html', '', $chunks[1]);
+
+        if ($chunks[1] != $courseAlias || (isset($chunks[2]) && $chunks[2] == '')) {
+            $modx->sendRedirect($chunks[0] . '/' . $courseAlias);
+        }
+
+        if (!$course = $modx->getObject('vcCourse', ['alias' => $courseAlias])) {
+            $modx->sendForward($this->getOption('error_page'), $this->getOption('error_page_header', null, 'HTTP/1.0 404 Not Found'));
+        }
+
+        // TBD related collections and videos
+
+        $modx->setPlaceholders($course, 'course.');
+        $modx->sendForward($coursesSection);
 
         break;
 }

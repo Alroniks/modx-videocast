@@ -178,7 +178,7 @@ class Builder
                 $this->builder->putVehicle($this->builder->createVehicle($setting, [
                     xPDOTransport::UNIQUE_KEY => 'key',
                     xPDOTransport::PRESERVE_KEYS => true,
-                    xPDOTransport::UPDATE_OBJECT => true
+                    xPDOTransport::UPDATE_OBJECT => false
                 ]));
             }
             $this->modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($settings) . ' system settings.');
