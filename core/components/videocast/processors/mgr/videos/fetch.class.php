@@ -38,14 +38,14 @@ class VideoCastVideosFetchProcessor extends modProcessor
         $video = intval($this->getProperty('video'));
 
         if (!$video) {
-            return $this->failure(_('vc_videos_error_fetch_invalid_video_id'), null);
+            return $this->failure($this->modx->lexicon('vc_videos_error_fetch_invalid_video_id'), null);
         }
 
         $response = $this->client->request('/videos/' . $video);
 
         if (401 === $response['status']) {
             $this->modx->log(modX::LOG_LEVEL_WARN, 'VideoCast: ' . $response['body']['error']);
-            return $this->failure(_('vc_videos_error_fetch_access_denied'), null);
+            return $this->failure($this->modx->lexicon('vc_videos_error_fetch_access_denied'), null);
         }
 
         $playground = $response['body'];

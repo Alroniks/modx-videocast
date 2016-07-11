@@ -64,7 +64,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                 },
                 failure: {
                     fn: function (response) {
-                        Ext.MessageBox.alert('', response.message);
+                        // empty
                     }, scope: this
                 }
             }
