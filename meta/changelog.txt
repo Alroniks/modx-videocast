@@ -1,3 +1,14 @@
+VideoCast 0.0.6-pl (Jul 11, 2016)
+====================================
+
+    New version of publisher script
+
+460c5c1 Fix git commiting command
+631226f Extreamly improved release part of builder
+32a021a Added vimeo fetch processor and javascript part for that
+515d010 Redone video edit window and other minor fixes
+ef6e559 Fix minor issues
+
 VideoCast 0.0.5-pl (June 21, 2016)
 ====================================
 
