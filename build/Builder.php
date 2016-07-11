@@ -271,6 +271,11 @@ class Builder
             'vehicle_class' => 'xPDOScriptVehicle',
             'object' => ['source' => __DIR__ . '/resolvers/sources.php']
         ]));
+
+        $this->builder->putVehicle($this->builder->createVehicle('xPDOScriptVehicle', [
+            'vehicle_class' => 'xPDOScriptVehicle',
+            'object' => ['source' => __DIR__ . '/resolvers/updater.php']
+        ]));
     }
 
     /**
