@@ -415,8 +415,8 @@ class Builder
             $changeLog = join(PHP_EOL, $info) . $changeLog;
             file_put_contents($file, $changeLog);
 
-            $m = escapeshellarg($m);
-            shell_exec("git commit -am $m");
+            $msg = escapeshellarg($m);
+            shell_exec("git commit -am $msg");
             shell_exec("git push origin master");
         }
 
