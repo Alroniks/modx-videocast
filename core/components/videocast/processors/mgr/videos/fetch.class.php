@@ -8,18 +8,23 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 class VideoCastVideosFetchProcessor extends modProcessor
 {
     private $client;
+
+    public $languageTopics = ['videocast:default'];
     
     public function __construct(modX $modx, array $properties)
     {
         parent::__construct($modx, $properties);
 
-        $identifier = 'ffaff2c7ebfcae06037fe9517256b1cf43d49f7d';
-        $secret = 'XAdTCu80/ScY1sdBXK56uwu6IUaPkmwxMLRcIjcXeeKm6G/7qKDeheAHHbcGOi18pS+mAdJo1vicXr/6RAg4OU9nu+Bkmf4qdyFeV9vC0jkYYX25/n5OQjGAIBDnq0K6';
+        $this->client = new \Vimeo\Vimeo($this->modx->getOption('videocast_video_source_client_identifier'), $this->modx->getOption('videocast_video_source_client_secret'));
+        $this->client->setToken($this->modx->getOption('videocast_video_source_access_token'));
+    }
 
-        $token = '22fc42e7cc48d86c3ae4e550b34cfcab';
-
-        $this->client = new \Vimeo\Vimeo($identifier, $secret);
-        $this->client->setToken($token);
+    /**
+     * @return array
+     */
+    public function getLanguageTopics()
+    {
+        return $this->languageTopics;
     }
 
     /**
@@ -27,21 +32,20 @@ class VideoCastVideosFetchProcessor extends modProcessor
      * Used here for pre-2.2-style processors.
      *
      * @return mixed
-     * @TODO: ошибки нужно тоже переводить, так как они показываются клиенту
      */
     public function process()
     {
         $video = intval($this->getProperty('video'));
 
         if (!$video) {
-            return $this->failure('Video code should be valid integer number greater than 0', null);
+            return $this->failure(_('vc_videos_error_fetch_invalid_video_id'), null);
         }
 
         $response = $this->client->request('/videos/' . $video);
 
         if (401 === $response['status']) {
             $this->modx->log(modX::LOG_LEVEL_WARN, 'VideoCast: ' . $response['body']['error']);
-            return $this->failure('You don\'t have access to the Vimeo.com. Please, check you credentials in the system settings.', null);
+            return $this->failure(_('vc_videos_error_fetch_access_denied'), null);
         }
 
         $playground = $response['body'];

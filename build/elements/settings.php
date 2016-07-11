@@ -1,21 +1,33 @@
 <?php
 
 $list = [
-    'cover_source_default' => [
+    'media_source_cover' => [
         'xtype' => 'modx-combo-source',
         'value' => 0
     ],
-    'collections_resource' => [
+    'resource_collections' => [
         'xtype' => 'vc-combo-resources',
         'value' => 0
     ],
-    'videos_resource' => [
+    'resource_videos' => [
         'xtype' => 'vc-combo-resources',
         'value' => 0
     ],
-    'courses_resource' => [
+    'resource_courses' => [
         'xtype' => 'vc-combo-resources',
         'value' => 0
+    ],
+    'video_source_client_identifier' => [
+        'xtype' => 'textfield',
+        'value' => ''
+    ],
+    'video_source_client_secret' => [
+        'xtype' => 'textfield',
+        'value' => ''
+    ],
+    'video_source_access_token' => [
+        'xtype' => 'textfield',
+        'value' => ''
     ]
 ];
 

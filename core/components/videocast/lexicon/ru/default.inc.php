@@ -29,6 +29,10 @@ $_lang['vc_videos_window_title_update'] = 'Редактирование виде
 $_lang['vc_videos_message_update_title'] = 'Обновление сведений';
 $_lang['vc_videos_message_update_msg'] = 'Обновленные данные могут удалить или изменить уже сохраненную информацию. Вы уверены?';
 
+// errors
+$_lang['vc_videos_error_fetch_invalid_video_id'] = 'Код видео должен быть целым числом больше ноля';
+$_lang['vc_videos_error_fetch_access_denied'] = 'У вас нет доступа к Video.com. Пожалуйста, проверьте ключи доступа oauth в системных настройках.';
+
 // form fields
 $_lang['vc_videos_field_title'] = 'Название видео';
 $_lang['vc_videos_field_alias'] = 'Ссылка на видео';
