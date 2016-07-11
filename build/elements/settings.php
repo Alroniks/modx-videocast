@@ -4,6 +4,18 @@ $list = [
     'cover_source_default' => [
         'xtype' => 'modx-combo-source',
         'value' => 0
+    ],
+    'collections_resource' => [
+        'xtype' => 'vc-combo-resources',
+        'value' => 0
+    ],
+    'videos_resource' => [
+        'xtype' => 'vc-combo-resources',
+        'value' => 0
+    ],
+    'courses_resource' => [
+        'xtype' => 'vc-combo-resources',
+        'value' => 0
     ]
 ];
 

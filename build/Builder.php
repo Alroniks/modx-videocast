@@ -107,10 +107,7 @@ class Builder
         $category = $this->modx->newObject('modCategory');
         $category->set('category', self::PKG_NAME);
 
-//        $this->packCategoryElements($category, 'templates');
-//        $this->packCategoryElements($category, 'chunks');
-//        $this->packCategoryElements($category, 'snippets');
-//        $this->packCategoryElements($category, 'plugins');
+        $this->packCategoryElements($category, 'plugins');
 
         $this->builder->putVehicle($this->builder->createVehicle($category, [
             xPDOTransport::UNIQUE_KEY => 'category',
@@ -118,31 +115,16 @@ class Builder
             xPDOTransport::UPDATE_OBJECT => true,
             xPDOTransport::RELATED_OBJECTS => true,
             xPDOTransport::RELATED_OBJECT_ATTRIBUTES => [
-//                'Templates' => [
-//                    xPDOTransport::PRESERVE_KEYS => true,
-//                    xPDOTransport::UPDATE_OBJECT => true,
-//                    xPDOTransport::UNIQUE_KEY => 'id'
-//                ],
-//                'Chunks' => [
-//                    xPDOTransport::PRESERVE_KEYS => false,
-//                    xPDOTransport::UPDATE_OBJECT => true,
-//                    xPDOTransport::UNIQUE_KEY => 'name'
-//                ],
-//                'Snippets' => [
-//                    xPDOTransport::PRESERVE_KEYS => false,
-//                    xPDOTransport::UPDATE_OBJECT => true,
-//                    xPDOTransport::UNIQUE_KEY => 'name'
-//                ],
-//                'Plugins' => [
-//                    xPDOTransport::PRESERVE_KEYS => true,
-//                    xPDOTransport::UPDATE_OBJECT => true,
-//                    xPDOTransport::UNIQUE_KEY => 'name'
-//                ],
-//                'PluginEvents' => [
-//                    xPDOTransport::PRESERVE_KEYS => true,
-//                    xPDOTransport::UPDATE_OBJECT => true,
-//                    xPDOTransport::UNIQUE_KEY => ['pluginid','event'],
-//                ]
+                'Plugins' => [
+                    xPDOTransport::PRESERVE_KEYS => true,
+                    xPDOTransport::UPDATE_OBJECT => true,
+                    xPDOTransport::UNIQUE_KEY => 'name'
+                ],
+                'PluginEvents' => [
+                    xPDOTransport::PRESERVE_KEYS => true,
+                    xPDOTransport::UPDATE_OBJECT => true,
+                    xPDOTransport::UNIQUE_KEY => ['pluginid','event'],
+                ]
             ]
         ]));
     }
