@@ -54,7 +54,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         }
         $source->save();
 
-        if ($setting = $modx->getObject('modSystemSetting', ['key' => 'videocast_cover_source_default'])) {
+        if ($setting = $modx->getObject('modSystemSetting', ['key' => 'videocast_media_source_cover'])) {
             if (!$setting->get('value')) {
                 $setting->set('value', $source->get('id'));
                 $setting->save();
