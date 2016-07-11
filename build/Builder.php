@@ -376,8 +376,6 @@ class Builder
      */
     protected function publish($v, $m)
     {
-        $m = escapeshellarg($m);
-
         // get latest release
         $release = $this->request('/repos/:owner/:repo/releases/latest');
 
@@ -417,7 +415,8 @@ class Builder
             $changeLog = join(PHP_EOL, $info) . $changeLog;
             file_put_contents($file, $changeLog);
 
-            shell_exec("git commit -am '$m'");
+            $m = escapeshellarg($m);
+            shell_exec("git commit -am $m");
             shell_exec("git push origin master");
         }
 
