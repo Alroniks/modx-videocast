@@ -150,18 +150,16 @@ class Builder
     /**
      * Packs metadata for package
      */
-    private function packMeta() {
-
+    private function packMeta()
+    {
         $transport = $this->modx->fromJSON(file_get_contents(__DIR__ . '/../transport.json'));
         unset($transport['support']['db']);
 
         $this->builder->setPackageAttributes([
             'changelog' =>  file_get_contents(__DIR__ . '/../meta/changelog.txt'),
-            'license' =>    file_get_contents(__DIR__ . '/../meta/license.txt'),
-            'readme' =>     file_get_contents(__DIR__ . '/../meta/readme.txt'),
-            'requires', array_merge($transport, [
-                'pdoTools' => '>=2.4'
-            ])
+            'license'   =>  file_get_contents(__DIR__ . '/../meta/license.txt'),
+            'readme'    =>  file_get_contents(__DIR__ . '/../meta/readme.txt'),
+            'requires'  =>  $transport['support']
         ]);
     }
 
