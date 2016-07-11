@@ -1,0 +1,72 @@
+VideoCast 0.0.5-pl (June 21, 2016)
+====================================
+
+    Little fixes in grids
+
+d1c555e A little fixed in grids
+14f64bd Refactored current grids and windows and new staff
+
+
+VideoCast 0.0.4-pl (June 19, 2016)
+====================================
+
+    Source for cover field
+
+1559d3d Fix issue with hidden field and add srouce to cover field
+
+
+VideoCast 0.0.3-pl (June 19, 2016)
+====================================
+
+    Fixed require config in connector
+
+f836de7 Fixed require config in connector
+
+
+VideoCast 0.0.2-pl (June 19, 2016)
+====================================
+
+    Valid path to component assets
+
+13321d4 Fixed path to component assets in builder
+
+
+VideoCast 0.0.1-pl (June 19, 2016)
+====================================
+
+    Work on grids
+
+73cbd36 Started work on videos grid
+83b3bb0 Added search field into topbar by default for all grids
+2e929d5 Drastically improved editing/creating of collections
+c5f7975 Added scss for mgr theme builded by phpstorm and other improvements
+d30ac33 Added updating collection also fix issue with checkboxes
+1642c92 Added ability add and save collections
+d7bc62b Added new field to collection and fix views in grid
+
+
+VideoCast 0.0.0-pl (June 6, 2016)
+====================================
+
+    Init release
+
+92fa655 Added new fields into schema
+9018a4d A little changes of scripts and meta
+4ec5139 Improved builder - added model changes compiler and menu packer
+312694f Fixed builder and meta info about this package
+b9844f7 Added transport.json
+a21a5bc Added fixed column with cover
+ac9071a Some tweaks for windows with new collection
+1011856 Realised new theme styles for collections grid
+745d82a Continue work on collections
+d3ad582 Finished grid for collections
+049c225 Added resolver for tables
+f362e1a Fixed outdated code for UI of component
+72a6708 Finished data model
+d0aa57e Added base models
+60a7d9a Started working on model
+b3f6594 Refactored builder
+a98118a Some updates
+707cd9a Started work on video library
+060fb89 Fixed errors in js components
+840f8df Started work on videocasr module, that separated from usual site
