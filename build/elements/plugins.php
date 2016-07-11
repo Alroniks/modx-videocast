@@ -17,7 +17,7 @@ $list = [
         ]
     ],
     'vcrouter' => [
-        'disabled' => true,
+        'disabled' => false,
         'description' => 'Routing plugin for root pages for videos, collections and courses',
         'events' => [
             'OnPageNotFound' => []

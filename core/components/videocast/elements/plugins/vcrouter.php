@@ -1,5 +1,4 @@
 <?php
-
 if ($modx->event->name != 'OnPageNotFound') {
     return false;
 }
@@ -14,14 +13,24 @@ $request = $_REQUEST[$alias];
 
 $chunks = explode('/', $request);
 
-// get system settings
+$collections = $modx->getObject('modResource', ['id' => $this->getOption('videocast_resource_collections'), null, '']);
+$videos = $modx->getObject('modResource', ['id' => $this->getOption('videocast_resource_videos'), null, '']);
 
-// если страница категории и она есть в системных настройках, то пытаемся найти страницу в категории
+if (!$collections) {
+    $modx->log(modX::LOG_LEVEL_ERROR, 'Entry point resource for collections not found. See system settings.');
 
+    return false;
+}
+
+if (!$videos) {
+    $modx->log(modX::LOG_LEVEL_ERROR, 'Entry point resource for videos not found. See system settings.');
+
+    return false;
+}
 
 switch ($chunks[0]) {
 
-    case 'collections':
+    case $collections->get('alias'):
 
         if (!$collectionsSection = $modx->findResource($chunks[0])) {
             return false;
@@ -34,7 +43,7 @@ switch ($chunks[0]) {
         }
 
         if (!$collection = $modx->getObject('vcCollection', ['alias' => $collectionAlias])) {
-            $modx->sendErrorPage();
+            $modx->sendForward($this->getOption('error_page'), $this->getOption('error_page_header', null, 'HTTP/1.0 404 Not Found'));
         }
 
         $modx->setPlaceholders($collection, 'collection.');
@@ -42,7 +51,7 @@ switch ($chunks[0]) {
 
         break;
 
-    case 'videos':
+    case $videos->get('alias'):
 
         if (!$videosSection = $modx->findResource($chunks[0])) {
             return false;
@@ -55,7 +64,7 @@ switch ($chunks[0]) {
         }
 
         if (!$video = $modx->getObject('vcVideo', ['alias' => $videoAlias])) {
-            $modx->sendErrorPage();
+            $modx->sendForward($this->getOption('error_page'), $this->getOption('error_page_header', null, 'HTTP/1.0 404 Not Found'));
         }
 
         if ($collection = $video->getOne('Collection')) {
