@@ -1,11 +1,11 @@
 VideoCast.window.Collection = function (config) {
-    config = config || {};
+    config = config || { new: false };
 
     Ext.applyIf(config, {
         modal: false,
         width: 700,
         baseParams: {
-            action: config.action || 'mgr/collections/create'
+            action: config.action || 'mgr/collections/' + (config.new ? 'create' : 'update')
         },
         cls: 'vc-window collection'
     });
@@ -15,10 +15,11 @@ VideoCast.window.Collection = function (config) {
 
 Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
 
-    getLeftColumn: function getLeftColumn() {
+    getLeftColumn: function getLeftColumn(config) {
         return {
             columnWidth: .6,
             layout: 'form',
+            defaults: { msgTarget: 'under' },
             items: [{
                 xtype: 'textfield',
                 name: 'title',
@@ -28,6 +29,7 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                 xtype: 'textfield',
                 name: 'alias',
                 fieldLabel: _('vc_collections_field_alias'),
+                readOnly: !config.new,
                 anchor: '100%'
             }, {
                 layout: 'column',
@@ -76,21 +78,23 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
         };
     },
 
-    getRightColumn: function getRightColumn() {
+    getRightColumn: function getRightColumn(config) {
         return {
             columnWidth: .4,
             layout: 'form',
+            defaults: { msgTarget: 'under' },
             items: [{
                 xtype: 'modx-combo-browser',
                 name: 'cover',
                 fieldLabel: _('vc_collections_field_cover'),
                 anchor: '100%',
-                source: MODx.config['videocast_cover_source_default'] || MODx.config.default_media_source,
+                source: MODx.config['videocast_media_source_cover'] || MODx.config.default_media_source,
                 hideSourceCombo: false,
                 listeners: {
                     'select': {
                         fn: function (image) {
-                            this.renderPreview(image.relativeUrl);
+                            // console.log(image);
+                            this.renderPreview(image.fullRelativeUrl);
                         }, scope: this
                     }
                 }
@@ -110,17 +114,18 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
         };
     },
 
-    getFields: function () {
+    getFields: function (config) {
         return [{
             xtype: 'hidden',
             name: 'id'
         }, {
             layout: 'column',
             defaults: { msgTarget: 'under', border: false },
-            items: [this.getLeftColumn(), this.getRightColumn()]
+            items: [this.getLeftColumn(config), this.getRightColumn(config)]
         }, {
             layout: 'form',
             style: 'margin-top: 15px',
+            defaults: { msgTarget: 'under' },
             items: [{
                 html: 'here will be list of videos',
                 cls: 'disabled'

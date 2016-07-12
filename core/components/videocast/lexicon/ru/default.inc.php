@@ -85,6 +85,17 @@ $_lang['vc_collections_grid_seconds'] = 'секунд';
 $_lang['vc_collections_window_title_new'] = 'Новая коллекция';
 $_lang['vc_collections_window_title_update'] = 'Редактирование коллекции: [[+0]]';
 
+// messages
+
+// errors
+$_lang['vc_collections_err_save'] = 'Невозможно сохранить коллекцию. Исправьте значения полей и попробуйте снова.';
+$_lang['vc_collections_title_err_notEmpty'] = 'Пожалуйста, укажите название коллекции';
+$_lang['vc_collections_title_err_onlyAlphaNum'] = 'Пожалуйста, используйте только буквы, цифры и символы - и _';
+$_lang['vc_collections_alias_err_notEmpty'] = 'Пожалуйста, укажите ссылку на коллекцию (alias)';
+$_lang['vc_collections_alias_err_onlyAlphaNum'] = 'Пожалуйста, используйте только латинские буквы, цифры и символ _';
+$_lang['vc_collections_description_err_notEmpty'] = 'Пожалуйста, укажите текстовое описание коллекции (анонс)';
+$_lang['vc_collections_cover_err_notEmpty'] = 'Пожалуйста, укажите ссылку на файл обложки коллекции';
+
 // form fields
 $_lang['vc_collections_field_title'] = 'Название коллекции';
 $_lang['vc_collections_field_alias'] = 'Ссылка на коллекцию';

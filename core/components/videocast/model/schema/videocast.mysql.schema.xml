@@ -26,6 +26,20 @@
         <field key="publishedon" phptype="timestamp" comment="Date of publishing video"
                dbtype="timestamp" null="false" default="CURRENT_TIMESTAMP" index="index"/>
 
+        <validation>
+
+            <rule field="title" name="notEmpty" type="xPDOValidationRule" rule="xPDOMinLengthValidationRule" value="1" message="vc_collections_title_err_notEmpty"/>
+            <rule field="title" name="onlyAlphaNum" type="preg_match" rule="/^[a-zA-Zа-яА-Я0-9_\-]*$/" message="vc_collections_title_err_onlyAlphaNum"/>
+
+            <rule field="alias" name="notEmpty" type="xPDOValidationRule" rule="xPDOMinLengthValidationRule" value="1" message="vc_collections_alias_err_notEmpty"/>
+            <rule field="alias" name="onlyAlphaNum" type="preg_match" rule="/^[a-zA-Z0-9_]*$/" value="1" message="vc_collections_alias_err_notEmpty"/>
+
+            <rule field="description" name="notEmpty" type="xPDOValidationRule" rule="xPDOMinLengthValidationRule" value="1" message="vc_collections_description_err_notEmpty"/>
+
+            <rule field="cover" name="notEmpty" type="xPDOValidationRule" rule="xPDOMinLengthValidationRule" value="1" message="vc_collections_cover_err_notEmpty"/>
+
+        </validation>
+
         <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
             <column key="alias" length="" collation="A" null="false" />
         </index>

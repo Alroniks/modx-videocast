@@ -109,8 +109,8 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
         MODx.load({
             xtype: 'vc-window-collection',
             title: _('vc_collections_window_title_new'),
-            action: 'mgr/collections/create',
             grid: this,
+            new: true,
             listeners: {
                 success: {
                     fn: function () {
@@ -129,7 +129,6 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
         var window = MODx.load({
             xtype: 'vc-window-collection',
             title: _('vc_collections_window_title_update', [record.title]),
-            action: 'mgr/collections/update',
             record: record,
             grid: this,
             listeners: {

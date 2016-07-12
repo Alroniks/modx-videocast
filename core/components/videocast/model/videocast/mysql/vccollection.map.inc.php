@@ -145,4 +145,63 @@ $xpdo_meta_map['vcCollection']= array (
       'owner' => 'local',
     ),
   ),
+  'validation' => 
+  array (
+    'rules' => 
+    array (
+      'title' => 
+      array (
+        'notEmpty' => 
+        array (
+          'type' => 'xPDOValidationRule',
+          'rule' => 'xPDOMinLengthValidationRule',
+          'value' => '1',
+          'message' => 'vc_collections_title_err_notEmpty',
+        ),
+        'onlyAlphaNum' => 
+        array (
+          'type' => 'preg_match',
+          'rule' => '/^[a-zA-Zа-яА-Я0-9_\\-]*$/',
+          'message' => 'vc_collections_title_err_onlyAlphaNum',
+        ),
+      ),
+      'alias' => 
+      array (
+        'notEmpty' => 
+        array (
+          'type' => 'xPDOValidationRule',
+          'rule' => 'xPDOMinLengthValidationRule',
+          'value' => '1',
+          'message' => 'vc_collections_alias_err_notEmpty',
+        ),
+        'onlyAlphaNum' => 
+        array (
+          'type' => 'preg_match',
+          'rule' => '/^[a-zA-Z0-9_]*$/',
+          'value' => '1',
+          'message' => 'vc_collections_alias_err_notEmpty',
+        ),
+      ),
+      'description' => 
+      array (
+        'notEmpty' => 
+        array (
+          'type' => 'xPDOValidationRule',
+          'rule' => 'xPDOMinLengthValidationRule',
+          'value' => '1',
+          'message' => 'vc_collections_description_err_notEmpty',
+        ),
+      ),
+      'cover' => 
+      array (
+        'notEmpty' => 
+        array (
+          'type' => 'xPDOValidationRule',
+          'rule' => 'xPDOMinLengthValidationRule',
+          'value' => '1',
+          'message' => 'vc_collections_cover_err_notEmpty',
+        ),
+      ),
+    ),
+  ),
 );
