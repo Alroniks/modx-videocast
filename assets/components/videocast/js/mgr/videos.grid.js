@@ -25,7 +25,7 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
 
     getFields: function getFields() {
         return [
-            'id', 'title', 'alias', 'description', 'cover', 'source', 'duration',
+            'id', 'title', 'alias', 'description', 'cover', 'source', 'duration', 'plays',
             'free', 'hidden', 'publishedon', 'collection', 'collection_title', 'preview'
         ];
     },
@@ -57,6 +57,9 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
         menu.push({
             text: _('vc_videos_menu_edit'),
             handler: this.updateVideo
+        }, {
+            text: 'Обновить статистику (lex)',
+            handler: this.updatePlays
         });
 
         this.addContextMenuItem(menu);
@@ -113,6 +116,32 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
         window.setValues(record);
         window.show(e.target);
     },
+    
+    updatePlays: function updatePlays(btn, e) {
+        
+        var record = this.menu.record;
+        
+        MODx.Ajax.request({
+            url: VideoCast.config['url.assets.connector'],
+            params: {
+                action: 'mgr/videos/plays',
+                video: record.id,
+                source: record.source
+            },
+            listeners: {
+                success: {
+                    fn: function (response) {
+                        this.refresh();
+                    }, scope: this
+                },
+                failure: {
+                    fn: function (response) {
+                        MODx.msg.alert(response.message);
+                    }, scope: this
+                }
+            }
+        });
+    },
 
     descriptionRenderer: function descriptionRenderer(value, metaData, record) {
 
@@ -148,8 +177,6 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
         var h = ('0' + Math.floor(record.data.duration / 3600)).slice(-2),
             m = ('0' + Math.floor(record.data.duration / 60) % 60).slice(-2),
             s = ('0' + record.data.duration % 60).slice(-2);
-
-        record.data.plays = 0;
 
         var tpl =
             '<div class="details">' +

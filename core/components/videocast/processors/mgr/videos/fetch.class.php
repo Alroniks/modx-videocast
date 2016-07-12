@@ -53,7 +53,6 @@ class VideoCastVideosFetchProcessor extends modProcessor
 
         if (401 === $response['status']) {
             $this->modx->log(modX::LOG_LEVEL_WARN, 'VideoCast: ' . $response['body']['error']);
-            print_r($response['body']);
             return $this->failure($this->modx->lexicon('vc_videos_error_fetch_access_denied'), null);
         }
 
@@ -64,7 +63,8 @@ class VideoCastVideosFetchProcessor extends modProcessor
             'description' => $playground['description'],
             'alias' => array_pop(explode('/', $playground['link'])),
             'duration' => $playground['duration'],
-            'cover' => array_pop($playground['pictures']['sizes'])['link']
+            'cover' => array_pop($playground['pictures']['sizes'])['link'],
+            'plays' => $playground['stats']['plays']
         ];
 
         return $this->success('', $data);

@@ -234,6 +234,9 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
             xtype: 'hidden',
             name: 'id'
         }, {
+            xtype: 'hidden',
+            name: 'plays'
+        }, {
             layout: 'column',
             defaults: { msgTarget: 'under', border: false },
             items: [this.getLeftColumn(config), this.getRightColumn(config)]

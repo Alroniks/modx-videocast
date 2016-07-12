@@ -12,9 +12,11 @@ $xpdo_meta_map['vcVideo']= array (
     'cover' => '',
     'source' => '',
     'duration' => 0,
+    'plays' => 0,
     'free' => 0,
     'hidden' => 0,
     'publishedon' => 'CURRENT_TIMESTAMP',
+    'updatedon' => 'CURRENT_TIMESTAMP',
     'collection' => 0,
   ),
   'fieldMeta' => 
@@ -74,6 +76,16 @@ $xpdo_meta_map['vcVideo']= array (
       'null' => false,
       'default' => 0,
     ),
+    'plays' => 
+    array (
+      'phptype' => 'integer',
+      'comment' => 'Count of plays of video',
+      'dbtype' => 'integer',
+      'precision' => '5',
+      'attributes' => 'unsigned',
+      'null' => false,
+      'default' => 0,
+    ),
     'free' => 
     array (
       'phptype' => 'boolean',
@@ -103,6 +115,16 @@ $xpdo_meta_map['vcVideo']= array (
       'dbtype' => 'timestamp',
       'null' => false,
       'default' => 'CURRENT_TIMESTAMP',
+      'index' => 'index',
+    ),
+    'updatedon' => 
+    array (
+      'phptype' => 'timestamp',
+      'comment' => 'Date of update video object',
+      'dbtype' => 'timestamp',
+      'null' => false,
+      'default' => 'CURRENT_TIMESTAMP',
+      'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
       'index' => 'index',
     ),
     'collection' => 
@@ -144,6 +166,22 @@ $xpdo_meta_map['vcVideo']= array (
       'columns' => 
       array (
         'hidden' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'plays' => 
+    array (
+      'alias' => 'plays',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'plays' => 
         array (
           'length' => '',
           'collation' => 'A',

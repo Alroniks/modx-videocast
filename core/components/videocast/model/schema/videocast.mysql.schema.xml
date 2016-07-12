@@ -156,6 +156,9 @@
         <field key="duration" phptype="integer" comment="Duration of video (in seconds)"
                dbtype="integer" precision="3" attributes="unsigned" null="false" default="0" />
 
+        <field key="plays" phptype="integer" comment="Count of plays of video"
+               dbtype="integer" precision="5" attributes="unsigned" null="false" default="0" />
+
         <field key="free" phptype="boolean" comment="Status of video: free of paid"
                dbtype="tinyint" precision="1" attributes="unsigned" null="true" default="0" index="index" />
 
@@ -164,6 +167,9 @@
 
         <field key="publishedon" phptype="timestamp" comment="Date of publishing video"
                dbtype="timestamp" null="false" default="CURRENT_TIMESTAMP" index="index"/>
+
+        <field key="updatedon" phptype="timestamp" comment="Date of update video object"
+               dbtype="timestamp" null="false" default="CURRENT_TIMESTAMP" attributes="ON UPDATE CURRENT_TIMESTAMP" index="index"/>
 
         <field key="collection" phptype="integer" comment="Link to collection"
                dbtype="integer" precision="10" attributes="unsigned" null="true" default="" index="index" />
@@ -191,6 +197,10 @@
 
         <index alias="hidden" name="hidden" primary="false" unique="false" type="BTREE">
             <column key="hidden" length="" collation="A" null="false" />
+        </index>
+
+        <index alias="plays" name="plays" primary="false" unique="false" type="BTREE">
+            <column key="plays" length="" collation="A" null="false" />
         </index>
 
         <index alias="free" name="free" primary="false" unique="false" type="BTREE">
