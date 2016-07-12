@@ -186,15 +186,15 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
 
         record.data.duration = record.data.duration || 0;
 
-        var h = Math.floor(record.data.duration / 3600),
-            m = Math.floor(record.data.duration / 60) % 60,
-            s = record.data.duration % 60;
+        var h = ('0' + Math.floor(record.data.duration / 3600)).slice(-2),
+            m = ('0' + Math.floor(record.data.duration / 60) % 60).slice(-2),
+            s = ('0' + record.data.duration % 60).slice(-2);
 
         var tpl =
             '<div class="parameters">' +
             '<p class="count"><strong>{videos} <small>' + _('vc_collections_grid_videos') + '</small></strong></p>' +
             '<p class="time"><strong>{duration} <small>' + _('vc_collections_grid_seconds') + '</small></strong>' +
-            '<br><span>' + _('vc_collections_grid_duration', [h, m, s]) + '</span>' +
+            '<br><span>' + [h , m, s].join(':') + '</span>' +
             '</p>' +
             '<p class="publishedon">' + _('vc_collections_grid_publishedon', pubdate) + '</p>' +
             '</div>';

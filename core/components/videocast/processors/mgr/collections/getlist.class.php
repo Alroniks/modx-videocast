@@ -45,8 +45,7 @@ class VideoCastCollectionsGetListProcessor extends modObjectGetListProcessor
     {
         $row = parent::prepareRow($object);
 
-        // @TODO to system settings?
-        $row['preview'] = $this->modx->makeUrl(22) . '/' . $object->get('alias');
+        $row['preview'] = $this->modx->makeUrl($this->modx->getOption('videocast_resource_collections', null, '')) . '/' . $object->get('alias');
         
         return $row;
     }

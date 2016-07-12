@@ -25,6 +25,10 @@
 .vc-grid .description h3 {
   font-size: 14px;
   font-weight: normal; }
+.vc-grid .description h4 {
+  color: #86939E;
+  font-size: 16px;
+  margin: 0 0 5px; }
 .vc-grid .description .visibility,
 .vc-grid .description .availability {
   font-size: 12px;
@@ -51,13 +55,20 @@
   .vc-grid .description .availability.paid {
     color: #0e6ffd;
     border-color: #0e6ffd; }
-.vc-grid .parameters .count strong {
+.vc-grid .parameters .count strong,
+.vc-grid .parameters .plays strong,
+.vc-grid .details .count strong,
+.vc-grid .details .plays strong {
   font-size: 30px;
   color: #43484D; }
-.vc-grid .parameters .time strong {
+.vc-grid .parameters .time strong,
+.vc-grid .parameters .duration strong,
+.vc-grid .details .time strong,
+.vc-grid .details .duration strong {
   font-size: 24px;
   color: #86939E; }
-.vc-grid .parameters .publishedon {
+.vc-grid .parameters .publishedon,
+.vc-grid .details .publishedon {
   margin-top: 20px; }
 .vc-grid.video .cover img {
   height: 94px; }

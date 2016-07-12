@@ -51,6 +51,10 @@ $_lang['vc_videos_field_preview'] = 'Предпросмотр обложки';
 // context menu
 $_lang['vc_videos_menu_edit'] = 'Редактировать видео';
 
+$_lang['vc_videos_grid_publishedon'] = '<b>Опубликована:</b><br/><time datetime="[[+rtime]]">[[+htime]]</time>';
+$_lang['vc_videos_grid_plays'] = 'показов';
+$_lang['vc_videos_grid_seconds'] = 'секунд';
+
 // custom strings
 $_lang['vc_videos_visibility_hidden'] = 'скрыто';
 $_lang['vc_videos_visibility_active'] = 'показывается';
@@ -76,7 +80,6 @@ $_lang['vc_collections_column_parameters'] = 'Параметры и статис
 $_lang['vc_collections_grid_publishedon'] = '<b>Опубликована:</b><br/><time datetime="[[+rtime]]">[[+htime]]</time>';
 $_lang['vc_collections_grid_videos'] = 'видео';
 $_lang['vc_collections_grid_seconds'] = 'секунд';
-$_lang['vc_collections_grid_duration'] = '[[+0]]ч [[+1]]м [[+2]]с';
 
 // windows
 $_lang['vc_collections_window_title_new'] = 'Новая коллекция';
@@ -103,6 +106,8 @@ $_lang['vc_collections_menu_move_down'] = 'Передвинуть вниз';
 // custom strings
 $_lang['vc_collections_visibility_hidden'] = 'скрыто';
 $_lang['vc_collections_visibility_active'] = 'показывается';
+
+$_lang['vc_collections_preview'] = 'Открыть на сайте';
 
 
 # COURSES

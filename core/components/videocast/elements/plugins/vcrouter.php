@@ -13,9 +13,9 @@ $request = $_REQUEST[$alias];
 
 $chunks = explode('/', $request);
 
-$collections = $modx->getObject('modResource', ['id' => $this->getOption('videocast_resource_collections', null, '')]);
-$videos = $modx->getObject('modResource', ['id' => $this->getOption('videocast_resource_videos', null, '')]);
-$courses = $modx->getObject('modResource', ['id' => $this->getOption('videocast_resource_courses', null, '')]);
+$collections = $modx->getObject('modResource', ['id' => $modx->getOption('videocast_resource_collections', null, '')]);
+$videos = $modx->getObject('modResource', ['id' => $modx->getOption('videocast_resource_videos', null, '')]);
+$courses = $modx->getObject('modResource', ['id' => $modx->getOption('videocast_resource_courses', null, '')]);
 
 if (!$collections) {
     $modx->log(modX::LOG_LEVEL_ERROR, 'Entry point resource for collections not found. See system settings.');

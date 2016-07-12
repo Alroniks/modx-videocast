@@ -14,7 +14,7 @@ VideoCast.grid.Videos = function (config) {
         },
         cm: this.cm,
         stripeRows: false,
-        pageSize: 3,
+        pageSize: 5,
         cls: 'main-wrapper vc-grid video'
     });
 
@@ -26,7 +26,7 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
     getFields: function getFields() {
         return [
             'id', 'title', 'alias', 'description', 'cover', 'source', 'duration',
-            'free', 'hidden', 'publishedon', 'collection', 'preview'
+            'free', 'hidden', 'publishedon', 'collection', 'collection_title', 'preview'
         ];
     },
     
@@ -127,6 +127,7 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
         var tpl =
             '<div class="description">' +
             '<h2>{title}</h2>' +
+            '<h4>{collection_title}</h4>' +
             '<p>{visibility} {availability}</p>' +
             '<h3>.../{alias}</h3>' +
             '<p>{description}</p>' +
@@ -142,8 +143,19 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
                 htime: publishedon.format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)
             };
 
+        record.data.duration = record.data.duration || 0;
+
+        var h = ('0' + Math.floor(record.data.duration / 3600)).slice(-2),
+            m = ('0' + Math.floor(record.data.duration / 60) % 60).slice(-2),
+            s = ('0' + record.data.duration % 60).slice(-2);
+
+        record.data.plays = 0;
+
         var tpl =
             '<div class="details">' +
+            '<p class="plays"><strong>{plays} <small>' + _('vc_videos_grid_plays') + '</small></strong></p>' +
+            '<p class="duration"><strong>{duration} <small>' + _('vc_videos_grid_seconds') + '</small></strong>' +
+            '<br><span>' + [h , m, s].join(':') + '</span>' +
             '<p class="publishedon">' + _('vc_videos_grid_publishedon', pubdate) + '</p>' +
             '</div>';
 
