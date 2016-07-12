@@ -64,7 +64,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                 },
                 failure: {
                     fn: function (response) {
-                        // empty
+                        MODx.msg.alert(response.message);
                     }, scope: this
                 }
             }
@@ -75,16 +75,17 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
         return {
             columnWidth: .7,
             layout: 'form',
+            defaults: { msgTarget: 'under' },
             items: [{
                 layout: 'column',
                 items: [{
                     columnWidth: 1,
                     layout: 'form',
+                    defaults: { msgTarget: 'under' },
                     items: [{
                         xtype: 'trigger',
                         name: 'source',
                         fieldLabel: _('vc_videos_field_source'),
-                        emptyText: '12345678',
                         anchor: '100%',
                         triggerConfig: {
                             html: _('vc_videos_field_source_fetch'),
@@ -99,6 +100,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                 items: [{
                     columnWidth: .6,
                     layout: 'form',
+                    defaults: { msgTarget: 'under' },
                     items: [{
                         xtype: 'textfield',
                         name: 'title',
@@ -108,6 +110,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                 }, {
                     columnWidth: .4,
                     layout: 'form',
+                    defaults: { msgTarget: 'under' },
                     items: [{
                         xtype: 'vc-combo-collections',
                         name: 'collection',
@@ -122,6 +125,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                 items: [{
                     columnWidth: .6,
                     layout: 'form',
+                    defaults: { msgTarget: 'under' },
                     items: [{
                         xtype: 'textfield',
                         name: 'alias',
@@ -132,6 +136,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                 }, {
                     columnWidth: .4,
                     layout: 'form',
+                    defaults: { msgTarget: 'under' },
                     items: [{
                         xtype: 'datefield',
                         name: 'publishedon',
@@ -147,6 +152,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                 items: [{
                     columnWidth: .3,
                     layout: 'form',
+                    defaults: { msgTarget: 'under' },
                     items: [{
                         xtype: 'numberfield',
                         name: 'duration',
@@ -162,6 +168,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                 }, {
                     columnWidth: .3,
                     layout: 'form',
+                    defaults: { msgTarget: 'under' },
                     items: [{
                         xtype: 'xcheckbox',
                         name: 'hidden',
@@ -171,6 +178,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                 }, {
                     columnWidth: .3,
                     layout: 'form',
+                    defaults: { msgTarget: 'under' },
                     items: [{
                         xtype: 'xcheckbox',
                         name: 'free',
@@ -186,6 +194,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
         return {
             columnWidth: .3,
             layout: 'form',
+            defaults: { msgTarget: 'under' },
             items: [{
                 xtype: 'modx-combo-browser',
                 name: 'cover',
@@ -230,6 +239,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
             items: [this.getLeftColumn(config), this.getRightColumn(config)]
         }, {
             layout: 'form',
+            defaults: { msgTarget: 'under' },
             style: 'margin-top: 15px',
             items: [{
                 xtype: 'textarea',

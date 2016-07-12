@@ -161,7 +161,7 @@ $xpdo_meta_map['vcCollection']= array (
         'onlyAlphaNum' => 
         array (
           'type' => 'preg_match',
-          'rule' => '/^[a-zA-Zа-яА-Я0-9_\\-]*$/',
+          'rule' => '/^[a-zA-Zа-яА-Я0-9_\\-\\s]*$/',
           'message' => 'vc_collections_title_err_onlyAlphaNum',
         ),
       ),

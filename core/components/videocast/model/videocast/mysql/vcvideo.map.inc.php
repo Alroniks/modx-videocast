@@ -195,4 +195,79 @@ $xpdo_meta_map['vcVideo']= array (
       'owner' => 'foreign',
     ),
   ),
+  'validation' => 
+  array (
+    'rules' => 
+    array (
+      'source' => 
+      array (
+        'notEmpty' => 
+        array (
+          'type' => 'xPDOValidationRule',
+          'rule' => 'xPDOMinLengthValidationRule',
+          'value' => '1',
+          'message' => 'vc_videos_source_err_notEmpty',
+        ),
+        'onlyNumbers' => 
+        array (
+          'type' => 'preg_match',
+          'rule' => '/^[0-9]*$/',
+          'message' => 'vc_videos_source_err_onlyNumbers',
+        ),
+      ),
+      'title' => 
+      array (
+        'notEmpty' => 
+        array (
+          'type' => 'xPDOValidationRule',
+          'rule' => 'xPDOMinLengthValidationRule',
+          'value' => '1',
+          'message' => 'vc_videos_title_err_notEmpty',
+        ),
+        'onlyAlphaNum' => 
+        array (
+          'type' => 'preg_match',
+          'rule' => '/^[a-zA-Zа-яА-Я0-9_\\-\\s]*$/',
+          'message' => 'vc_videos_title_err_onlyAlphaNum',
+        ),
+      ),
+      'alias' => 
+      array (
+        'notEmpty' => 
+        array (
+          'type' => 'xPDOValidationRule',
+          'rule' => 'xPDOMinLengthValidationRule',
+          'value' => '1',
+          'message' => 'vc_videos_alias_err_notEmpty',
+        ),
+        'onlyAlphaNum' => 
+        array (
+          'type' => 'preg_match',
+          'rule' => '/^[a-zA-Z0-9_]*$/',
+          'value' => '1',
+          'message' => 'vc_videos_alias_err_notEmpty',
+        ),
+      ),
+      'description' => 
+      array (
+        'notEmpty' => 
+        array (
+          'type' => 'xPDOValidationRule',
+          'rule' => 'xPDOMinLengthValidationRule',
+          'value' => '1',
+          'message' => 'vc_videos_description_err_notEmpty',
+        ),
+      ),
+      'cover' => 
+      array (
+        'notEmpty' => 
+        array (
+          'type' => 'xPDOValidationRule',
+          'rule' => 'xPDOMinLengthValidationRule',
+          'value' => '1',
+          'message' => 'vc_videos_cover_err_notEmpty',
+        ),
+      ),
+    ),
+  ),
 );

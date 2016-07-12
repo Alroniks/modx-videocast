@@ -31,7 +31,17 @@ $_lang['vc_videos_message_update_msg'] = 'Обновленные данные м
 
 // errors
 $_lang['vc_videos_error_fetch_invalid_video_id'] = 'Код видео должен быть целым числом больше ноля';
-$_lang['vc_videos_error_fetch_access_denied'] = 'У вас нет доступа к Video.com. Пожалуйста, проверьте ключи доступа oauth в системных настройках.';
+$_lang['vc_videos_error_fetch_access_denied'] = 'У вас нет доступа к Vimeo.com. Проверьте ключи доступа в системных настройках.';
+
+$_lang['vc_videos_err_save'] = 'Невозможно сохранить видео. Исправьте значения полей и попробуйте снова.';
+$_lang['vc_videos_source_err_notEmpty'] = 'Пожалуйста, укажите номер видео на vimeo.com';
+$_lang['vc_videos_source_err_onlyNumbers'] = 'Пожалуйста, используйте только цифры';
+$_lang['vc_videos_title_err_notEmpty'] = 'Пожалуйста, укажите название видео';
+$_lang['vc_videos_title_err_onlyAlphaNum'] = 'Пожалуйста, используйте только буквы, цифры и символы - и _';
+$_lang['vc_videos_alias_err_notEmpty'] = 'Пожалуйста, укажите ссылку на видео (alias)';
+$_lang['vc_videos_alias_err_onlyAlphaNum'] = 'Пожалуйста, используйте только латинские буквы, цифры и символ _';
+$_lang['vc_videos_description_err_notEmpty'] = 'Пожалуйста, укажите текстовое описание видео (анонс)';
+$_lang['vc_videos_cover_err_notEmpty'] = 'Пожалуйста, укажите ссылку на файл обложки видео';
 
 // form fields
 $_lang['vc_videos_field_title'] = 'Название видео';

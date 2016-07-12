@@ -10,13 +10,21 @@ class VideoCastVideosFetchProcessor extends modProcessor
     private $client;
 
     public $languageTopics = ['videocast:default'];
-    
+
+    /**
+     * VideoCastVideosFetchProcessor constructor.
+     * @param modX $modx
+     * @param array $properties
+     */
     public function __construct(modX $modx, array $properties)
     {
         parent::__construct($modx, $properties);
 
-        $this->client = new \Vimeo\Vimeo($this->modx->getOption('videocast_video_source_client_identifier'), $this->modx->getOption('videocast_video_source_client_secret'));
-        $this->client->setToken($this->modx->getOption('videocast_video_source_access_token'));
+        $this->client = new \Vimeo\Vimeo(
+            $this->modx->getOption('videocast_video_source_client_identifier'),
+            $this->modx->getOption('videocast_video_source_client_secret'),
+            $this->modx->getOption('videocast_video_source_access_token')
+        );
     }
 
     /**
@@ -45,6 +53,7 @@ class VideoCastVideosFetchProcessor extends modProcessor
 
         if (401 === $response['status']) {
             $this->modx->log(modX::LOG_LEVEL_WARN, 'VideoCast: ' . $response['body']['error']);
+            print_r($response['body']);
             return $this->failure($this->modx->lexicon('vc_videos_error_fetch_access_denied'), null);
         }
 
