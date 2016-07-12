@@ -1,3 +1,28 @@
+VideoCast 0.1.0-pl (Jul 13, 2016)
+====================================
+
+    First stable version available for use in production
+
+aeae268 Fixed tasks in readme
+8ee66d2 Started work on superboxselect but not finished
+129e387 Started work on superboxselect but not finished
+beed739 Added plays field for get stats about video plays
+0dff4f3 Added validation to videos
+2feb28a Fixed problem with paths to covers in collection and videos
+0b7cfd1 Added validation rules for collection model
+6e612c7 Finished details for video in grid
+5bbc180 Fixed generated system setting for default media source
+33368fa Fix router
+2c222bd Added courses to router
+719bcfa Added stabbed resolver for update package beetwen versions
+13c6a8e Fixed error with infinity loop in router with not found items
+b5a9707 Added lexicons for system settings
+6322d27 Fixed lexicons for error in processor
+b4ebdc3 Added system setting for vimeo credentials
+4b15050 Added config for root resources for videos/collections
+565a7b8 Fixed package dependencies
+d62e3b2 Fixed description of release
+
 VideoCast 0.0.6-pl (Jul 11, 2016)
 ====================================
 
