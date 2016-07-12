@@ -76,7 +76,7 @@ Ext.extend(VideoCast.window.Default, MODx.Window, {
         var rule = new RegExp(/^http(s?):\/\/.+/);
         var preview = rule.test(cover)
             ? cover
-            : MODx.config.base_url + cover;
+            : MODx.config.site_url + cover;
 
         document.getElementById('cover-preview').setAttribute('src', preview);
     }

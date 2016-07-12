@@ -182,19 +182,25 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
         }
     },
 
-    getRightColumn: function getRightColumn() {
+    getRightColumn: function getRightColumn(config) {
         return {
             columnWidth: .3,
             layout: 'form',
             items: [{
                 xtype: 'modx-combo-browser',
                 name: 'cover',
+                id: config.id + '-cover',
                 fieldLabel: _('vc_videos_field_cover'),
                 anchor: '100%',
+                source: MODx.config['videocast_media_source_cover'] || MODx.config.default_media_source,
                 listeners: {
                     'select': {
                         fn: function (image) {
-                            this.renderPreview(image.relativeUrl);
+                            var coverField = Ext.getCmp(config.id + '-cover');
+                            if (coverField) {
+                                coverField.setValue(image.fullRelativeUrl);
+                            }
+                            this.renderPreview(image.fullRelativeUrl);
                         }, scope: this
                     }
                 }

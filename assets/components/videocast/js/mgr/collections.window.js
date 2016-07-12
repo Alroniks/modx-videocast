@@ -86,14 +86,17 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
             items: [{
                 xtype: 'modx-combo-browser',
                 name: 'cover',
+                id: config.id + '-cover',
                 fieldLabel: _('vc_collections_field_cover'),
                 anchor: '100%',
                 source: MODx.config['videocast_media_source_cover'] || MODx.config.default_media_source,
-                hideSourceCombo: false,
                 listeners: {
                     'select': {
                         fn: function (image) {
-                            // console.log(image);
+                            var coverField = Ext.getCmp(config.id + '-cover');
+                            if (coverField) {
+                                coverField.setValue(image.fullRelativeUrl);
+                            }
                             this.renderPreview(image.fullRelativeUrl);
                         }, scope: this
                     }
