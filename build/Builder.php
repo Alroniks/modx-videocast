@@ -359,7 +359,7 @@ class Builder
      * @param $v - Release version
      * @param $m - Release notes
      */
-    protected function publish($v, $m)
+    protected function release($v, $m)
     {
         // get latest release
         $release = $this->request('/repos/:owner/:repo/releases/latest');
@@ -451,7 +451,7 @@ class Builder
               
             \e[33mAvailable commands:
               \e[32mbuild                           \t\t\e[0mBuilds current version of code to local package
-              \e[32mpublish \e[36mdescription   \e[0mBuilds new version of package and releases it to github
+              \e[32mrelease \e[36mdescription   \e[0mBuilds new version of package and releases it to github
                                             \t\t\e[0m<description> – Release notes \e[35m[required] \e[0m(\e[33mNote: \e[0muse quotes for description message)
               
             \e[33mOptions:  
@@ -476,11 +476,11 @@ class Builder
             }
 
             // release package
-            if ($this->argv[1] === 'publish') {
+            if ($this->argv[1] === 'release') {
                 // check if all committed
                 $answer = shell_exec('git status');
                 if (strpos($answer, 'Changes not staged for commit') !== false) {
-                    echo "\033[31mError: Changes aren't recorded into repository. You should commit and push all changes before publishing.\033[0m\n";
+                    echo "\033[31mError: Changes aren't recorded into repository. You should commit and push all changes before releasing.\033[0m\n";
 
                     return;
                 }
@@ -498,7 +498,7 @@ class Builder
                     return;
                 }
 
-                $this->publish($v, $this->argv[2]);
+                $this->release($v, $this->argv[2]);
 
                 return;
             }
