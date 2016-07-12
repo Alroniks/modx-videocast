@@ -130,6 +130,7 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
             style: 'margin-top: 15px',
             defaults: { msgTarget: 'under' },
             items: [{
+                // xtype: 'vc-combo-videos',
                 html: 'here will be list of videos',
                 cls: 'disabled'
             }]

@@ -62,7 +62,7 @@ $_lang['vc_videos_field_preview'] = 'Предпросмотр обложки';
 $_lang['vc_videos_menu_edit'] = 'Редактировать видео';
 
 $_lang['vc_videos_grid_publishedon'] = '<b>Опубликована:</b><br/><time datetime="[[+rtime]]">[[+htime]]</time>';
-$_lang['vc_videos_grid_plays'] = 'показов';
+$_lang['vc_videos_grid_plays'] = 'просмотров';
 $_lang['vc_videos_grid_seconds'] = 'секунд';
 
 // custom strings
