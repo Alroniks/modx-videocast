@@ -11,6 +11,7 @@ $xpdo_meta_map['vcVideo']= array (
     'description' => '',
     'cover' => '',
     'source' => '',
+    'type' => '',
     'duration' => 0,
     'plays' => 0,
     'free' => 0,
@@ -60,9 +61,18 @@ $xpdo_meta_map['vcVideo']= array (
     'source' => 
     array (
       'phptype' => 'string',
-      'comment' => 'Link to video file or embedded code for video player',
+      'comment' => 'Link to video file or video code on external hosting',
       'dbtype' => 'varchar',
       'precision' => '555',
+      'null' => false,
+      'default' => '',
+    ),
+    'type' => 
+    array (
+      'phptype' => 'string',
+      'comment' => 'Type of video source',
+      'dbtype' => 'varchar',
+      'precision' => '20',
       'null' => false,
       'default' => '',
     ),
@@ -89,7 +99,7 @@ $xpdo_meta_map['vcVideo']= array (
     'free' => 
     array (
       'phptype' => 'boolean',
-      'comment' => 'Status of video: free of paid',
+      'comment' => 'Status of video: free or private',
       'dbtype' => 'tinyint',
       'precision' => '1',
       'attributes' => 'unsigned',
@@ -198,6 +208,22 @@ $xpdo_meta_map['vcVideo']= array (
       'columns' => 
       array (
         'free' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'type' => 
+    array (
+      'alias' => 'type',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'type' => 
         array (
           'length' => '',
           'collation' => 'A',

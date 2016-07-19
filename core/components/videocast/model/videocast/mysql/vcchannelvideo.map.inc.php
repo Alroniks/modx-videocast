@@ -1,21 +1,21 @@
 <?php
-$xpdo_meta_map['vcCourseCollection']= array (
+$xpdo_meta_map['vcChannelVideo']= array (
   'package' => 'videocast',
   'version' => '1.1',
-  'table' => 'vc_courses_collections',
+  'table' => 'vc_channels_videos',
   'extends' => 'xPDOObject',
   'fields' => 
   array (
-    'course' => 0,
-    'collection' => 0,
+    'channel' => 0,
+    'video' => 0,
     'rank' => 0,
   ),
   'fieldMeta' => 
   array (
-    'course' => 
+    'channel' => 
     array (
       'phptype' => 'integer',
-      'comment' => 'Link to course',
+      'comment' => 'Link to channel',
       'dbtype' => 'integer',
       'precision' => '10',
       'attributes' => 'unsigned',
@@ -23,11 +23,11 @@ $xpdo_meta_map['vcCourseCollection']= array (
       'default' => 0,
       'index' => 'pk',
     ),
-    'collection' => 
+    'video' => 
     array (
       'phptype' => 'integer',
-      'comment' => 'Link to collection',
-      'dbtype' => 'int',
+      'comment' => 'Link to video',
+      'dbtype' => 'integer',
       'precision' => '10',
       'attributes' => 'unsigned',
       'null' => false,
@@ -55,13 +55,13 @@ $xpdo_meta_map['vcCourseCollection']= array (
       'type' => 'BTREE',
       'columns' => 
       array (
-        'course' => 
+        'channel' => 
         array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
         ),
-        'collection' => 
+        'video' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -88,18 +88,18 @@ $xpdo_meta_map['vcCourseCollection']= array (
   ),
   'aggregates' => 
   array (
-    'Course' => 
+    'Channel' => 
     array (
-      'class' => 'vcCourse',
-      'local' => 'course',
+      'class' => 'vcChannel',
+      'local' => 'channel',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'Collection' => 
+    'Video' => 
     array (
-      'class' => 'vcCollection',
-      'local' => 'collection',
+      'class' => 'vcVideo',
+      'local' => 'video',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

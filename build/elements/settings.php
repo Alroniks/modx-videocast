@@ -26,21 +26,21 @@ $list = [
     'plugins' => [
         'xtype' => 'textfield',
         'area' => 'vc_main',
-        'value' => ''
+        'value' => 'mp4,vimeo,youtube'
     ],
 
     // vimeo
-    'video_vimeo_client_identifier' => [
+    'vimeo_client_identifier' => [
         'xtype' => 'textfield',
         'area' => 'vc_vimeo',
         'value' => ''
     ],
-    'video_vimeo_client_secret' => [
+    'vimeo_client_secret' => [
         'xtype' => 'textfield',
         'area' => 'vc_vimeo',
         'value' => ''
     ],
-    'video_vimeo_access_token' => [
+    'vimeo_access_token' => [
         'xtype' => 'textfield',
         'area' => 'vc_vimeo',
         'value' => ''

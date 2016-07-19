@@ -22,11 +22,11 @@ $_lang['setting_videocast_plugins'] = 'Активные плагины';
 $_lang['setting_videocast_plugins_desc'] = 'Список активных плагинов (источников видео), доступных в библиотеке. Указываются через запятую. Возможные варианты: <strong>mp4</strong>, <strong>youtube</strong>, <strong>vimeo</strong>, <strong>hls</strong>.';
 
 // vimeo
-$_lang['setting_videocast_video_vimeo_client_identifier'] = 'Идентификатор приложения';
-$_lang['setting_videocast_video_vimeo_client_identifier_desc'] = 'Идентификатор приложения, задаваемый настройками vimeo.com при создании приложения для работы с видео.';
+$_lang['setting_videocast_vimeo_client_identifier'] = 'Идентификатор приложения';
+$_lang['setting_videocast_vimeo_client_identifier_desc'] = 'Идентификатор приложения, задаваемый настройками vimeo.com при создании приложения для работы с видео.';
 
-$_lang['setting_videocast_video_vimeo_client_secret'] = 'Секретный ключ';
-$_lang['setting_videocast_video_vimeo_client_secret_desc'] = 'Секретный ключ, используемые для авторизации на сайте vimeo.com при использовании API.';
+$_lang['setting_videocast_vimeo_client_secret'] = 'Секретный ключ';
+$_lang['setting_videocast_vimeo_client_secret_desc'] = 'Секретный ключ, используемые для авторизации на сайте vimeo.com при использовании API.';
 
-$_lang['setting_videocast_video_vimeo_access_token'] = 'Токен доступа';
-$_lang['setting_videocast_video_vimeo_access_token_desc'] = 'Специальный ключ-токен, выдаваемый сервисом vimeo и используемые для подписи и авторизации всех запросов к API.';
+$_lang['setting_videocast_vimeo_access_token'] = 'Токен доступа';
+$_lang['setting_videocast_vimeo_access_token_desc'] = 'Специальный ключ-токен, выдаваемый сервисом vimeo и используемые для подписи и авторизации всех запросов к API.';

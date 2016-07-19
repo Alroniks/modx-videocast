@@ -1,8 +1,8 @@
 <?php
-$xpdo_meta_map['vcCourse']= array (
+$xpdo_meta_map['vcChannel']= array (
   'package' => 'videocast',
   'version' => '1.1',
-  'table' => 'vc_courses',
+  'table' => 'vc_channels',
   'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
@@ -17,7 +17,7 @@ $xpdo_meta_map['vcCourse']= array (
     'title' => 
     array (
       'phptype' => 'string',
-      'comment' => 'Short name of course',
+      'comment' => 'Short name of channel',
       'dbtype' => 'varchar',
       'precision' => '255',
       'null' => false,
@@ -26,7 +26,7 @@ $xpdo_meta_map['vcCourse']= array (
     'alias' => 
     array (
       'phptype' => 'string',
-      'comment' => 'Slugged title for link of course',
+      'comment' => 'Slugged title for link of channel',
       'dbtype' => 'varchar',
       'precision' => '255',
       'null' => false,
@@ -36,7 +36,7 @@ $xpdo_meta_map['vcCourse']= array (
     'description' => 
     array (
       'phptype' => 'string',
-      'comment' => 'Description or introduction of course',
+      'comment' => 'Description or introduction of channel',
       'dbtype' => 'text',
       'null' => true,
       'default' => '',
@@ -53,7 +53,7 @@ $xpdo_meta_map['vcCourse']= array (
     'complexity' => 
     array (
       'phptype' => 'string',
-      'comment' => 'Complexity of course (youngling | padawan | knight | master)',
+      'comment' => 'Complexity of channel (youngling | padawan | knight | master)',
       'dbtype' => 'varchar',
       'precision' => '50',
       'null' => true,
@@ -100,17 +100,17 @@ $xpdo_meta_map['vcCourse']= array (
   array (
     'Collections' => 
     array (
-      'class' => 'vcCourseCollection',
+      'class' => 'vcChannelCollection',
       'local' => 'id',
-      'foreign' => 'course',
+      'foreign' => 'channel',
       'cardinality' => 'many',
       'owner' => 'local',
     ),
     'Videos' => 
     array (
-      'class' => 'vcCourseVideo',
+      'class' => 'vcChannelVideo',
       'local' => 'id',
-      'foreign' => 'course',
+      'foreign' => 'channel',
       'cardinality' => 'many',
       'owner' => 'local',
     ),

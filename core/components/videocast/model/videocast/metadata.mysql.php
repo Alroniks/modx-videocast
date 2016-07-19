@@ -4,12 +4,12 @@ $xpdo_meta_map = array (
   'xPDOSimpleObject' => 
   array (
     0 => 'vcCollection',
-    1 => 'vcCourse',
+    1 => 'vcChannel',
     2 => 'vcVideo',
   ),
   'xPDOObject' => 
   array (
-    0 => 'vcCourseCollection',
-    1 => 'vcCourseVideo',
+    0 => 'vcChannelCollection',
+    1 => 'vcChannelVideo',
   ),
 );
