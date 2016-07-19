@@ -18,11 +18,11 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $manager = $modx->getManager();
 
         $tables = [
+            'vcVideo',
             'vcCollection',
-            'vcCourse',
-            'vcCourseCollection',
-            'vcCourseVideo',
-            'vcVideo'
+            'vcChannel',
+            'vcChannelVideo',
+            'vcChannelCollection'
         ];
 
         foreach ($tables as $table) {

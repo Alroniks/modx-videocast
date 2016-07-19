@@ -76,6 +76,8 @@
 
     .parameters,
     .details {
+        position: relative;
+        min-height: 150px;
         .count,
         .plays {
             strong {
@@ -94,6 +96,16 @@
 
         .publishedon {
             margin-top: 20px;
+        }
+
+        .icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 130px;
+            opacity: 0.2;
+            color: silver;
+            transform: rotate(-30deg);
         }
     }
     &.collection {}

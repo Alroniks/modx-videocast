@@ -1,38 +1,55 @@
 <?php
 
 $list = [
+
+    // main
     'media_source_cover' => [
         'xtype' => 'modx-combo-source',
+        'area' => 'vc_main',
+        'value' => 0
+    ],
+    'resource_channels' => [
+        'xtype' => 'vc-combo-resources',
+        'area' => 'vc_main',
         'value' => 0
     ],
     'resource_collections' => [
         'xtype' => 'vc-combo-resources',
+        'area' => 'vc_main',
         'value' => 0
     ],
     'resource_videos' => [
         'xtype' => 'vc-combo-resources',
+        'area' => 'vc_main',
         'value' => 0
     ],
-    'resource_courses' => [
-        'xtype' => 'vc-combo-resources',
-        'value' => 0
-    ],
-    'video_source_client_identifier' => [
+    'plugins' => [
         'xtype' => 'textfield',
+        'area' => 'vc_main',
         'value' => ''
     ],
-    'video_source_client_secret' => [
+
+    // vimeo
+    'video_vimeo_client_identifier' => [
         'xtype' => 'textfield',
+        'area' => 'vc_vimeo',
         'value' => ''
     ],
-    'video_source_access_token' => [
+    'video_vimeo_client_secret' => [
         'xtype' => 'textfield',
+        'area' => 'vc_vimeo',
+        'value' => ''
+    ],
+    'video_vimeo_access_token' => [
+        'xtype' => 'textfield',
+        'area' => 'vc_vimeo',
         'value' => ''
     ]
 ];
 
 $settings = [];
 foreach ($list as $k => $v) {
+    /** @var modSystemSetting $setting */
     $setting = $this->modx->newObject('modSystemSetting');
     $setting->fromArray(array_merge([
         'key' => Builder::PKG_NAME . '_' . $k,

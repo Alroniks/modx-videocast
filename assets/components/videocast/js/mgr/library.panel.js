@@ -20,7 +20,7 @@ VideoCast.panel.Library = function (config) {
                     id: 'vc-grid-collections'
                 }]
             }, {
-                title: _('vc_courses_tab_title'),
+                title: _('vc_channels_tab_title'),
                 layout: 'anchor'
             }, {
                 title: 'Настройки',

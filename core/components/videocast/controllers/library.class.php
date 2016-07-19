@@ -57,17 +57,17 @@ class VideoCastLibraryManagerController extends modExtraManagerController
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/default.window.js');
 
         // combos
-        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/collections.combo.js');
-        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/videos.combo.js');
+        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/combo/collections.combo.js');
+        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/combo/videos.combo.js');
 
         // windows
-        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/collections.window.js');
-        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/videos.window.js');
+        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/window/collections.window.js');
+        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/window/videos.window.js');
 
         // grids
-        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/videos.grid.js');
-        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/collections.grid.js');
-        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/courses.grid.js');
+        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/grid/channels.grid.js');
+        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/grid/collections.grid.js');
+        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/grid/videos.grid.js');
 
         // panel
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/library.panel.js');

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class VideoCastCollectionsGetListProcessor
+ */
 class VideoCastCollectionsGetListProcessor extends modObjectGetListProcessor
 {
     public $classKey = 'vcCollection';
@@ -40,7 +43,11 @@ class VideoCastCollectionsGetListProcessor extends modObjectGetListProcessor
 
         return parent::initialize();
     }
-    
+
+    /**
+     * @param xPDOObject $object
+     * @return array
+     */
     public function prepareRow(xPDOObject $object)
     {
         $row = parent::prepareRow($object);

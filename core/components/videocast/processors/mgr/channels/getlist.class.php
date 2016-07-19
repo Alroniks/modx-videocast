@@ -1,6 +1,9 @@
 <?php
 
-class VideoCastCoursesGetListProcessor extends modObjectGetListProcessor
+/**
+ * Class VideoCastChannelsGetListProcessor
+ */
+class VideoCastChannelsGetListProcessor extends modObjectGetListProcessor
 {
     public $classKey = 'vcCourse';
     public $languageTopics = ['default', 'videocast:default'];
@@ -27,4 +30,4 @@ class VideoCastCoursesGetListProcessor extends modObjectGetListProcessor
 
 }
 
-return VideoCastCoursesGetListProcessor::class;
+return VideoCastChannelsGetListProcessor::class;

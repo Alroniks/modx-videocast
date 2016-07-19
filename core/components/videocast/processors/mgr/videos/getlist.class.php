@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class VideoCastVideosGetListProcessor
+ */
 class VideoCastVideosGetListProcessor extends modObjectGetListProcessor
 {
     public $classKey = 'vcVideo';

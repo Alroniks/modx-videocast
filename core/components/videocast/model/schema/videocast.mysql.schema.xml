@@ -56,21 +56,21 @@
 
     </object>
 
-    <object class="vcCourse" table="vc_courses" extends="xPDOSimpleObject">
+    <object class="vcChannel" table="vc_channels" extends="xPDOSimpleObject">
 
-        <field key="title" phptype="string" comment="Short name of course"
+        <field key="title" phptype="string" comment="Short name of channel"
                dbtype="varchar" precision="255" null="false" default="" />
 
-        <field key="alias" phptype="string" comment="Slugged title for link of course"
+        <field key="alias" phptype="string" comment="Slugged title for link of channel"
                dbtype="varchar" precision="255" null="false" default="" index="index" />
 
-        <field key="description" phptype="string" comment="Description or introduction of course"
+        <field key="description" phptype="string" comment="Description or introduction of channel"
                dbtype="text"  null="true" default="" />
 
         <field key="cover" phptype="string" comment="Path to image, that will be used as cover"
                dbtype="varchar" precision="255" null="false" default="" />
 
-        <field key="complexity" phptype="string" comment="Complexity of course (youngling | padawan | knight | master)"
+        <field key="complexity" phptype="string" comment="Complexity of channel (youngling | padawan | knight | master)"
                dbtype="varchar" precision="50" null="true" default="" index="index" />
 
         <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
@@ -81,14 +81,14 @@
             <column key="complexity" length="" collation="A" null="false" />
         </index>
 
-        <composite alias="Collections" class="vcCourseCollection" local="id" foreign="course" cardinality="many" owner="local" />
-        <composite alias="Videos" class="vcCourseVideo" local="id" foreign="course" cardinality="many" owner="local" />
+        <composite alias="Collections" class="vcChannelCollection" local="id" foreign="channel" cardinality="many" owner="local" />
+        <composite alias="Videos" class="vcChannelVideo" local="id" foreign="channel" cardinality="many" owner="local" />
 
     </object>
 
-    <object class="vcCourseCollection" table="vc_courses_collections" extends="xPDOObject">
+    <object class="vcChannelCollection" table="vc_channels_collections" extends="xPDOObject">
 
-        <field  key="course" phptype="integer" comment="Link to course"
+        <field  key="channel" phptype="integer" comment="Link to channel"
                 dbtype="integer" precision="10" attributes="unsigned" null="false" default="0" index="pk"/>
 
         <field  key="collection" phptype="integer" comment="Link to collection"
@@ -98,7 +98,7 @@
                dbtype="integer" precision="10" null="false" default="0" index="index"/>
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
-            <column key="course" length="" collation="A" null="false" />
+            <column key="channel" length="" collation="A" null="false" />
             <column key="collection" length="" collation="A" null="false" />
         </index>
 
@@ -106,14 +106,14 @@
             <column key="rank" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Course" class="vcCourse" local="course" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Channel" class="vcChannel" local="channel" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Collection" class="vcCollection" local="collection" foreign="id" cardinality="one" owner="foreign" />
 
     </object>
 
-    <object class="vcCourseVideo" table="vc_courses_videos" extends="xPDOObject">
+    <object class="vcChannelVideo" table="vc_channels_videos" extends="xPDOObject">
 
-        <field  key="course" phptype="integer" comment="Link to course"
+        <field  key="channel" phptype="integer" comment="Link to channel"
                 dbtype="integer" precision="10" attributes="unsigned" null="false" default="0" index="pk"/>
 
         <field  key="video" phptype="integer" comment="Link to video"
@@ -123,7 +123,7 @@
                dbtype="integer" precision="10" null="false" default="0" index="index"/>
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
-            <column key="course" length="" collation="A" null="false" />
+            <column key="channel" length="" collation="A" null="false" />
             <column key="video" length="" collation="A" null="false" />
         </index>
 
@@ -131,10 +131,16 @@
             <column key="rank" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Course" class="vcCourse" local="course" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Channel" class="vcChannel" local="channel" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Video" class="vcVideo" local="video" foreign="id" cardinality="one" owner="foreign" />
 
     </object>
+
+    yt: 4l0bYttJFt8
+    vimeo: 84584736
+    mp4: link to file.mp4
+    hls: link to file.m3u8
+    ./ -_ буквы и цифры (без кирилицы)
 
     <object class="vcVideo" table="vc_videos" extends="xPDOSimpleObject">
 
@@ -150,8 +156,11 @@
         <field key="cover" phptype="string" comment="Path to image, that will be used as cover"
                dbtype="varchar" precision="255" null="false" default="" />
 
-        <field key="source" phptype="string" comment="Link to video file or embedded code for video player"
+        <field key="source" phptype="string" comment="Link to video file or video code on external hosting"
                dbtype="varchar" precision="555" null="false" default="" />
+
+        <field key="type" phptype="string" comment="Type of video source"
+               dbtype="varchar" precision="20" null="false" default="" />
 
         <field key="duration" phptype="integer" comment="Duration of video (in seconds)"
                dbtype="integer" precision="3" attributes="unsigned" null="false" default="0" />
@@ -159,7 +168,7 @@
         <field key="plays" phptype="integer" comment="Count of plays of video"
                dbtype="integer" precision="5" attributes="unsigned" null="false" default="0" />
 
-        <field key="free" phptype="boolean" comment="Status of video: free of paid"
+        <field key="free" phptype="boolean" comment="Status of video: free or private"
                dbtype="tinyint" precision="1" attributes="unsigned" null="true" default="0" index="index" />
 
         <field key="hidden" phptype="boolean" comment="Video, that exists but hidden from lists and search"
@@ -205,6 +214,10 @@
 
         <index alias="free" name="free" primary="false" unique="false" type="BTREE">
             <column key="free" length="" collation="A" null="false" />
+        </index>
+
+        <index alias="type" name="type" primary="false" unique="false" type="BTREE">
+            <column key="type" length="" collation="A" null="false" />
         </index>
 
         <index alias="collection" name="collection" primary="false" unique="false" type="BTREE">

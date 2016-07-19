@@ -67,14 +67,49 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
     
     getTopBar: function getTopBar() {
         var topBar = VideoCast.grid.Videos.superclass.getTopBar.call(this);
-        
+
+        var buttons = {
+            'mp4': {
+                'icon': 'apple',
+
+            },
+            'youtube': {},
+            'vimeo': {},
+            'hls': {}
+        };
+
+        //console.log(MODx.config.vc_) // plugins
+
+
         topBar.unshift({
-            text: '<i class="icon icon-large icon-vimeo"></i>&nbsp;&nbsp;&nbsp;' + _('vc_videos_button_new'),
+            text: '<i class="icon icon-large icon-apple"></i>&nbsp;&nbsp;&nbsp; HLS',
+            handler: this.addVideo,
+            scope: this
+        });
+
+        topBar.unshift({
+            text: '<i class="icon icon-large icon-youtube"></i>&nbsp;&nbsp;&nbsp; YouTube',
+            handler: this.addVideo,
+            scope: this
+        });
+
+        topBar.unshift({
+            text: '<i class="icon icon-large icon-vimeo"></i>&nbsp;&nbsp;&nbsp; Vimeo',
+            handler: this.addVideo,
+            scope: this
+        });
+
+        topBar.unshift({
+            text: '<i class="icon icon-large icon-film"></i>&nbsp;&nbsp;&nbsp;' + 'MP4',
             handler: this.addVideo,
             scope: this
         });
         
         return topBar;
+    },
+
+    addMP4Video: function addMP4Video() {
+        this.addVideo(params);
     },
     
     addVideo: function addVideo() {
@@ -184,6 +219,7 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
             '<p class="duration"><strong>{duration} <small>' + _('vc_videos_grid_seconds') + '</small></strong>' +
             '<br><span>' + [h , m, s].join(':') + '</span>' +
             '<p class="publishedon">' + _('vc_videos_grid_publishedon', pubdate) + '</p>' +
+            '<i class="icon icon-large icon-youtube"></i>' +
             '</div>';
 
         return new Ext.XTemplate(tpl).applyTemplate(record.data);

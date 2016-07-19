@@ -71,6 +71,18 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
         });
     },
 
+    getYouTubeFields: function () {
+
+    },
+
+    getVimeoField: function () {
+
+    },
+
+    getHlsFields: function () {
+
+    },
+
     getLeftColumn: function getLeftColumn(config) {
         return {
             columnWidth: .7,

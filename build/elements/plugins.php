@@ -44,7 +44,6 @@ foreach ($list as $name => &$data) {
     }
     $events = array_values($events);
 
-    // fetch plugins
     /* @var modPlugin $plugin */
     $plugin = $this->modx->newObject('modPlugin');
     $plugin->fromArray(array_merge([
