@@ -39,24 +39,24 @@ switch ($chunks[0]) {
 
     case $channels->get('alias'):
 
-        if (!$coursesSection = $modx->findResource($chunks[0])) {
+        if (!$channelsSection = $modx->findResource($chunks[0])) {
             return false;
         }
 
-        $courseAlias = str_replace('.html', '', $chunks[1]);
+        $channelAlias = str_replace('.html', '', $chunks[1]);
 
-        if ($chunks[1] != $courseAlias || (isset($chunks[2]) && $chunks[2] == '')) {
-            $modx->sendRedirect($chunks[0] . '/' . $courseAlias);
+        if ($chunks[1] != $channelAlias || (isset($chunks[2]) && $chunks[2] == '')) {
+            $modx->sendRedirect($chunks[0] . '/' . $channelAlias);
         }
 
-        if (!$course = $modx->getObject('vcCourse', ['alias' => $courseAlias])) {
+        if (!$channel = $modx->getObject('vcChannel', ['alias' => $channelAlias])) {
             $modx->sendForward($this->getOption('error_page'), $this->getOption('error_page_header', null, 'HTTP/1.0 404 Not Found'));
         }
 
         // TBD related collections and videos
 
-        $modx->setPlaceholders($course, 'course.');
-        $modx->sendForward($coursesSection);
+        $modx->setPlaceholders($channel, 'channel.');
+        $modx->sendForward($channelsSection);
 
         break;
 

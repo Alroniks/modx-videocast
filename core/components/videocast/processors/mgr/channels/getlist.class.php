@@ -5,11 +5,11 @@
  */
 class VideoCastChannelsGetListProcessor extends modObjectGetListProcessor
 {
-    public $classKey = 'vcCourse';
+    public $classKey = 'vcChannel';
     public $languageTopics = ['default', 'videocast:default'];
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
-    //public $permission = 'vcvideo_list';
+    public $permission = 'vc_channels_list';
 
     /** @var VideoCast */
     protected $vc;

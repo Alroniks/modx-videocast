@@ -65,7 +65,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         @mkdir(MODX_ASSETS_PATH . 'images/covers/');
         @mkdir(MODX_ASSETS_PATH . 'images/covers/videos/');
         @mkdir(MODX_ASSETS_PATH . 'images/covers/collections/');
-        @mkdir(MODX_ASSETS_PATH . 'images/covers/courses/');
+        @mkdir(MODX_ASSETS_PATH . 'images/covers/channels/');
 
         break;
     case xPDOTransport::ACTION_UNINSTALL:

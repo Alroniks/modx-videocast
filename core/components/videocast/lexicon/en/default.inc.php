@@ -6,4 +6,4 @@ $_lang['vc_menu_desc'] = 'Управление видео-файлами сай�
 
 $_lang['vc_videos_tab_title'] = 'Видео';
 $_lang['vc_collections_tab_title'] = 'Коллекции';
-$_lang['vc_courses_tab_title'] = 'Курсы';
+$_lang['vc_channels_tab_title'] = 'Channels';
