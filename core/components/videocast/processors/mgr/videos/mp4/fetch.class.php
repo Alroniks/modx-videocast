@@ -1,14 +1,10 @@
 <?php
 
-require_once __DIR__ . '/../../../../vendor/autoload.php';
-
 /**
  * Class VideoCastVideosMP4FetchProcessor
  */
 class VideoCastVideosMP4FetchProcessor extends modProcessor
 {
-    private $client;
-
     public $languageTopics = ['videocast:default', 'videocast:videos'];
 
     /**
@@ -33,20 +29,43 @@ class VideoCastVideosMP4FetchProcessor extends modProcessor
             return $this->failure($this->modx->lexicon('vc_videos_error_fetch_invalid_video_id'), null);
         }
 
-        // load library for reading tags
+        $fileInfo = [];
+        if ($remote = fopen($video, 'rb')) {
+            $localTempFileName = tempnam('/tmp', 'mp4fetch');
+            if ($local = fopen($localTempFileName, 'wb')) {
+                while ($buffer = fread($remote, 8192)) {
+                    fwrite($local, $buffer);
+                }
+                fclose($local);
 
-//        $data = [
-//            'title' => $playground['name'],
-//            'description' => $playground['description'],
-//            'alias' => array_pop(explode('/', $playground['link'])),
-//            'duration' => $playground['duration'],
-//            'cover' => array_pop($playground['pictures']['sizes'])['link'],
-//            'plays' => $playground['stats']['plays']
-//        ];
+                $fileInfo = shell_exec(escapeshellcmd(
+                    'ffprobe -v quiet -print_format json -show_format ' . escapeshellarg($localTempFileName)
+                ));
 
-        $data = [
-            'duration' => 1000
-        ];
+                unlink($localTempFileName);
+            }
+            fclose($remote);
+        }
+
+        $data = [];
+
+        $fileInfo = json_decode($fileInfo, true);
+
+        if (isset($fileInfo['format']['duration'])) {
+            $data['duration'] = round($fileInfo['format']['duration']);
+        }
+
+        if (isset($fileInfo['format']['size'])) {
+            $data['size'] = round($fileInfo['format']['size']);
+        }
+
+        if (isset($fileInfo['format']['tags']['title'])) {
+            $data['title'] = $fileInfo['format']['tags']['title'];
+        }
+
+        if (isset($fileInfo['format']['tags']['description'])) {
+            $data['description'] = $fileInfo['format']['tags']['description'];
+        }
 
         return $this->success('', $data);
     }

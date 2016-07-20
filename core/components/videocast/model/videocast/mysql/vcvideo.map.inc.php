@@ -291,7 +291,7 @@ $xpdo_meta_map['vcVideo']= array (
         'onlyAlphaNum' => 
         array (
           'type' => 'preg_match',
-          'rule' => '/^[a-zA-Zа-яА-Я0-9_\\-\\s]*$/',
+          'rule' => '/^[a-zA-Zа-яА-Я0-9,\\._\\-\\s\\(\\)]*$/',
           'message' => 'vc_videos_title_err_onlyAlphaNum',
         ),
       ),
@@ -307,7 +307,7 @@ $xpdo_meta_map['vcVideo']= array (
         'onlyAlphaNum' => 
         array (
           'type' => 'preg_match',
-          'rule' => '/^[a-zA-Z0-9_]*$/',
+          'rule' => '/^[a-zA-Z0-9\\-]*$/',
           'value' => '1',
           'message' => 'vc_videos_alias_err_notEmpty',
         ),

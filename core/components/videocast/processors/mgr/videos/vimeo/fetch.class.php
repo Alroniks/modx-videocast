@@ -43,13 +43,16 @@ class VideoCastVideosVimeoFetchProcessor extends modProcessor
      */
     public function process()
     {
-        $video = intval($this->getProperty('video'));
+        $video = filter_var($this->getProperty('video'), FILTER_VALIDATE_URL);
 
         if (!$video) {
             return $this->failure($this->modx->lexicon('vc_videos_error_fetch_invalid_video_id'), null);
         }
 
-        $response = $this->client->request('/videos/' . $video);
+        $chunks = explode('/', $video);
+        $code = array_pop($chunks);
+
+        $response = $this->client->request('/videos/' . $code);
 
         if (401 === $response['status']) {
             $this->modx->log(modX::LOG_LEVEL_WARN, 'VideoCast: ' . $response['body']['error']);
