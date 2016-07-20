@@ -212,10 +212,13 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
             m = ('0' + Math.floor(record.data.duration / 60) % 60).slice(-2),
             s = ('0' + record.data.duration % 60).slice(-2);
 
+        record.data.duration = Ext.util.Format.declension(record.data.duration, _('vc_videos_grid_seconds').split('|'));
+        record.data.plays = Ext.util.Format.declension(record.data.plays, _('vc_videos_grid_plays').split('|'));
+
         var tpl =
             '<div class="details">' +
-            '<p class="plays"><strong>{plays} <small>' + _('vc_videos_grid_plays') + '</small></strong></p>' +
-            '<p class="duration"><strong>{duration} <small>' + _('vc_videos_grid_seconds') + '</small></strong>' +
+            '<p class="plays"><strong>{plays}</strong></p>' +
+            '<p class="duration"><strong>{duration}</strong>' +
             '<br><span>' + [h , m, s].join(':') + '</span>' +
             '<p class="publishedon">' + _('vc_videos_grid_publishedon', pubdate) + '</p>' +
             '<i class="icon icon-large icon-vimeo"></i>' +

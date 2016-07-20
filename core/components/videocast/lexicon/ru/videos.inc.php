@@ -15,8 +15,8 @@ $_lang['vc_videos_column_details'] = 'Детали';
 
 // grid labels
 $_lang['vc_videos_grid_publishedon'] = '<b>Опубликовано:</b><br/><time datetime="[[+rtime]]">[[+htime]]</time>';
-$_lang['vc_videos_grid_plays'] = 'просмотр|просмотра|просмотров|'; // добавить declension
-$_lang['vc_videos_grid_seconds'] = 'секунд'; // добавить declension
+$_lang['vc_videos_grid_plays'] = '$ <small>просмотров</small>|$ <small>просмотр</small>|$ <small>просмотра</small>|$ <small>просмотров</small>';
+$_lang['vc_videos_grid_seconds'] = '$ <small>секунд</small>|$ <small>секунда</small>|$ <small>секунды</small>|$ <small>секунд</small>';
 
 // context menu
 $_lang['vc_videos_menu_edit'] = 'Редактировать видео';
