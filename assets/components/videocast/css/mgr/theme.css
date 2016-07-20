@@ -105,5 +105,22 @@
     content: '\f021';
     left: 0;
     right: inherit; }
+.vc-window.video .x-toolbar-left {
+  position: relative; }
+  .vc-window.video .x-toolbar-left:after {
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.1; }
+.vc-window.video.mp4 .x-toolbar-left:after {
+  content: '\f008'; }
+.vc-window.video.vimeo .x-toolbar-left:after {
+  content: '\f27d'; }
+.vc-window.video.youtube .x-toolbar-left:after {
+  content: '\f167'; }
+.vc-window.video.hls .x-toolbar-left:after {
+  content: '\f179'; }
 
 /*# sourceMappingURL=theme.css.map */

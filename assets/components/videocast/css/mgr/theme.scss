@@ -144,6 +144,29 @@
                 right: inherit;
             }
         }
+        .x-toolbar-left {
+            position: relative;
+            &:after {
+                font: normal normal normal 14px/1 FontAwesome;
+                font-size: 40px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 0.1;
+            }
+        }
+        &.mp4 .x-toolbar-left:after {
+            content: '\f008';
+        }
+        &.vimeo .x-toolbar-left:after {
+            content: '\f27d';
+        }
+        &.youtube .x-toolbar-left:after {
+            content: '\f167';
+        }
+        &.hls .x-toolbar-left:after {
+            content: '\f179';
+        }
     }
     &.channel {}
 }

@@ -275,8 +275,8 @@ $xpdo_meta_map['vcVideo']= array (
         'onlyNumbers' => 
         array (
           'type' => 'preg_match',
-          'rule' => '/^[0-9]*$/',
-          'message' => 'vc_videos_source_err_onlyNumbers',
+          'rule' => '/^[a-zA-Z0-9:_\\-\\/\\.]*$/',
+          'message' => 'vc_videos_source_err_onlyUrls',
         ),
       ),
       'title' => 

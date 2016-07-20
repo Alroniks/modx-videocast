@@ -30,7 +30,12 @@ class VideoCastLibraryManagerController extends modExtraManagerController
      */
     public function getLanguageTopics()
     {
-        return ['videocast:default'];
+        return [
+            'videocast:default',
+            'videocast:channels',
+            'videocast:collections',
+            'videocast:videos'
+        ];
     }
 
     /**

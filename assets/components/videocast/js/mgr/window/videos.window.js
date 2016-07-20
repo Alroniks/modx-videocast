@@ -11,7 +11,7 @@ VideoCast.window.Video = function (config) {
         baseParams: {
             action: config.action || 'mgr/videos/' + (config.new ? 'create' : 'update')
         },
-        cls: 'vc-window video'
+        cls: 'vc-window video ' + config.plugin
     });
 
     VideoCast.window.Video.superclass.constructor.call(this, config);
@@ -44,21 +44,30 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
         );
     },
 
-    getMetaDataFromSource: function getMetaDataFromSource(e, target, object) {
+    getMetaData: function getMetaDataFromSource(e, target, object) {
 
-        var video = this.getValue();
+        var w = Ext.getCmp('vc-window-video'),
+            plugin = w.config.plugin,
+            video;
+
+        // console.log(arguments, this, object);
+
+        if (typeof this.getValue == 'function') {
+            video = this.getValue();
+        } else {
+            video = MODx.config.site_url + object.fullRelativeUrl;
+        }
 
         MODx.Ajax.request({
             url: VideoCast.config['url.assets.connector'],
             params: {
-                action: 'mgr/videos/fetch',
+                action: 'mgr/videos/' + plugin + '/fetch',
                 video: video
             },
             listeners: {
                 success: {
                     fn: function (response) {
                         var answer = response.object;
-                        var w = Ext.getCmp('vc-window-video');
                         w.updateFields(answer);
                     }, scope: this
                 },
@@ -71,16 +80,60 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
         });
     },
 
-    getYouTubeFields: function () {
+    getSourceField: function (name, plugin) {
 
+        var field,
+            label = _('vc_videos_field_source_' + plugin);
+
+        switch (plugin) {
+            case 'mp4':
+                field = this.getFileField(label, MODx.config['videocast_media_source_mp4'] || MODx.config.default_media_source);
+                break;
+            case 'hls':
+                field = this.getFileField(label, MODx.config['videocast_media_source_hls'] || MODx.config.default_media_source);
+                break;
+            case 'vimeo':
+                field = this.getServiceField(label);
+                break;
+            case 'youtube':
+                field = this.getServiceField(label);
+                break;
+        }
+
+        if (field) {
+            field.name = name;
+        }
+
+        return field;
     },
 
-    getVimeoField: function () {
-
+    getFileField: function (label, source) {
+        return {
+            xtype: 'modx-combo-browser',
+            fieldLabel: label,
+            anchor: '100%',
+            source: source,
+            listeners: {
+                select: {
+                    fn: function (file) {
+                        this.getMetaData(null, null, file);
+                    }, scope: this
+                }
+            }
+        };
     },
 
-    getHlsFields: function () {
-
+    getServiceField: function (label) {
+        return {
+            xtype: 'trigger',
+            fieldLabel: label,
+            anchor: '100%',
+            triggerConfig: {
+                html: _('vc_videos_field_source_fetch'),
+                cls: 'x-form-trigger fetcher'
+            },
+            onTriggerClick: this.getMetaData
+        };
     },
 
     getLeftColumn: function getLeftColumn(config) {
@@ -94,17 +147,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                     columnWidth: 1,
                     layout: 'form',
                     defaults: { msgTarget: 'under' },
-                    items: [{
-                        xtype: 'trigger',
-                        name: 'source',
-                        fieldLabel: _('vc_videos_field_source'),
-                        anchor: '100%',
-                        triggerConfig: {
-                            html: _('vc_videos_field_source_fetch'),
-                            cls: 'x-form-trigger fetcher'
-                        },
-                        onTriggerClick: this.getMetaDataFromSource
-                    }]
+                    items: [this.getSourceField('source', config.plugin)]
                 }]
             }, {
                 layout: 'column',
@@ -170,12 +213,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                         name: 'duration',
                         fieldLabel: _('vc_videos_field_duration'),
                         readOnly: true,
-                        anchor: '100%',
-                        listeners: {
-                            render: function () {
-                                // добавить мутатор для рисования правильного человеческого значения
-                            }
-                        }
+                        anchor: '100%'
                     }]
                 }, {
                     columnWidth: .3,
@@ -245,6 +283,10 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
         return [{
             xtype: 'hidden',
             name: 'id'
+        }, {
+            xtype: 'hidden',
+            name: 'type',
+            value: config.plugin
         }, {
             xtype: 'hidden',
             name: 'plays'

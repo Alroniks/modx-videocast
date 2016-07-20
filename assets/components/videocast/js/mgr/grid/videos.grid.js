@@ -68,56 +68,55 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
     getTopBar: function getTopBar() {
         var topBar = VideoCast.grid.Videos.superclass.getTopBar.call(this);
 
-        var buttons = {
-            'mp4': {
-                'icon': 'apple',
+        var plugins = MODx.config.videocast_plugins.split(',').reverse();
 
-            },
-            'youtube': {},
-            'vimeo': {},
-            'hls': {}
+        var buttonsMap = {
+            mp4: { icon: 'film', handler: this.addMP4Video },
+            youtube: { icon: 'youtube', handler: this.addYouTubeVideo },
+            vimeo: { icon: 'vimeo', handler: this.addVimeoVideo },
+            hls: { icon: 'apple', handler: this.addHLSVideo }
         };
 
-        //console.log(MODx.config.vc_) // plugins
-
-
-        topBar.unshift({
-            text: '<i class="icon icon-large icon-apple"></i>&nbsp;&nbsp;&nbsp; HLS',
-            handler: this.addVideo,
-            scope: this
-        });
-
-        topBar.unshift({
-            text: '<i class="icon icon-large icon-youtube"></i>&nbsp;&nbsp;&nbsp; YouTube',
-            handler: this.addVideo,
-            scope: this
-        });
-
-        topBar.unshift({
-            text: '<i class="icon icon-large icon-vimeo"></i>&nbsp;&nbsp;&nbsp; Vimeo',
-            handler: this.addVideo,
-            scope: this
-        });
-
-        topBar.unshift({
-            text: '<i class="icon icon-large icon-film"></i>&nbsp;&nbsp;&nbsp;' + 'MP4',
-            handler: this.addVideo,
-            scope: this
-        });
+        for (var key in plugins) {
+            if (!plugins.hasOwnProperty(key)) {
+                continue;
+            }
+            var plugin = plugins[key];
+            if (buttonsMap.hasOwnProperty(plugin)) {
+                topBar.unshift({
+                    text: '<i class="icon icon-large icon-' + buttonsMap[plugin].icon + '"></i>&nbsp;&nbsp;&nbsp;' + _('vc_videos_add_' + plugin),
+                    handler: buttonsMap[plugin].handler,
+                    scope: this
+                });
+            }
+        }
         
         return topBar;
     },
 
     addMP4Video: function addMP4Video() {
-        this.addVideo(params);
+        this.addVideo('mp4');
+    },
+
+    addVimeoVideo: function addVimeoVideo() {
+        this.addVideo('vimeo');
+    },
+
+    addYouTubeVideo: function addYouTubeVideo() {
+        this.addVideo('youtube');
+    },
+
+    addHLSVideo: function addHLSVideo() {
+        this.addVideo('hls');
     },
     
-    addVideo: function addVideo() {
+    addVideo: function addVideo(plugin) {
         MODx.load({
             xtype: 'vc-window-video',
             title: _('vc_videos_window_title_new'),
             grid: this,
             new: true,
+            plugin: plugin,
             listeners: {
                 success: {
                     fn: function () {
@@ -165,7 +164,7 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
             },
             listeners: {
                 success: {
-                    fn: function (response) {
+                    fn: function () {
                         this.refresh();
                     }, scope: this
                 },
@@ -181,12 +180,12 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
     descriptionRenderer: function descriptionRenderer(value, metaData, record) {
 
         record.data.visibility = record.data.hidden
-            ? '<span class="visibility hidden">' + _('vc_videos_visibility_hidden') + '</span>'
-            : '<span class="visibility active">' + _('vc_videos_visibility_active') + '</span>';
+            ? '<span class="visibility hidden">' + _('vc_status_visibility_hidden') + '</span>'
+            : '<span class="visibility active">' + _('vc_status_visibility_active') + '</span>';
 
         record.data.availability = record.data.free
             ? '<span class="availability free">' + _('vc_videos_availability_free') + '</span>'
-            : '<span class="availability paid">' + _('vc_videos_availability_paid') + '</span>';
+            : '<span class="availability paid">' + _('vc_videos_availability_private') + '</span>';
 
         var tpl =
             '<div class="description">' +
@@ -219,7 +218,7 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
             '<p class="duration"><strong>{duration} <small>' + _('vc_videos_grid_seconds') + '</small></strong>' +
             '<br><span>' + [h , m, s].join(':') + '</span>' +
             '<p class="publishedon">' + _('vc_videos_grid_publishedon', pubdate) + '</p>' +
-            '<i class="icon icon-large icon-youtube"></i>' +
+            '<i class="icon icon-large icon-vimeo"></i>' +
             '</div>';
 
         return new Ext.XTemplate(tpl).applyTemplate(record.data);

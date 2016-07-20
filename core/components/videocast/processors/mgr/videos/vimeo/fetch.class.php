@@ -1,15 +1,15 @@
 <?php
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/../../../../vendor/autoload.php';
 
 /**
- * Class VideoCastVideosFetchProcessor
+ * Class VideoCastVideosVimeoFetchProcessor
  */
-class VideoCastVideosFetchProcessor extends modProcessor
+class VideoCastVideosVimeoFetchProcessor extends modProcessor
 {
     private $client;
 
-    public $languageTopics = ['videocast:default'];
+    public $languageTopics = ['videocast:default', 'videocast:videos'];
 
     /**
      * VideoCastVideosFetchProcessor constructor.
@@ -21,9 +21,9 @@ class VideoCastVideosFetchProcessor extends modProcessor
         parent::__construct($modx, $properties);
 
         $this->client = new \Vimeo\Vimeo(
-            $this->modx->getOption('videocast_video_source_client_identifier'),
-            $this->modx->getOption('videocast_video_source_client_secret'),
-            $this->modx->getOption('videocast_video_source_access_token')
+            $this->modx->getOption('videocast_vimeo_client_identifier'),
+            $this->modx->getOption('videocast_vimeo_client_secret'),
+            $this->modx->getOption('videocast_vimeo_access_token')
         );
     }
 
@@ -71,4 +71,4 @@ class VideoCastVideosFetchProcessor extends modProcessor
     }
 }
 
-return VideoCastVideosFetchProcessor::class;
+return VideoCastVideosVimeoFetchProcessor::class;

@@ -161,7 +161,7 @@ Ext.extend(VideoCast.grid.Default, MODx.grid.Grid, {
             .applyTemplate({
                 cover: cover,
                 preview_link: record.data.preview,
-                preview_text: _('vc_videos_preview')
+                preview_text: _('vc_preview')
             });
     }
     

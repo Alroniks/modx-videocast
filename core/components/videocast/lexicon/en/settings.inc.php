@@ -30,7 +30,3 @@ $_lang['setting_videocast_vimeo_client_secret_desc'] = 'Секретный кл�
 
 $_lang['setting_videocast_vimeo_access_token'] = 'Токен доступа';
 $_lang['setting_videocast_vimeo_access_token_desc'] = 'Специальный ключ-токен, выдаваемый сервисом vimeo и используемые для подписи и авторизации всех запросов к API.';
-
-// youtube
-// hls
-// mp4

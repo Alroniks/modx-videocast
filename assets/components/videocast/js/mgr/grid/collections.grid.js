@@ -160,8 +160,8 @@ Ext.extend(VideoCast.grid.Collections, VideoCast.grid.Default, {
     descriptionRenderer: function descriptionRenderer(value, metaData, record) {
 
         record.data.visibility = record.data.hidden
-            ? '<span class="visibility hidden">' + _('vc_collections_visibility_hidden') + '</span>'
-            : '<span class="visibility active">' + _('vc_collections_visibility_active') + '</span>';
+            ? '<span class="visibility hidden">' + _('vc_status_visibility_hidden') + '</span>'
+            : '<span class="visibility active">' + _('vc_status_visibility_active') + '</span>';
 
         var tpl =
             '<div class="description">' +

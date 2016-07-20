@@ -47,3 +47,9 @@ $_lang['vc_collections_menu_show'] = 'Показать коллекцию';
 $_lang['vc_collections_menu_remove'] = 'Удалить коллекцию';
 $_lang['vc_collections_menu_move_up'] = 'Передвинуть вверх';
 $_lang['vc_collections_menu_move_down'] = 'Передвинуть вниз';
+
+// custom strings
+$_lang['vc_collections_visibility_hidden'] = 'скрыто';
+$_lang['vc_collections_visibility_active'] = 'показывается';
+
+$_lang['vc_collections_preview'] = 'Открыть на сайте';

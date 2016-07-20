@@ -14,7 +14,7 @@ require_once MODX_CONNECTORS_PATH . 'index.php';
 $corePath = $modx->getOption('videocast.core_path', null, $modx->getOption('core_path') . 'components/videocast/');
 require_once $corePath . 'model/videocast/videocast.class.php';
 $modx->videocast = new VideoCast($modx);
-$modx->lexicon->load('videocast:default');
+$modx->lexicon->load('videocast:default', 'videocast:videos');
 
 /* handle request */
 $path = $modx->getOption('processorsPath', $modx->videocast->config, $corePath . 'processors/');
