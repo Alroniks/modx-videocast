@@ -44,6 +44,13 @@ $list = [
         'xtype' => 'textfield',
         'area' => 'vc_vimeo',
         'value' => ''
+    ],
+
+    // youtube
+    'youtube_api_key' => [
+        'xtype' => 'textfield',
+        'area' => 'vc_youtube',
+        'value' => ''
     ]
 ];
 

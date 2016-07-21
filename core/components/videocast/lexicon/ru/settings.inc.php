@@ -32,5 +32,8 @@ $_lang['setting_videocast_vimeo_access_token'] = 'Токен доступа';
 $_lang['setting_videocast_vimeo_access_token_desc'] = 'Специальный ключ-токен, выдаваемый сервисом vimeo и используемые для подписи и авторизации всех запросов к API.';
 
 // youtube
+$_lang['setting_videocast_youtube_api_key'] = 'Ключ API';
+$_lang['setting_videocast_youtube_api_key_desc'] = 'Серверный ключ API для доступа к сервисам гугла. Задается в консоли google.';
+
 // hls
 // mp4

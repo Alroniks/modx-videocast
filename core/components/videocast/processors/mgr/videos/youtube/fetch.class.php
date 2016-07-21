@@ -31,8 +31,7 @@ class VideoCastVideosYouTubeFetchProcessor extends modProcessor
 
         $data = [];
 
-        $key = 'AIzaSyDlVwLxfNvBbVr3UppYhrakvGsdtkPK95s';
-
+        $key = $this->modx->getOption('videocast_youtube_api_key');
         $parsed = parse_url($video);
         $code = str_replace('v=', '', $parsed['query'] ?? '');
 
@@ -40,7 +39,7 @@ class VideoCastVideosYouTubeFetchProcessor extends modProcessor
             return $this->success('', $data);
         }
 
-        $url = "https://www.googleapis.com/youtube/v3/videos?id={$code}&part=snippet,contentDetails&key={$key}";
+        $url = "https://www.googleapis.com/youtube/v3/videos?id={$code}&part=snippet,contentDetails,statistics&key={$key}";
         $response = json_decode(file_get_contents($url), true);
 
         $item = current($response['items']);
@@ -70,6 +69,10 @@ class VideoCastVideosYouTubeFetchProcessor extends modProcessor
             $date = (new DateTime('now'))->add($interval);
             $duration = $date->getTimestamp() - (new DateTime())->getTimestamp();
             $data['duration'] = $duration;
+        }
+
+        if (isset($item['statistics']['viewCount'])) {
+            $data['plays'] = $item['statistics']['viewCount'];
         }
 
         return $this->success('', $data);
