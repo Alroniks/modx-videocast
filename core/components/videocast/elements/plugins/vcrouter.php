@@ -1,4 +1,5 @@
 <?php
+
 if ($modx->event->name != 'OnPageNotFound') {
     return false;
 }
@@ -72,9 +73,23 @@ switch ($chunks[0]) {
             $modx->sendRedirect($chunks[0] . '/' . $collectionAlias);
         }
 
-        if (!$collection = $modx->getObject('vcCollection', ['alias' => $collectionAlias])) {
+        if (!$collection = $modx->getObject('vcCollection', ['alias' => $collectionAlias, 'hidden' => 0])) {
             $modx->sendForward($this->getOption('error_page'), $this->getOption('error_page_header', null, 'HTTP/1.0 404 Not Found'));
         }
+
+        $duration = 0;
+        $videos = 0;
+
+        /** @var vcVideo $video */
+        foreach ($collection->getMany('Videos') as $video) {
+            if (!$video->get('hidden')) {
+                $videos++;
+                $duration += $video->get('duration');
+            }
+        }
+
+        $collection->set('duration', $duration);
+        $collection->set('videos', $videos);
 
         $modx->setPlaceholders($collection, 'collection.');
         $modx->sendForward($collectionsSection);
@@ -93,7 +108,7 @@ switch ($chunks[0]) {
             $modx->sendRedirect($chunks[0] . '/' . $videoAlias);
         }
 
-        if (!$video = $modx->getObject('vcVideo', ['alias' => $videoAlias])) {
+        if (!$video = $modx->getObject('vcVideo', ['alias' => $videoAlias, 'hidden' => 0])) {
             $modx->sendForward($this->getOption('error_page'), $this->getOption('error_page_header', null, 'HTTP/1.0 404 Not Found'));
         }
 

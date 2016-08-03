@@ -60,11 +60,11 @@ class VideoCastVideosMP4FetchProcessor extends modProcessor
         }
 
         if (isset($fileInfo['format']['tags']['title'])) {
-            $data['title'] = $fileInfo['format']['tags']['title'];
+            $data['title'] = trim($fileInfo['format']['tags']['title']);
         }
 
         if (isset($fileInfo['format']['tags']['description'])) {
-            $data['description'] = $fileInfo['format']['tags']['description'];
+            $data['description'] = trim($fileInfo['format']['tags']['description']);
         }
 
         return $this->success('', $data);

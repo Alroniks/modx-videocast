@@ -112,7 +112,7 @@
     &.video {
         .cover {
             img {
-                height: 94px;
+                height: 84px;
             }
         }
     }
@@ -169,4 +169,9 @@
         }
     }
     &.channel {}
+}
+
+// override
+.ext-strict .x-menu-item-icon {
+    top: 4px;
 }

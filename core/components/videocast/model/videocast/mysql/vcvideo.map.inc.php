@@ -291,7 +291,7 @@ $xpdo_meta_map['vcVideo']= array (
         'onlyAlphaNum' => 
         array (
           'type' => 'preg_match',
-          'rule' => '/^[a-zа-я0-9,\\._\\-\\s\\(\\)\\?=+]*$/iu',
+          'rule' => '/^[a-zа-я0-9,\\._\\-\\s\\(\\)\\?=\\+]*$/iu',
           'message' => 'vc_videos_title_err_onlyAlphaNum',
         ),
       ),

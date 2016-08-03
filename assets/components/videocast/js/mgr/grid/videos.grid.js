@@ -55,11 +55,17 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
     getMenu: function getMenu() {
         var menu = [];
         menu.push({
-            text: _('vc_videos_menu_edit'),
+            text: '<i class="x-menu-item-icon icon icon-li icon-edit"></i> ' + _('vc_videos_menu_edit'),
             handler: this.updateVideo
         }, {
-            text: 'Обновить статистику (lex)',
+            text: '<span><i class="x-menu-item-icon icon icon-li icon-refresh"></i> Обновить статистику (lex)</span>',
             handler: this.updatePlays
+        }, {
+            text: 'Скрыть с сайта / Показать на сайте'
+        }, '-', {
+            text: 'Удалить'
+        }, {
+            text: 'Сделать приватным / Открыть для всех'
         });
 
         this.addContextMenuItem(menu);

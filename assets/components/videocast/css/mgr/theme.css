@@ -84,7 +84,7 @@
     color: silver;
     transform: rotate(-30deg); }
 .vc-grid.video .cover img {
-  height: 94px; }
+  height: 84px; }
 
 /* window styles */
 .vc-window .cover-preview {
@@ -122,5 +122,8 @@
   content: '\f167'; }
 .vc-window.video.hls .x-toolbar-left:after {
   content: '\f179'; }
+
+.ext-strict .x-menu-item-icon {
+  top: 4px; }
 
 /*# sourceMappingURL=theme.css.map */
