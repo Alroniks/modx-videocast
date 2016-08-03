@@ -1,3 +1,21 @@
+VideoCast 0.1.1-pl (Aug 03, 2016)
+====================================
+
+    Fixed validators and more accurate listings
+
+a2166c8 Fixed listing of videos in plugin - return 404 for hidden
+c2536b4 Move youtube api key to system settings
+5ad89ff Added youtube fetcher and fixed rules in schema
+ae2ed67 Fixed fetching meta dat for videos in different formats
+c01ed16 Fixed fetching meta dat for videos in different formats
+a80e09c Added active plugin in update mode
+9761b3b Added propper declension of counts to video grid
+8b6136a Added plugins for different type of video sources for new video
+ec0a911 Regenerated models and fixed system settings
+d763530 Renamed course to channel everywhere
+722aa59 Started big refactoring
+691f4a0 Change pusblish command to more releable release
+
 VideoCast 0.1.0-pl (Jul 13, 2016)
 ====================================
 
