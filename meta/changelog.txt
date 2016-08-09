@@ -1,3 +1,10 @@
+VideoCast 0.1.2-pl (Aug 09, 2016)
+====================================
+
+    Field validation in collections
+
+402d4c0 Fixed validation in collections
+
 VideoCast 0.1.1-pl (Aug 03, 2016)
 ====================================
 
