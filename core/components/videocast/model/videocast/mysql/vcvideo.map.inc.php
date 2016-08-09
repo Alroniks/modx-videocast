@@ -304,12 +304,12 @@ $xpdo_meta_map['vcVideo']= array (
           'value' => '1',
           'message' => 'vc_videos_alias_err_notEmpty',
         ),
-        'onlyAlphaNum' => 
+        'onlyAlias' => 
         array (
           'type' => 'preg_match',
           'rule' => '/^[a-zA-Z0-9\\-]*$/',
           'value' => '1',
-          'message' => 'vc_videos_alias_err_notEmpty',
+          'message' => 'vc_videos_alias_err_onlyAlias',
         ),
       ),
       'description' => 

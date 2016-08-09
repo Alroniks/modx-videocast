@@ -161,8 +161,8 @@ $xpdo_meta_map['vcCollection']= array (
         'onlyAlphaNum' => 
         array (
           'type' => 'preg_match',
-          'rule' => '/^[a-zA-Zа-яА-Я0-9_\\-\\s]*$/',
-          'message' => 'vc_collections_title_err_onlyAlphaNum',
+          'rule' => '/^[a-zа-я0-9,\\._\\-\\s\\(\\)\\?=\\+]*$/iu',
+          'message' => 'vc_videos_title_err_onlyAlphaNum',
         ),
       ),
       'alias' => 
@@ -174,12 +174,12 @@ $xpdo_meta_map['vcCollection']= array (
           'value' => '1',
           'message' => 'vc_collections_alias_err_notEmpty',
         ),
-        'onlyAlphaNum' => 
+        'onlyAlias' => 
         array (
           'type' => 'preg_match',
-          'rule' => '/^[a-zA-Z0-9_]*$/',
+          'rule' => '/^[a-zA-Z0-9_\\-]*$/',
           'value' => '1',
-          'message' => 'vc_collections_alias_err_notEmpty',
+          'message' => 'vc_collections_alias_err_onlyAlias',
         ),
       ),
       'description' => 

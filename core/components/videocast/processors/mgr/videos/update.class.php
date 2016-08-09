@@ -21,6 +21,16 @@ class VideoCastVideosUpdateProcessor extends modObjectUpdateProcessor
         $this->setCheckbox('hidden');
         $this->setCheckbox('free');
     }
+
+    /**
+     * @return bool
+     */
+    public function beforeSave()
+    {
+        $this->object->setDirty(); // whole obj
+
+        return true;
+    }
 }
 
 return VideoCastVideosUpdateProcessor::class;
