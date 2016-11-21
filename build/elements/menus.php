@@ -11,7 +11,7 @@ $list = [
         'text' => 'vc_menu',
         'description' => 'vc_menu_desc',
         'parent' => 'topnav',
-        'menuindex' => -10,
+        'menuindex' => 0,
         'icon' => '<i class="icon-television icon icon-large"></i>',
         'action' => 'library'
     ]
