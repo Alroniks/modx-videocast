@@ -221,7 +221,6 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
 
         record.data.duration = Ext.util.Format.declension(record.data.duration, _('vc_videos_grid_seconds').split('|'));
         record.data.plays = Ext.util.Format.declension(record.data.plays, _('vc_videos_grid_plays').split('|'));
-        record.data.icon = record.data.type.replace('mp4', 'film').replace('hls', 'apple');
 
         var tpl =
             '<div class="details">' +
@@ -229,7 +228,6 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
             '<p class="duration"><strong>{duration}</strong>' +
             '<br><span>' + [h , m, s].join(':') + '</span>' +
             '<p class="publishedon">' + _('vc_videos_grid_publishedon', pubdate) + '</p>' +
-            '<i class="icon icon-large icon-{icon}"></i>' +
             '</div>';
 
         return new Ext.XTemplate(tpl).applyTemplate(record.data);
