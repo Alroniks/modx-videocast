@@ -9,6 +9,9 @@ VideoCast.panel.Library = function (config) {
                 title: _('vc_videos_tab_title'),
                 layout: 'anchor',
                 items: [{
+                    html: 'vc_videos_tab_description',
+                    xtype: 'modx-description'
+                },{
                     xtype: 'vc-grid-videos',
                     id: 'vc-grid-videos'
                 }]
@@ -16,11 +19,17 @@ VideoCast.panel.Library = function (config) {
                 title: _('vc_collections_tab_title'),
                 layout: 'anchor',
                 items: [{
+                    html: 'vc_collections_tab_description',
+                    xtype: 'modx-description'
+                },{
                     xtype: 'vc-grid-collections',
                     id: 'vc-grid-collections'
                 }]
             }, {
                 title: _('vc_channels_tab_title'),
+                layout: 'anchor'
+            }, {
+                title: 'Stats',
                 layout: 'anchor'
             }, {
                 title: 'Настройки',

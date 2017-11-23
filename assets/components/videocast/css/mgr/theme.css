@@ -9,14 +9,6 @@
     width: 150px;
     height: 150px;
     border-radius: 3px; }
-  .vc-grid .cover .preview {
-    margin-top: 5px;
-    display: inline-block;
-    border: 1px solid;
-    border-radius: 5px;
-    text-decoration: none;
-    padding: 0 5px;
-    white-space: nowrap; }
 .vc-grid .description h2 {
   font-size: 20px;
   font-weight: bold;
@@ -55,22 +47,21 @@
   .vc-grid .description .availability.paid {
     color: #0e6ffd;
     border-color: #0e6ffd; }
+.vc-grid .duration {
+  line-height: 1.5; }
+  .vc-grid .duration .human {
+    font-size: 19px; }
+  .vc-grid .duration .seconds {
+    text-transform: uppercase; }
 .vc-grid .parameters,
 .vc-grid .details {
-  position: relative;
-  min-height: 150px; }
+  position: relative; }
   .vc-grid .parameters .count strong,
   .vc-grid .parameters .plays strong,
   .vc-grid .details .count strong,
   .vc-grid .details .plays strong {
-    font-size: 30px;
+    font-size: 20px;
     color: #43484D; }
-  .vc-grid .parameters .time strong,
-  .vc-grid .parameters .duration strong,
-  .vc-grid .details .time strong,
-  .vc-grid .details .duration strong {
-    font-size: 24px;
-    color: #86939E; }
   .vc-grid .parameters .publishedon,
   .vc-grid .details .publishedon {
     margin-top: 20px; }
@@ -84,7 +75,8 @@
     color: silver;
     transform: rotate(-30deg); }
 .vc-grid.video .cover img {
-  height: 84px; }
+  width: 80px;
+  height: auto; }
 
 /* window styles */
 .vc-window .cover-preview {

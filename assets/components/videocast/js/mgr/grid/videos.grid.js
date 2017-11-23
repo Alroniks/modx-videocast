@@ -14,7 +14,7 @@ VideoCast.grid.Videos = function (config) {
         },
         cm: this.cm,
         stripeRows: false,
-        pageSize: 5,
+        pageSize: 10,
         cls: 'main-wrapper vc-grid video'
     });
 
@@ -38,17 +38,35 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
             renderer: this.coverRenderer.createDelegate(this, [this], true),
             fixed: true,
             resizable: false,
-            width: 170
+            width: 100
         }, {
             id: 'description',
-            header: _('vc_videos_column_description'),
+            header: _('vc_videos_column_title'),
             dataIndex: 'title',
             renderer: this.descriptionRenderer.createDelegate(this, [this], true)
         }, {
-            id: 'details',
-            header: _('vc_videos_column_details'),
-            dataIndex: 'alias',
-            renderer: this.detailsRenderer.createDelegate(this, [this], true)
+            id: 'language',
+            header: ('lang'),
+            dataIndex: 'language',
+            width: 10
+        }, {
+            id: 'duration',
+            header: _('vc_videos_column_duration'),
+            dataIndex: 'duration',
+            renderer: this.durationRenderer.createDelegate(this, [this], true),
+            width: 15
+        }, {
+            id: 'publishedon',
+            header: _('vc_videos_column_publishedon'),
+            dataIndex: 'publishedon',
+            // renderer: this.publishedRenderer.createDelegate(this, [this], true)
+            width: 15
+        }, {
+            id: 'plays',
+            header: _('vc_videos_column_statistics'),
+            dataIndex: 'plays',
+            renderer: this.detailsRenderer.createDelegate(this, [this], true),
+            width: 20
         }];
     },
 
@@ -197,39 +215,42 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
         var tpl =
             '<div class="description">' +
             '<h2>{title}</h2>' +
-            '<h4>{collection_title}</h4>' +
             '<p>{visibility} {availability}</p>' +
-            '<h3>.../{alias}</h3>' +
-            '<p>{description}</p>' +
             '</div>';
 
         return new Ext.XTemplate(tpl).applyTemplate(record.data);
     },
 
-    detailsRenderer: function detailsRenderer(value, metaData, record) {
-        var publishedon = new Date(record.data.publishedon),
-            pubdate = {
-                rtime: publishedon.toISOString(),
-                htime: publishedon.format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)
-            };
-
+    durationRenderer: function durationRenderer(value, metaData, record) {
         record.data.duration = record.data.duration || 0;
-
         var h = ('0' + Math.floor(record.data.duration / 3600)).slice(-2),
             m = ('0' + Math.floor(record.data.duration / 60) % 60).slice(-2),
             s = ('0' + record.data.duration % 60).slice(-2);
 
-        record.data.duration = Ext.util.Format.declension(record.data.duration, _('vc_videos_grid_seconds').split('|'));
-        record.data.plays = Ext.util.Format.declension(record.data.plays, _('vc_videos_grid_plays').split('|'));
+        record.data.duration = Ext.util.Format.declension(
+            record.data.duration,
+            _('vc_videos_grid_seconds').split('|')
+        );
 
         var tpl =
-            '<div class="details">' +
-            '<p class="plays"><strong>{plays}</strong></p>' +
-            '<p class="duration"><strong>{duration}</strong>' +
-            '<br><span>' + [h , m, s].join(':') + '</span>' +
-            '<p class="publishedon">' + _('vc_videos_grid_publishedon', pubdate) + '</p>' +
+            '<div class="duration">' +
+            '<p class="human">' + [h , m, s].join(':') + '</p>' +
+            '<p class="seconds">{duration}</p>' +
             '</div>';
 
+        return new Ext.XTemplate(tpl).applyTemplate(record.data);
+    },
+
+    publishedRenderer: function publishedRenderer(value, metaData, record) {
+        record.data.publishedon = record.data.publishedon || 0;
+
+
+    },
+
+    detailsRenderer: function detailsRenderer(value, metaData, record) {
+        record.data.plays = Ext.util.Format.declension(record.data.plays, _('vc_videos_grid_plays').split('|'));
+        var tpl = '<div class="plays">{plays}</div>';
+        
         return new Ext.XTemplate(tpl).applyTemplate(record.data);
     }
 

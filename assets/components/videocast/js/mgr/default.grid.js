@@ -145,8 +145,8 @@ Ext.extend(VideoCast.grid.Default, MODx.grid.Grid, {
     // Renders
     coverRenderer: function coverRenderer(value, metaData, record) {
         var cover;
-        if (!value) {
-            cover = 'https://dummyimage.com/300x188/eeeeee/ffffff&text=cl';
+        if (!value || /\//.test(value) === false) {
+            cover = 'https://dummyimage.com/80x45/444444/ffffff&text=%20cover';
         } else {
             var rule = new RegExp(/^http(s?):\/\/.+/);
             cover = rule.test(value)
@@ -155,14 +155,8 @@ Ext.extend(VideoCast.grid.Default, MODx.grid.Grid, {
         }
 
         return new Ext
-            .XTemplate('<div class="cover"><img src="{cover}">' +
-                '<a href="{preview_link}" class="preview" target="_blank">{preview_text}</a>' +
-            '</div>')
-            .applyTemplate({
-                cover: cover,
-                preview_link: record.data.preview,
-                preview_text: _('vc_preview')
-            });
+            .XTemplate('<div class="cover"><a href="{preview_link}" target="_blank"><img src="{cover}"></a></div>')
+            .applyTemplate({ cover: cover, preview_link: record.data.preview });
     }
     
 });

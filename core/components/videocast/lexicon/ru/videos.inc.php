@@ -1,6 +1,7 @@
 <?php
 
 $_lang['vc_videos_tab_title'] = 'Видео';
+$_lang['vc_videos_tab_description'] = 'Видео jgbcfybt';
 
 // buttons
 $_lang['vc_videos_add_mp4'] = 'MP4';
@@ -10,8 +11,10 @@ $_lang['vc_videos_add_hls'] = 'HLS';
 
 // columns
 $_lang['vc_videos_column_cover'] = 'Обложка';
-$_lang['vc_videos_column_description'] = 'Описание видео';
-$_lang['vc_videos_column_details'] = 'Детали';
+$_lang['vc_videos_column_title'] = 'Название и статусы';
+$_lang['vc_videos_column_duration'] = 'Длительность';
+$_lang['vc_videos_column_publishedon'] = 'Опубликовано';
+$_lang['vc_videos_column_statistics'] = 'Статистика';
 
 // grid labels
 $_lang['vc_videos_grid_publishedon'] = '<b>Опубликовано:</b><br/><time datetime="[[+rtime]]">[[+htime]]</time>';
