@@ -5,7 +5,7 @@
   "license": "MIT",
   "support": {
     "db": ["mysql"],
-    "php": "~7.0",
-    "modx": "~2.5.0"
+    "php": ">=7.0",
+    "modx": ">=2.5.0"
   }
 }
