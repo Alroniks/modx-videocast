@@ -141,18 +141,6 @@
                 opacity: 0.1;
             }
         }
-        &.mp4 .x-toolbar-left:after {
-            content: '\f008';
-        }
-        &.vimeo .x-toolbar-left:after {
-            content: '\f27d';
-        }
-        &.youtube .x-toolbar-left:after {
-            content: '\f167';
-        }
-        &.hls .x-toolbar-left:after {
-            content: '\f179';
-        }
     }
     &.channel {}
 }

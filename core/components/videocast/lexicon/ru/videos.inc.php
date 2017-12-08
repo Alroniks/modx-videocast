@@ -4,21 +4,19 @@ $_lang['vc_videos_tab_title'] = 'Видео';
 $_lang['vc_videos_tab_description'] = 'Видео jgbcfybt';
 
 // buttons
-$_lang['vc_videos_add_mp4'] = 'MP4';
-$_lang['vc_videos_add_vimeo'] = 'Vimeo';
-$_lang['vc_videos_add_youtube'] = 'YouTube';
-$_lang['vc_videos_add_hls'] = 'HLS';
+$_lang['vc_videos_add'] = 'Добавить видео';
 
 // columns
 $_lang['vc_videos_column_cover'] = 'Обложка';
 $_lang['vc_videos_column_title'] = 'Название и статусы';
+$_lang['vc_videos_column_language'] = 'Язык';
 $_lang['vc_videos_column_duration'] = 'Длительность';
 $_lang['vc_videos_column_publishedon'] = 'Опубликовано';
 $_lang['vc_videos_column_statistics'] = 'Статистика';
 
 // grid labels
 $_lang['vc_videos_grid_publishedon'] = '<b>Опубликовано:</b><br/><time datetime="[[+rtime]]">[[+htime]]</time>';
-$_lang['vc_videos_grid_plays'] = '$ <small>просмотров</small>|$ <small>просмотр</small>|$ <small>просмотра</small>|$ <small>просмотров</small>';
+//$_lang['vc_videos_grid_plays'] = '$ <small>просмотров</small>|$ <small>просмотр</small>|$ <small>просмотра</small>|$ <small>просмотров</small>';
 $_lang['vc_videos_grid_seconds'] = '$ <small>секунд</small>|$ <small>секунда</small>|$ <small>секунды</small>|$ <small>секунд</small>';
 
 // context menu
@@ -30,19 +28,20 @@ $_lang['vc_videos_window_title_new'] = 'Новое видео';
 $_lang['vc_videos_window_title_update'] = 'Редактирование видео: [[+0]]';
 
 // form fields
-$_lang['vc_videos_field_title'] = 'Название видео';
 $_lang['vc_videos_field_alias'] = 'Ссылка на видео';
-$_lang['vc_videos_field_duration'] = 'Продолжительность';
 $_lang['vc_videos_field_collection'] = 'Коллекция';
 $_lang['vc_videos_field_collection_empty'] = 'Без коллекции';
-$_lang['vc_videos_field_publishedon'] = 'Опубликовано';
-$_lang['vc_videos_field_hidden'] = 'Не показывать';
-$_lang['vc_videos_field_free'] = 'Для всех';
 $_lang['vc_videos_field_cover'] = 'Обложка';
+$_lang['vc_videos_field_description'] = 'Описание';
+$_lang['vc_videos_field_duration'] = 'Продолжительность';
+$_lang['vc_videos_field_free'] = 'Для всех';
+$_lang['vc_videos_field_hidden'] = 'Не показывать';
+$_lang['vc_videos_field_language'] = 'Язык видео';
+$_lang['vc_videos_field_preview'] = 'Предпросмотр обложки';
+$_lang['vc_videos_field_publishedon'] = 'Опубликовано';
 $_lang['vc_videos_field_source'] = 'Источник видео';
 $_lang['vc_videos_field_source_fetch'] = 'Синхронизировать';
-$_lang['vc_videos_field_description'] = 'Описание';
-$_lang['vc_videos_field_preview'] = 'Предпросмотр обложки';
+$_lang['vc_videos_field_title'] = 'Название видео';
 
 // status labels
 $_lang['vc_videos_availability_free'] = 'для всех';
@@ -66,9 +65,3 @@ $_lang['vc_videos_alias_err_notEmpty'] = 'Пожалуйста, укажите �
 $_lang['vc_videos_alias_err_onlyAlias'] = 'Пожалуйста, используйте только латинские буквы, цифры, символ _ и - (дефис)';
 $_lang['vc_videos_description_err_notEmpty'] = 'Пожалуйста, укажите текстовое описание видео (анонс)';
 $_lang['vc_videos_cover_err_notEmpty'] = 'Пожалуйста, укажите ссылку на файл обложки видео';
-
-// plugins
-$_lang['vc_videos_field_source_vimeo'] = 'Ссылка на видео на vimeo.com';
-$_lang['vc_videos_field_source_youtube'] = 'Ссылка на видео на youtube.com';
-$_lang['vc_videos_field_source_mp4'] = 'Ссылка на видео-файл в формате mp4 (H.264)';
-$_lang['vc_videos_field_source_hls'] = 'Ссылка на плейлист с видеопотоком формата Apple HLS';

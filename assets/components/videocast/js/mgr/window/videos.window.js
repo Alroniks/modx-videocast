@@ -11,7 +11,7 @@ VideoCast.window.Video = function (config) {
         baseParams: {
             action: config.action || 'mgr/videos/' + (config.new ? 'create' : 'update')
         },
-        cls: 'vc-window video ' + config.plugin
+        cls: 'vc-window video'
     });
 
     VideoCast.window.Video.superclass.constructor.call(this, config);
@@ -27,7 +27,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
             _('vc_videos_message_update_title'),
             _('vc_videos_message_update_msg'),
             function (value) {
-                if (value == 'yes') {
+                if (value === 'yes') {
                     form.items.each(function(field) {
                         if (data.hasOwnProperty(field.name)) {
                             if (!self.config.new && field.name === 'alias') {
@@ -46,13 +46,11 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
 
     getMetaData: function getMetaDataFromSource(e, target, object) {
 
-        var w = Ext.getCmp('vc-window-video'),
-            plugin = w.config.plugin,
-            video;
+        var w = Ext.getCmp('vc-window-video'), video;
 
         // console.log(arguments, this, object);
 
-        if (typeof this.getValue == 'function') {
+        if (typeof this.getValue === 'function') {
             video = this.getValue();
         } else {
             video = MODx.config.site_url + object.fullRelativeUrl;
@@ -80,25 +78,12 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
         });
     },
 
-    getSourceField: function (name, plugin) {
+    getSourceField: function (name) {
 
         var field,
-            label = _('vc_videos_field_source_' + plugin);
+            label = _('vc_videos_field_source');
 
-        switch (plugin) {
-            case 'mp4':
-                field = this.getFileField(label, MODx.config['videocast_media_source_mp4'] || MODx.config.default_media_source);
-                break;
-            case 'hls':
-                field = this.getFileField(label, MODx.config['videocast_media_source_hls'] || MODx.config.default_media_source);
-                break;
-            case 'vimeo':
-                field = this.getServiceField(label);
-                break;
-            case 'youtube':
-                field = this.getServiceField(label);
-                break;
-        }
+        field = this.getFileField(label, MODx.config['videocast_media_source_mp4'] || MODx.config.default_media_source);
 
         if (field) {
             field.name = name;
@@ -123,19 +108,6 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
         };
     },
 
-    getServiceField: function (label) {
-        return {
-            xtype: 'trigger',
-            fieldLabel: label,
-            anchor: '100%',
-            triggerConfig: {
-                html: _('vc_videos_field_source_fetch'),
-                cls: 'x-form-trigger fetcher'
-            },
-            onTriggerClick: this.getMetaData
-        };
-    },
-
     getLeftColumn: function getLeftColumn(config) {
         return {
             columnWidth: .7,
@@ -147,7 +119,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                     columnWidth: 1,
                     layout: 'form',
                     defaults: { msgTarget: 'under' },
-                    items: [this.getSourceField('source', config.plugin)]
+                    items: [this.getSourceField('source')]
                 }]
             }, {
                 layout: 'column',
@@ -284,17 +256,11 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
             xtype: 'hidden',
             name: 'id'
         }, {
-            xtype: 'hidden',
-            name: 'type',
-            value: config.plugin
-        }, {
-            xtype: 'hidden',
-            name: 'plays'
-        }, {
             layout: 'column',
             defaults: { msgTarget: 'under', border: false },
             items: [this.getLeftColumn(config), this.getRightColumn(config)]
         }, {
+            // move to another tab, add rte
             layout: 'form',
             defaults: { msgTarget: 'under' },
             style: 'margin-top: 15px',

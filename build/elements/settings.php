@@ -23,11 +23,6 @@ $list = [
         'area' => 'vc_main',
         'value' => 0
     ],
-    'plugins' => [
-        'xtype' => 'textfield',
-        'area' => 'vc_main',
-        'value' => 'mp4,vimeo,youtube'
-    ],
 
     // vimeo
     'vimeo_client_identifier' => [
