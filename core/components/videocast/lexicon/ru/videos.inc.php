@@ -1,10 +1,10 @@
 <?php
 
 $_lang['vc_videos_tab_title'] = 'Видео';
-$_lang['vc_videos_tab_description'] = 'Видео jgbcfybt';
+$_lang['vc_videos_tab_description'] = 'Видео - это просто видео.';
 
 // buttons
-$_lang['vc_videos_add'] = 'Добавить видео';
+$_lang['vc_videos_add_video'] = 'Добавить видео';
 
 // columns
 $_lang['vc_videos_column_cover'] = 'Обложка';
@@ -23,9 +23,12 @@ $_lang['vc_videos_grid_seconds'] = '$ <small>секунд</small>|$ <small>се�
 $_lang['vc_videos_menu_edit'] = 'Редактировать видео';
 //$_lang['vc_videos_menu_up'] = 'UP';
 
-// windows
+// window
 $_lang['vc_videos_window_title_new'] = 'Новое видео';
 $_lang['vc_videos_window_title_update'] = 'Редактирование видео: [[+0]]';
+
+$_lang['vc_videos_window_tab_settings'] = 'Настройки видео';
+$_lang['vc_videos_window_tab_description'] = 'Описание';
 
 // form fields
 $_lang['vc_videos_field_alias'] = 'Ссылка на видео';

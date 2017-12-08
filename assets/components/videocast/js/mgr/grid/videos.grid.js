@@ -43,33 +43,21 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
             id: 'title',
             header: _('vc_videos_column_title'),
             dataIndex: 'title',
-            renderer: this.descriptionRenderer.createDelegate(this, [this], true)
+            renderer: this.descriptionRenderer.createDelegate(this, [this], true),
+            width: 45
         }, {
             id: 'language',
             header: _('vc_videos_column_language'),
             dataIndex: 'language',
-            width: 10
+            renderer: this.languageRenderer.createDelegate(this, [this], true),
+            width: 7
         }, {
             id: 'duration',
             header: _('vc_videos_column_duration'),
             dataIndex: 'duration',
             renderer: this.durationRenderer.createDelegate(this, [this], true),
             width: 15
-        }, {
-            id: 'publishedon',
-            header: _('vc_videos_column_publishedon'),
-            dataIndex: 'publishedon',
-            // renderer: this.publishedRenderer.createDelegate(this, [this], true)
-            width: 15
-        }, 
-            // {
-            // id: 'plays',
-            // header: _('vc_videos_column_statistics'),
-            // dataIndex: 'plays',
-            // renderer: this.detailsRenderer.createDelegate(this, [this], true),
-            // width: 20
-            // }
-        ];
+        }];
     },
 
     getMenu: function getMenu() {
@@ -181,10 +169,15 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
             ? '<span class="availability free">' + _('vc_videos_availability_free') + '</span>'
             : '<span class="availability paid">' + _('vc_videos_availability_private') + '</span>';
 
+        record.data.publishedon =
+            '<span class="publishedon">' +
+            (new Date(record.data.publishedon)).format(MODx.config.manager_date_format || 'd-m-Y') +
+            '</span>';
+
         var tpl =
             '<div class="description">' +
             '<h2>{title}</h2>' +
-            '<p>{visibility} {availability}</p>' +
+            '<p>{publishedon} {visibility} {availability}</p>' +
             '</div>';
 
         return new Ext.XTemplate(tpl).applyTemplate(record.data);
@@ -196,30 +189,22 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
             m = ('0' + Math.floor(record.data.duration / 60) % 60).slice(-2),
             s = ('0' + record.data.duration % 60).slice(-2);
 
-        record.data.duration = Ext.util.Format.declension(
-            record.data.duration,
-            _('vc_videos_grid_seconds').split('|')
-        );
-
         var tpl =
             '<div class="duration">' +
             '<p class="human">' + [h , m, s].join(':') + '</p>' +
-            '<p class="seconds">{duration}</p>' +
             '</div>';
 
         return new Ext.XTemplate(tpl).applyTemplate(record.data);
     },
 
-    publishedRenderer: function publishedRenderer(value, metaData, record) {
-        record.data.publishedon = record.data.publishedon || 0;
-    },
+    languageRenderer: function languageRenderer(value, metaData, record) {
+        var tpl =
+            '<div class="language">' +
+            record.data.language +
+            '</div>';
 
-    // detailsRenderer: function detailsRenderer(value, metaData, record) {
-    //     record.data.plays = Ext.util.Format.declension(record.data.plays, _('vc_videos_grid_plays').split('|'));
-    //     var tpl = '<div class="plays">{plays}</div>';
-    //
-    //     return new Ext.XTemplate(tpl).applyTemplate(record.data);
-    // }
+        return new Ext.XTemplate(tpl).applyTemplate(record.data);
+    }
 
 });
 

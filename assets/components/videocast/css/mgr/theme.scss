@@ -1,4 +1,9 @@
 .vc-grid {
+    .x-grid3-td-cover,
+    .x-grid3-td-language,
+    .x-grid3-td-duration {
+        text-align: center;
+    }
     .cover,
     .description,
     .parameters {
@@ -34,7 +39,8 @@
         }
 
         .visibility,
-        .availability {
+        .availability,
+        .publishedon {
             font-size: 12px;
             line-height: 24px;
             border: 1px solid;
@@ -43,6 +49,7 @@
             padding: 0 5px;
             white-space: nowrap;
             vertical-align: top;
+            text-transform: lowercase;
 
             &.active {
                 color: #7DC855;
@@ -64,10 +71,12 @@
         }
     }
 
-    .duration {
-        line-height: 1.5;
-        .human { font-size: 19px; }
-        .seconds { text-transform: uppercase; }
+    .duration,
+    .language {
+        text-align: center;
+        line-height: 2;
+        font-size: 19px;
+        text-transform: uppercase;
     }
 
     .parameters,

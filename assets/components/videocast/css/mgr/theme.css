@@ -1,3 +1,7 @@
+.vc-grid .x-grid3-td-cover,
+.vc-grid .x-grid3-td-language,
+.vc-grid .x-grid3-td-duration {
+  text-align: center; }
 .vc-grid .cover,
 .vc-grid .description,
 .vc-grid .parameters {
@@ -22,7 +26,8 @@
   font-size: 16px;
   margin: 0 0 5px; }
 .vc-grid .description .visibility,
-.vc-grid .description .availability {
+.vc-grid .description .availability,
+.vc-grid .description .publishedon {
   font-size: 12px;
   line-height: 24px;
   border: 1px solid;
@@ -30,29 +35,34 @@
   font-weight: normal;
   padding: 0 5px;
   white-space: nowrap;
-  vertical-align: top; }
+  vertical-align: top;
+  text-transform: lowercase; }
   .vc-grid .description .visibility.active,
-  .vc-grid .description .availability.active {
+  .vc-grid .description .availability.active,
+  .vc-grid .description .publishedon.active {
     color: #7DC855;
     border-color: #7DC855; }
   .vc-grid .description .visibility.hidden,
-  .vc-grid .description .availability.hidden {
+  .vc-grid .description .availability.hidden,
+  .vc-grid .description .publishedon.hidden {
     color: #B5C2CD;
     border-color: #B5C2CD; }
   .vc-grid .description .visibility.free,
-  .vc-grid .description .availability.free {
+  .vc-grid .description .availability.free,
+  .vc-grid .description .publishedon.free {
     color: #fd5c44;
     border-color: #fd5c44; }
   .vc-grid .description .visibility.paid,
-  .vc-grid .description .availability.paid {
+  .vc-grid .description .availability.paid,
+  .vc-grid .description .publishedon.paid {
     color: #0e6ffd;
     border-color: #0e6ffd; }
-.vc-grid .duration {
-  line-height: 1.5; }
-  .vc-grid .duration .human {
-    font-size: 19px; }
-  .vc-grid .duration .seconds {
-    text-transform: uppercase; }
+.vc-grid .duration,
+.vc-grid .language {
+  text-align: center;
+  line-height: 2;
+  font-size: 19px;
+  text-transform: uppercase; }
 .vc-grid .parameters,
 .vc-grid .details {
   position: relative; }

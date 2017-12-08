@@ -7,6 +7,12 @@ class VideoCastLibraryManagerController extends modExtraManagerController
     /** @var VideoCast */
     protected $vc;
 
+    public function process(array $scriptProperties = array())
+    {
+        parent::process($scriptProperties);
+        $this->loadRichTextEditor();
+    }
+
     /**
      * Initialize function
      */
@@ -85,5 +91,22 @@ class VideoCastLibraryManagerController extends modExtraManagerController
             });
         </script>
         '));
+    }
+
+    private function loadRichTextEditor()
+    {
+        $useEditor = $this->modx->getOption('use_editor');
+        $whichEditor = $this->modx->getOption('which_editor');
+
+        if ($useEditor && !empty($whichEditor)) {
+            $onRichTextEditorInit = $this->modx->invokeEvent('OnRichTextEditorInit', [
+                'editor' => $whichEditor,
+                'elements' => [],
+            ]);
+            if (is_array($onRichTextEditorInit)) {
+                $onRichTextEditorInit = implode('', $onRichTextEditorInit);
+            }
+            $this->addHtml($onRichTextEditorInit);
+        }
     }
 }

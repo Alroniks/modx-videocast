@@ -7,11 +7,12 @@ VideoCast.window.Video = function (config) {
 
     Ext.applyIf(config, {
         modal: false,
-        width: 800,
+        width: 820,
         baseParams: {
             action: config.action || 'mgr/videos/' + (config.new ? 'create' : 'update')
         },
-        cls: 'vc-window video'
+        cls: 'vc-window video',
+        closeAction: 'close'
     });
 
     VideoCast.window.Video.superclass.constructor.call(this, config);
@@ -177,18 +178,29 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                 layout: 'column',
                 style: 'margin-top: 15px',
                 items: [{
-                    columnWidth: .3,
+                    columnWidth: .25,
                     layout: 'form',
                     defaults: { msgTarget: 'under' },
                     items: [{
                         xtype: 'numberfield',
                         name: 'duration',
                         fieldLabel: _('vc_videos_field_duration'),
-                        readOnly: true,
+                        readOnly: false, // tmp solution, need to fetch real data from files
                         anchor: '100%'
                     }]
                 }, {
-                    columnWidth: .3,
+                    columnWidth: .25,
+                    layout: 'form',
+                    defaults: { msgTarget: 'under' },
+                    items: [{
+                        xtype: 'modx-combo-language',
+                        name: 'language',
+                        fieldLabel: _('vc_videos_field_language'),
+                        anchor: '100%',
+                        value: MODx.config.manager_language
+                    }]
+                }, {
+                    columnWidth: .25,
                     layout: 'form',
                     defaults: { msgTarget: 'under' },
                     items: [{
@@ -198,7 +210,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                         anchor: '100%'
                     }]
                 }, {
-                    columnWidth: .3,
+                    columnWidth: .25,
                     layout: 'form',
                     defaults: { msgTarget: 'under' },
                     items: [{
@@ -256,19 +268,31 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
             xtype: 'hidden',
             name: 'id'
         }, {
-            layout: 'column',
-            defaults: { msgTarget: 'under', border: false },
-            items: [this.getLeftColumn(config), this.getRightColumn(config)]
-        }, {
-            // move to another tab, add rte
-            layout: 'form',
-            defaults: { msgTarget: 'under' },
-            style: 'margin-top: 15px',
+            xtype: 'modx-tabs',
+            defaults: {
+                listeners: {
+                    activate: function () {
+                        if (MODx.loadRTE) {
+                            MODx.loadRTE('vc_videos_window_tab_description_editor');
+                        }
+                    }
+                }
+            },
             items: [{
-                xtype: 'textarea',
-                name: 'description',
-                fieldLabel: _('vc_videos_field_description'),
-                anchor: '100%'
+                title: _('vc_videos_window_tab_settings'),
+                layout: 'column',
+                defaults: { msgTarget: 'under', border: false },
+                items: [this.getLeftColumn(config), this.getRightColumn(config)]
+            }, {
+                title: _('vc_videos_window_tab_description'),
+                layout: 'form',
+                defaults: { msgTarget: 'under', autoHeight: true },
+                items: [{
+                    id: 'vc_videos_window_tab_description_editor',
+                    xtype: 'textarea',
+                    name: 'description',
+                    anchor: '100%'
+                }]
             }]
         }];
     }
