@@ -1,3 +1,3 @@
 <?php
-require_once (dirname(dirname(__FILE__)) . '/vccollection.class.php');
+require_once (dirname(__DIR__) . '/vccollection.class.php');
 class vcCollection_mysql extends vcCollection {}

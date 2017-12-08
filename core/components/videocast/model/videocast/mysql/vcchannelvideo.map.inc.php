@@ -4,6 +4,10 @@ $xpdo_meta_map['vcChannelVideo']= array (
   'version' => '1.1',
   'table' => 'vc_channels_videos',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'MyISAM',
+  ),
   'fields' => 
   array (
     'channel' => 0,

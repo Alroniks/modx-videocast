@@ -4,6 +4,10 @@ $xpdo_meta_map['vcCollection']= array (
   'version' => '1.1',
   'table' => 'vc_collections',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'MyISAM',
+  ),
   'fields' => 
   array (
     'title' => '',

@@ -4,16 +4,19 @@ $xpdo_meta_map['vcVideo']= array (
   'version' => '1.1',
   'table' => 'vc_videos',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'MyISAM',
+  ),
   'fields' => 
   array (
     'title' => '',
     'alias' => '',
     'description' => '',
+    'language' => 'en',
     'cover' => '',
     'source' => '',
-    'type' => '',
     'duration' => 0,
-    'plays' => 0,
     'free' => 0,
     'hidden' => 0,
     'publishedon' => 'CURRENT_TIMESTAMP',
@@ -49,6 +52,15 @@ $xpdo_meta_map['vcVideo']= array (
       'null' => true,
       'default' => '',
     ),
+    'language' => 
+    array (
+      'phptype' => 'string',
+      'comment' => 'Language of the video',
+      'dbtype' => 'varchar',
+      'precision' => '2',
+      'null' => false,
+      'default' => 'en',
+    ),
     'cover' => 
     array (
       'phptype' => 'string',
@@ -61,18 +73,9 @@ $xpdo_meta_map['vcVideo']= array (
     'source' => 
     array (
       'phptype' => 'string',
-      'comment' => 'Link to video file or video code on external hosting',
+      'comment' => 'Link to video file on local or external server',
       'dbtype' => 'varchar',
       'precision' => '555',
-      'null' => false,
-      'default' => '',
-    ),
-    'type' => 
-    array (
-      'phptype' => 'string',
-      'comment' => 'Type of video source',
-      'dbtype' => 'varchar',
-      'precision' => '20',
       'null' => false,
       'default' => '',
     ),
@@ -82,16 +85,6 @@ $xpdo_meta_map['vcVideo']= array (
       'comment' => 'Duration of video (in seconds)',
       'dbtype' => 'integer',
       'precision' => '3',
-      'attributes' => 'unsigned',
-      'null' => false,
-      'default' => 0,
-    ),
-    'plays' => 
-    array (
-      'phptype' => 'integer',
-      'comment' => 'Count of plays of video',
-      'dbtype' => 'integer',
-      'precision' => '5',
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 0,
@@ -183,22 +176,6 @@ $xpdo_meta_map['vcVideo']= array (
         ),
       ),
     ),
-    'plays' => 
-    array (
-      'alias' => 'plays',
-      'primary' => false,
-      'unique' => false,
-      'type' => 'BTREE',
-      'columns' => 
-      array (
-        'plays' => 
-        array (
-          'length' => '',
-          'collation' => 'A',
-          'null' => false,
-        ),
-      ),
-    ),
     'free' => 
     array (
       'alias' => 'free',
@@ -215,15 +192,15 @@ $xpdo_meta_map['vcVideo']= array (
         ),
       ),
     ),
-    'type' => 
+    'language' => 
     array (
-      'alias' => 'type',
+      'alias' => 'language',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
       'columns' => 
       array (
-        'type' => 
+        'language' => 
         array (
           'length' => '',
           'collation' => 'A',

@@ -4,6 +4,10 @@ $xpdo_meta_map['vcChannelCollection']= array (
   'version' => '1.1',
   'table' => 'vc_channels_collections',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'MyISAM',
+  ),
   'fields' => 
   array (
     'channel' => 0,

@@ -1,3 +1,3 @@
 <?php
-require_once (dirname(dirname(__FILE__)) . '/vcchannelvideo.class.php');
+require_once (dirname(__DIR__) . '/vcchannelvideo.class.php');
 class vcChannelVideo_mysql extends vcChannelVideo {}
