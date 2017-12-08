@@ -21,7 +21,10 @@ $_lang['vc_videos_grid_seconds'] = '$ <small>секунд</small>|$ <small>се�
 
 // context menu
 $_lang['vc_videos_menu_edit'] = 'Редактировать видео';
-//$_lang['vc_videos_menu_up'] = 'UP';
+$_lang['vc_videos_menu_show'] = 'Показать на сайте';
+$_lang['vc_videos_menu_hide'] = 'Скрыть с сайта';
+$_lang['vc_videos_menu_close'] = 'Сделать приватным';
+$_lang['vc_videos_menu_share'] = 'Открыть для всех';
 
 // window
 $_lang['vc_videos_window_title_new'] = 'Новое видео';

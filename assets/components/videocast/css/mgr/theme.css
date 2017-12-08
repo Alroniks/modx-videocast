@@ -42,9 +42,9 @@
   .vc-grid .description .publishedon.active {
     color: #7DC855;
     border-color: #7DC855; }
-  .vc-grid .description .visibility.hidden,
-  .vc-grid .description .availability.hidden,
-  .vc-grid .description .publishedon.hidden {
+  .vc-grid .description .visibility.covert,
+  .vc-grid .description .availability.covert,
+  .vc-grid .description .publishedon.covert {
     color: #B5C2CD;
     border-color: #B5C2CD; }
   .vc-grid .description .visibility.free,

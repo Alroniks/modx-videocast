@@ -27,7 +27,7 @@ class VideoCastVideosUpdateProcessor extends modObjectUpdateProcessor
      */
     public function beforeSave()
     {
-        $this->object->setDirty(); // whole obj
+        $this->object->setDirty();
 
         return true;
     }

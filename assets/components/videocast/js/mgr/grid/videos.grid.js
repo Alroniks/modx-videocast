@@ -60,23 +60,28 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
         }];
     },
 
-    getMenu: function getMenu() {
-        var menu = [];
+    getMenu: function getMenu(grid, index) {
+        var menu = [],
+            record = grid.getStore().data.items[index].data;
+
         menu.push({
             text: '<i class="x-menu-item-icon icon icon-li icon-edit"></i> ' + _('vc_videos_menu_edit'),
             handler: this.updateVideo
-        },
-            // {
-            // text: '<span><i class="x-menu-item-icon icon icon-li icon-refresh"></i> Обновить статистику (lex)</span>',
-            // handler: this.updatePlays
-            // },
-            {
-            text: 'Скрыть с сайта / Показать на сайте'
-        }, '-', {
-            text: 'Удалить'
-        }, {
-            text: 'Сделать приватным / Открыть для всех'
         });
+        
+        var visibility = record.hidden
+            ? { handler: this.show,
+                text: '<i class="x-menu-item-icon icon icon-li icon-eye"></i> ' + _('vc_videos_menu_show') }
+            : { handler: this.hide,
+                text: '<i class="x-menu-item-icon icon icon-li icon-eye-slash"></i> ' +  _('vc_videos_menu_hide')};
+
+        var privacy = record.free
+            ? { handler: this.close,
+                text: '<i class="x-menu-item-icon icon icon-li icon-lock"></i> ' + _('vc_videos_menu_close')}
+            : { handler: this.share,
+                text: '<i class="x-menu-item-icon icon icon-li icon-globe"></i> ' + _('vc_videos_menu_share')};
+
+        menu.push(visibility, privacy);
 
         this.addContextMenuItem(menu);
     },
@@ -132,44 +137,51 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
         window.setValues(record);
         window.show(e.target);
     },
-    
-    // updatePlays: function updatePlays(btn, e) {
-    //
-    //     var record = this.menu.record;
-    //
-    //     MODx.Ajax.request({
-    //         url: VideoCast.config['url.assets.connector'],
-    //         params: {
-    //             action: 'mgr/videos/plays',
-    //             video: record.id,
-    //             source: record.source
-    //         },
-    //         listeners: {
-    //             success: {
-    //                 fn: function () {
-    //                     this.refresh();
-    //                 }, scope: this
-    //             },
-    //             failure: {
-    //                 fn: function (response) {
-    //                     MODx.msg.alert(response.message);
-    //                 }, scope: this
-    //             }
-    //         }
-    //     });
-    // },
+
+    show: function show() { this.updateFlags('hidden', false); },
+    hide: function hide() { this.updateFlags('hidden', true); },
+    share: function share() { this.updateFlags('free', true); },
+    close: function close() { this.updateFlags('free', false); },
+
+    updateFlags: function updateFlags(flag, value) {
+        var params = {
+            action: 'mgr/videos/update',
+            id: this.menu.record.id
+        };
+
+        if (this.menu.record.hasOwnProperty(flag)) {
+            params[flag] = value;
+        }
+
+        MODx.Ajax.request({
+            url: VideoCast.config['url.assets.connector'],
+            params: params,
+            listeners: {
+                success: {
+                    fn: function () {
+                        this.refresh();
+                    }, scope: this
+                },
+                failure: {
+                    fn: function (response) {
+                        MODx.msg.alert(response.message);
+                    }, scope: this
+                }
+            }
+        });
+    },
 
     descriptionRenderer: function descriptionRenderer(value, metaData, record) {
 
         record.data.visibility = record.data.hidden
-            ? '<span class="visibility hidden">' + _('vc_status_visibility_hidden') + '</span>'
+            ? '<span class="visibility covert">' + _('vc_status_visibility_hidden') + '</span>'
             : '<span class="visibility active">' + _('vc_status_visibility_active') + '</span>';
 
         record.data.availability = record.data.free
             ? '<span class="availability free">' + _('vc_videos_availability_free') + '</span>'
             : '<span class="availability paid">' + _('vc_videos_availability_private') + '</span>';
 
-        record.data.publishedon =
+        record.data.publishedoncustom =
             '<span class="publishedon">' +
             (new Date(record.data.publishedon)).format(MODx.config.manager_date_format || 'd-m-Y') +
             '</span>';
@@ -177,7 +189,7 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
         var tpl =
             '<div class="description">' +
             '<h2>{title}</h2>' +
-            '<p>{publishedon} {visibility} {availability}</p>' +
+            '<p>{publishedoncustom} {visibility} {availability}</p>' +
             '</div>';
 
         return new Ext.XTemplate(tpl).applyTemplate(record.data);
