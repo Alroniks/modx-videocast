@@ -70,6 +70,7 @@ class VideoCastLibraryManagerController extends modExtraManagerController
         // combos
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/combo/collections.combo.js');
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/combo/videos.combo.js');
+        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/combo/videotypes.combo.js');
 
         // windows
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/window/collections.window.js');

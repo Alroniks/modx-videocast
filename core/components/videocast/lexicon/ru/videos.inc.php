@@ -6,6 +6,14 @@ $_lang['vc_videos_tab_description'] = 'Видео - это просто виде
 // buttons
 $_lang['vc_videos_add_video'] = 'Добавить видео';
 
+// filters
+$_lang['vc_videos_filter_collection'] = 'Коллекция';
+$_lang['vc_videos_filter_type'] = 'Тип';
+$_lang['vc_videos_filter_type_closed'] = 'Приватные';
+$_lang['vc_videos_filter_type_shared'] = 'Публичные';
+$_lang['vc_videos_filter_type_hidden'] = 'Скрытые';
+$_lang['vc_videos_filter_type_showed'] = 'Показаные';
+
 // columns
 $_lang['vc_videos_column_cover'] = 'Обложка';
 $_lang['vc_videos_column_title'] = 'Название и статусы';

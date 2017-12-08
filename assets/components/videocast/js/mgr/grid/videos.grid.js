@@ -97,6 +97,47 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
         
         return topBar;
     },
+
+    getSearch: function getSearch() {
+        return [{
+            xtype: 'modx-combo-language',
+            emptyText: _('language'),
+            width: 100
+        }, {
+            xtype: 'vc-combo-collections',
+            emptyText: _('vc_videos_filter_collection'),
+            width: 120
+        }, {
+            xtype: 'vc-combo-video-types',
+            emptyText: _('vc_videos_filter_type'),
+            width: 120
+        }, {
+            xtype: 'textfield',
+            emptyText: _('search'),
+            width: 100,
+            listeners: {
+                render: {
+                    fn: function (cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER,
+                            fn: this.blur,
+                            scope: cmp
+                        });
+                    }, scope: this
+                },
+                change: {
+                    fn: function (field) {
+                        this.search(field)
+                    }, scope: this
+                }
+            }
+        }, {
+            xtype: 'button',
+            text: '<i class="icon icon-large icon-trash-o"></i>',
+            handler: this.clear,
+            scope: this
+        }];
+    },
     
     addVideo: function addVideo() {
         MODx.load({

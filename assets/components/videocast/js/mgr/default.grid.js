@@ -69,7 +69,7 @@ Ext.extend(VideoCast.grid.Default, MODx.grid.Grid, {
      * Returns list of field for do search in tabled data
      * @param width
      */
-    getSearch: function getSearchField(width) {
+    getSearch: function getSearch(width) {
         return [{
             xtype: 'textfield',
             width: width || 150,
