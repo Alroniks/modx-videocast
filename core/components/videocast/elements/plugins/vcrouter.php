@@ -1,5 +1,4 @@
 <?php
-
 if ($modx->event->name != 'OnPageNotFound') {
     return false;
 }

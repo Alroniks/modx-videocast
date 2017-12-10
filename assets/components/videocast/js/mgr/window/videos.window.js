@@ -46,10 +46,7 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
     },
 
     getMetaData: function getMetaDataFromSource(e, target, object) {
-
         var w = Ext.getCmp('vc-window-video'), video;
-
-        // console.log(arguments, this, object);
 
         if (typeof this.getValue === 'function') {
             video = this.getValue();

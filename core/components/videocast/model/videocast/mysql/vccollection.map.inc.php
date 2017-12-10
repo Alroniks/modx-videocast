@@ -13,6 +13,7 @@ $xpdo_meta_map['vcCollection']= array (
     'title' => '',
     'alias' => '',
     'description' => '',
+    'language' => 'en',
     'cover' => '',
     'rank' => 0,
     'hidden' => 0,
@@ -46,6 +47,15 @@ $xpdo_meta_map['vcCollection']= array (
       'dbtype' => 'text',
       'null' => true,
       'default' => '',
+    ),
+    'language' => 
+    array (
+      'phptype' => 'string',
+      'comment' => 'Language of the video',
+      'dbtype' => 'varchar',
+      'precision' => '2',
+      'null' => false,
+      'default' => 'en',
     ),
     'cover' => 
     array (
@@ -114,6 +124,22 @@ $xpdo_meta_map['vcCollection']= array (
       'columns' => 
       array (
         'rank' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'language' => 
+    array (
+      'alias' => 'language',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'language' => 
         array (
           'length' => '',
           'collation' => 'A',

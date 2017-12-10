@@ -17,7 +17,7 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
 
     getLeftColumn: function getLeftColumn(config) {
         return {
-            columnWidth: .6,
+            columnWidth: .7,
             layout: 'form',
             defaults: { msgTarget: 'under' },
             items: [{
@@ -39,7 +39,16 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                     border: false
                 },
                 items: [{
-                    columnWidth: .3,
+                    columnWidth: .2,
+                    layout: 'form',
+                    items: [{
+                        xtype: 'modx-combo-language',
+                        name: 'language',
+                        fieldLabel: _('vc_collections_field_language'),
+                        anchor: '100%'
+                    }]
+                }, {
+                    columnWidth: .2,
                     layout: 'form',
                     items: [{
                         xtype: 'numberfield',
@@ -68,19 +77,13 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
                         anchor: '100%'
                     }]
                 }]
-            }, {
-                xtype: 'textarea',
-                name: 'description',
-                fieldLabel: _('vc_collections_field_description'),
-                height: 115,
-                anchor: '100%'
             }]
         };
     },
 
     getRightColumn: function getRightColumn(config) {
         return {
-            columnWidth: .4,
+            columnWidth: .3,
             layout: 'form',
             defaults: { msgTarget: 'under' },
             items: [{
@@ -122,17 +125,38 @@ Ext.extend(VideoCast.window.Collection, VideoCast.window.Default, {
             xtype: 'hidden',
             name: 'id'
         }, {
-            layout: 'column',
-            defaults: { msgTarget: 'under', border: false },
-            items: [this.getLeftColumn(config), this.getRightColumn(config)]
-        }, {
-            layout: 'form',
-            style: 'margin-top: 15px',
-            defaults: { msgTarget: 'under' },
+            xtype: 'modx-tabs',
+            defaults: {
+                listeners: {
+                    activate: function () {
+                        if (MODx.loadRTE) {
+                            MODx.loadRTE('vc_collections_window_tab_description_editor');
+                        }
+                    }
+                }
+            },
             items: [{
-                // xtype: 'vc-combo-videos',
-                html: 'here will be list of videos',
-                cls: 'disabled'
+                title: _('vc_videos_window_tab_settings'),
+                layout: 'column',
+                defaults: { msgTarget: 'under', border: false },
+                items: [this.getLeftColumn(config), this.getRightColumn(config)]
+            }, {
+                title: _('vc_videos_window_tab_description'),
+                layout: 'form',
+                defaults: { msgTarget: 'under', autoHeight: true },
+                items: [{
+                    id: 'vc_collection_window_tab_description_editor',
+                    xtype: 'textarea',
+                    name: 'description',
+                    anchor: '100%'
+                }]
+            }, {
+                title: ('vc_videos_window_tab_videos'),
+                items: [{
+                    // xtype: 'vc-grid-videos'
+                    html: 'here will be list of videos',
+                    cls: 'disabled'
+                }]
             }]
         }];
     }

@@ -34,6 +34,7 @@ $_lang['vc_collections_cover_err_notEmpty'] = 'Пожалуйста, укажи�
 $_lang['vc_collections_field_title'] = 'Название коллекции';
 $_lang['vc_collections_field_alias'] = 'Ссылка на коллекцию';
 $_lang['vc_collections_field_rank'] = 'Позиция';
+$_lang['vc_collections_field_language'] = 'Язык';
 $_lang['vc_collections_field_publishedon'] = 'Опубликовано';
 $_lang['vc_collections_field_hidden'] = 'Не показывать';
 $_lang['vc_collections_field_cover'] = 'Обложка';

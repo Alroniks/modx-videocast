@@ -14,6 +14,9 @@
         <field key="description" phptype="string" comment="Description or introduction of collection"
                dbtype="text"  null="true" default="" />
 
+        <field key="language" phptype="string" comment="Language of the video"
+               dbtype="varchar" precision="2" null="false" default="en"/>
+
         <field key="cover" phptype="string" comment="Path to image, that will be used as cover"
                dbtype="varchar" precision="255" null="false" default="" />
 
@@ -46,6 +49,10 @@
 
         <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
             <column key="rank" length="" collation="A" null="false" />
+        </index>
+
+        <index alias="language" name="language" primary="false" unique="false" type="BTREE">
+            <column key="language" length="" collation="A" null="false" />
         </index>
 
         <index alias="hidden" name="hidden" primary="false" unique="false" type="BTREE">
