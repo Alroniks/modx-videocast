@@ -1,3 +1,12 @@
+VideoCast 0.3.0-pl (Dec 11, 2017)
+====================================
+
+    Language in Collections
+
+33baded Fixed script build
+c9dec79 Added script build
+269dab8 Added language to collections
+
 VideoCast 0.1.3-pl (Nov 22, 2016)
 ====================================
 
