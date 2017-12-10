@@ -1,0 +1,9 @@
+#!/usr/local/bin/php
+<?php
+
+namespace videocast\build;
+
+require_once 'Builder.php';
+
+// run builder
+call_user_func(new Builder($argv));
