@@ -1,8 +1,6 @@
 #!/usr/local/bin/php
 <?php
 
-namespace videocast\build;
-
 require_once 'Builder.php';
 
 // run builder
