@@ -1,7 +1,0 @@
-#!/usr/local/bin/php
-<?php
-
-require_once 'Builder.php';
-
-// run builder
-call_user_func(new Builder($argv));

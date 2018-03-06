@@ -38,7 +38,7 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
             renderer: this.coverRenderer.createDelegate(this, [this], true),
             fixed: true,
             resizable: false,
-            width: 100
+            width: 130
         }, {
             id: 'title',
             header: _('vc_videos_column_title'),
@@ -231,6 +231,7 @@ Ext.extend(VideoCast.grid.Videos, VideoCast.grid.Default, {
             '<div class="description">' +
             '<h2>{title}</h2>' +
             '<p>{publishedoncustom} {visibility} {availability}</p>' +
+            '<p><small>' + _('source') + ': {source}</small></p>' +
             '</div>';
 
         return new Ext.XTemplate(tpl).applyTemplate(record.data);
