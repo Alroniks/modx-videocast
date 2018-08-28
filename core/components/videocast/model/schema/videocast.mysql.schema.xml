@@ -163,6 +163,9 @@
         <field key="source" phptype="string" comment="Link to video file on local or external server"
                dbtype="varchar" precision="555" null="false" default="" />
 
+        <field key="password" phptype="string" comment="HLS password for chunks"
+                dbtype="varchar" precision="32" null="false" default="" />
+
         <field key="duration" phptype="integer" comment="Duration of video (in seconds)"
                dbtype="integer" precision="3" attributes="unsigned" null="false" default="0" />
 
@@ -221,14 +224,5 @@
         <aggregate alias="Collection" class="vcCollection" local="collection" foreign="id" cardinality="one" owner="foreign" />
 
     </object>
-
-    <!--// move to stats table-->
-    <!--Embeds-->
-    <!--Plays-->
-    <!--Completes-->
-    <!--Time Watched-->
-    <!--25% Completes-->
-    <!--50% Completes-->
-    <!--75% Completes-->
 
 </model>

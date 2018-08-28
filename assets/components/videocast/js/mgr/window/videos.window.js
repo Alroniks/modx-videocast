@@ -256,7 +256,16 @@ Ext.extend(VideoCast.window.Video, VideoCast.window.Default, {
                     class: 'cover-preview',
                     id: 'cover-preview'
                 }
-            })]
+            }), {
+                layout: 'form',
+                defaults: { msgTarget: 'under' },
+                items: [{
+                    xtype: 'textfield',
+                    name: 'password',
+                    fieldLabel: _('vc_videos_field_password'),
+                    anchor: '100%'
+                }]
+            }]
         }
     },
 

@@ -16,6 +16,7 @@ $xpdo_meta_map['vcVideo']= array (
     'language' => 'en',
     'cover' => '',
     'source' => '',
+    'password' => '',
     'duration' => 0,
     'free' => 0,
     'hidden' => 0,
@@ -76,6 +77,15 @@ $xpdo_meta_map['vcVideo']= array (
       'comment' => 'Link to video file on local or external server',
       'dbtype' => 'varchar',
       'precision' => '555',
+      'null' => false,
+      'default' => '',
+    ),
+    'password' => 
+    array (
+      'phptype' => 'string',
+      'comment' => 'HLS password for chunks',
+      'dbtype' => 'varchar',
+      'precision' => '32',
       'null' => false,
       'default' => '',
     ),
