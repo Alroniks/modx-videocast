@@ -8,11 +8,6 @@ $list = [
         'area' => 'vc_main',
         'value' => 0
     ],
-    'resource_channels' => [
-        'xtype' => 'vc-combo-resources',
-        'area' => 'vc_main',
-        'value' => 0
-    ],
     'resource_collections' => [
         'xtype' => 'vc-combo-resources',
         'area' => 'vc_main',

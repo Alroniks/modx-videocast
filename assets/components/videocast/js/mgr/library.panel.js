@@ -25,15 +25,6 @@ VideoCast.panel.Library = function (config) {
                     xtype: 'vc-grid-collections',
                     id: 'vc-grid-collections'
                 }]
-            }, {
-                title: _('vc_channels_tab_title'),
-                layout: 'anchor'
-            }, {
-                title: _('vc_statistics_tab_title'),
-                layout: 'anchor'
-            }, {
-                title: _('vc_settings_tab_title'),
-                layout: 'anchor'
             }]
         }]
     });

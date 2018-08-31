@@ -38,7 +38,6 @@ class VideoCastLibraryManagerController extends modExtraManagerController
     {
         return [
             'videocast:default',
-            'videocast:channels',
             'videocast:collections',
             'videocast:videos'
         ];
@@ -77,7 +76,6 @@ class VideoCastLibraryManagerController extends modExtraManagerController
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/window/videos.window.js');
 
         // grids
-        $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/grid/channels.grid.js');
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/grid/collections.grid.js');
         $this->addJavascript($this->vc->config['url.assets.js'] . 'mgr/grid/videos.grid.js');
 

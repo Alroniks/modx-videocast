@@ -13,15 +13,8 @@ $request = $_REQUEST[$alias];
 
 $chunks = explode('/', $request);
 
-$channels = $modx->getObject('modResource', ['id' => $modx->getOption('videocast_resource_channels', null, '')]);
 $collections = $modx->getObject('modResource', ['id' => $modx->getOption('videocast_resource_collections', null, '')]);
 $videos = $modx->getObject('modResource', ['id' => $modx->getOption('videocast_resource_videos', null, '')]);
-
-if (!$channels) {
-    $modx->log(modX::LOG_LEVEL_ERROR, 'Entry point resource for channels not found. See system settings.');
-
-    return false;
-}
 
 if (!$collections) {
     $modx->log(modX::LOG_LEVEL_ERROR, 'Entry point resource for collections not found. See system settings.');
@@ -36,30 +29,6 @@ if (!$videos) {
 }
 
 switch ($chunks[0]) {
-
-    case $channels->get('alias'):
-
-        if (!$channelsSection = $modx->findResource($chunks[0])) {
-            return false;
-        }
-
-        $channelAlias = str_replace('.html', '', $chunks[1]);
-
-        if ($chunks[1] != $channelAlias || (isset($chunks[2]) && $chunks[2] == '')) {
-            $modx->sendRedirect($chunks[0] . '/' . $channelAlias);
-        }
-
-        if (!$channel = $modx->getObject('vcChannel', ['alias' => $channelAlias])) {
-            $modx->sendForward($this->getOption('error_page'), $this->getOption('error_page_header', null, 'HTTP/1.0 404 Not Found'));
-        }
-
-        // TBD related collections and videos
-
-        $modx->setPlaceholders($channel, 'channel.');
-        $modx->sendForward($channelsSection);
-
-        break;
-
     case $collections->get('alias'):
 
         if (!$collectionsSection = $modx->findResource($chunks[0])) {

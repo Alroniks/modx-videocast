@@ -17,13 +17,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $modx->addPackage('videocast', $modelPath);
         $manager = $modx->getManager();
 
-        $tables = [
-            'vcVideo',
-            'vcCollection',
-            'vcChannel',
-            'vcChannelVideo',
-            'vcChannelCollection'
-        ];
+        $tables = ['vcVideo', 'vcCollection'];
 
         foreach ($tables as $table) {
             $manager->createObjectContainer($table);
